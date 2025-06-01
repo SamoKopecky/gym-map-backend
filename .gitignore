@@ -1,0 +1,7 @@
+trainer-helper
+.env
+tmp
+keycloak_data/*
+coverage.out
+.vscode/
+files/
