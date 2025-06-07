@@ -27,3 +27,18 @@ func (c DbContext) BadRequest(err error) error {
 	// TODO: log error too
 	return c.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid query parameters", "reason": errStr})
 }
+
+func DerefString(ptr *string) string {
+	if ptr == nil {
+		return ""
+	}
+	return *ptr
+}
+
+func DerefInt(ptr *int) int {
+	if ptr == nil {
+		return 0
+	}
+	return *ptr
+
+}

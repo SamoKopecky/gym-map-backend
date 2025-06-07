@@ -51,6 +51,8 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	machines := e.Group("/machines")
 	machines.GET("", machine.Get)
 	machines.POST("", machine.Post)
+	machines.PATCH("/:id", machine.Patch)
+	machines.DELETE("/:id", machine.Delete)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }

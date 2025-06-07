@@ -27,3 +27,13 @@ func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
 	return api.PostModel[machinePostRequest](cc, cc.MachineCrud)
 }
+
+func Patch(c echo.Context) error {
+	cc := c.(*api.DbContext)
+	return api.PatchModel[machinePatchRequest](cc, cc.MachineCrud)
+}
+
+func Delete(c echo.Context) error {
+	cc := c.(*api.DbContext)
+	return api.DeleteModel(cc, cc.MachineCrud)
+}

@@ -6,8 +6,12 @@ import (
 	"strconv"
 )
 
-type Modulator[M any] interface {
-	ToModel() M
+type NewModulator[M any] interface {
+	ToNewModel() M
+}
+
+type ExistingModulator[M any] interface {
+	ToExistingModel(id int) M
 }
 
 func DeleteModel[M any](cc *DbContext, crud store.StoreBase[M]) error {
@@ -24,13 +28,18 @@ func DeleteModel[M any](cc *DbContext, crud store.StoreBase[M]) error {
 	return cc.NoContent(http.StatusOK)
 }
 
-func PutModel[R Modulator[M], M any](cc *DbContext, crud store.StoreBase[M]) error {
+func PatchModel[R ExistingModulator[M], M any](cc *DbContext, crud store.StoreBase[M]) error {
+	id, err := strconv.Atoi(cc.Param("id"))
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
 	params, err := BindParams[R](cc)
 	if err != nil {
 		return cc.BadRequest(err)
 	}
 
-	model := params.ToModel()
+	model := params.ToExistingModel(id)
 	err = crud.Update(&model)
 	if err != nil {
 		return err
@@ -39,13 +48,13 @@ func PutModel[R Modulator[M], M any](cc *DbContext, crud store.StoreBase[M]) err
 	return cc.NoContent(http.StatusOK)
 }
 
-func PostModel[R Modulator[M], M any](cc *DbContext, crud store.StoreBase[M]) error {
+func PostModel[R NewModulator[M], M any](cc *DbContext, crud store.StoreBase[M]) error {
 	params, err := BindParams[R](cc)
 	if err != nil {
 		return cc.BadRequest(err)
 	}
 
-	newModel := params.ToModel()
+	newModel := params.ToNewModel()
 	err = crud.Insert(&newModel)
 	if err != nil {
 		return err
