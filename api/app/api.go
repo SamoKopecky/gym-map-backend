@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/uptrace/bun"
 )
 
@@ -46,6 +47,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	e := echo.New()
 	e.HTTPErrorHandler = logError
 	e.Use(contextMiddleware(db, appConfig))
+	e.Use(middleware.CORS())
 	e.GET("/-/ping", pong)
 
 	machines := e.Group("/machines")
