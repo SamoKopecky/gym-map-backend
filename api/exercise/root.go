@@ -1,4 +1,4 @@
-package machine
+package exercise
 
 import (
 	"gym-map/api"
@@ -8,20 +8,20 @@ import (
 
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.GetModels(cc, cc.MachineCrud)
+	return api.GetModels(cc, cc.ExerciseCrud)
 }
 
 func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PostModel[machinePostRequest](cc, cc.MachineCrud)
+	return api.PostModel[exercisePostRequest](cc, cc.ExerciseCrud)
 }
 
 func Patch(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PatchModel[machinePatchRequest](cc, cc.MachineCrud)
+	return api.PatchModel[exercisePatchRequest](cc, cc.ExerciseCrud)
 }
 
 func Delete(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.DeleteModel(cc, cc.MachineCrud)
+	return api.DeleteModel(cc, cc.ExerciseCrud)
 }

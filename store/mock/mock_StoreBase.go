@@ -58,14 +58,20 @@ type MockStoreBase_Delete_Call[T any] struct {
 }
 
 // Delete is a helper method to define mock.On call
-//   - modelId
+//   - modelId int
 func (_e *MockStoreBase_Expecter[T]) Delete(modelId interface{}) *MockStoreBase_Delete_Call[T] {
 	return &MockStoreBase_Delete_Call[T]{Call: _e.mock.On("Delete", modelId)}
 }
 
 func (_c *MockStoreBase_Delete_Call[T]) Run(run func(modelId int)) *MockStoreBase_Delete_Call[T] {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int))
+		var arg0 int
+		if args[0] != nil {
+			arg0 = args[0].(int)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -169,14 +175,20 @@ type MockStoreBase_GetById_Call[T any] struct {
 }
 
 // GetById is a helper method to define mock.On call
-//   - modelId
+//   - modelId int
 func (_e *MockStoreBase_Expecter[T]) GetById(modelId interface{}) *MockStoreBase_GetById_Call[T] {
 	return &MockStoreBase_GetById_Call[T]{Call: _e.mock.On("GetById", modelId)}
 }
 
 func (_c *MockStoreBase_GetById_Call[T]) Run(run func(modelId int)) *MockStoreBase_GetById_Call[T] {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int))
+		var arg0 int
+		if args[0] != nil {
+			arg0 = args[0].(int)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -214,14 +226,20 @@ type MockStoreBase_Insert_Call[T any] struct {
 }
 
 // Insert is a helper method to define mock.On call
-//   - model
+//   - model *T
 func (_e *MockStoreBase_Expecter[T]) Insert(model interface{}) *MockStoreBase_Insert_Call[T] {
 	return &MockStoreBase_Insert_Call[T]{Call: _e.mock.On("Insert", model)}
 }
 
 func (_c *MockStoreBase_Insert_Call[T]) Run(run func(model *T)) *MockStoreBase_Insert_Call[T] {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(*T))
+		var arg0 *T
+		if args[0] != nil {
+			arg0 = args[0].(*T)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -259,14 +277,20 @@ type MockStoreBase_Update_Call[T any] struct {
 }
 
 // Update is a helper method to define mock.On call
-//   - model
+//   - model *T
 func (_e *MockStoreBase_Expecter[T]) Update(model interface{}) *MockStoreBase_Update_Call[T] {
 	return &MockStoreBase_Update_Call[T]{Call: _e.mock.On("Update", model)}
 }
 
 func (_c *MockStoreBase_Update_Call[T]) Run(run func(model *T)) *MockStoreBase_Update_Call[T] {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(*T))
+		var arg0 *T
+		if args[0] != nil {
+			arg0 = args[0].(*T)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }

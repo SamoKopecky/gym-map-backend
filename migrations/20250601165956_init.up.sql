@@ -10,3 +10,13 @@ CREATE TABLE IF NOT EXISTS machine (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL 
 );
+
+CREATE TABLE IF NOT EXISTS exericse (
+    id SERIAL PRIMARY KEY,
+	machine_id INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    muscle_groups TEXT[],
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL 
+);

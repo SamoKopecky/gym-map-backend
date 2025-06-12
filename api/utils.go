@@ -19,7 +19,8 @@ func BindParams[T any](c echo.Context) (T, error) {
 type DbContext struct {
 	echo.Context
 
-	MachineCrud store.Machine
+	MachineCrud  store.Machine
+	ExerciseCrud store.Exercise
 }
 
 func (c DbContext) BadRequest(err error) error {

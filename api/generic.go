@@ -62,3 +62,16 @@ func PostModel[R NewModulator[M], M any](cc *DbContext, crud store.StoreBase[M])
 
 	return cc.JSON(http.StatusOK, newModel)
 }
+
+func GetModels[M any](cc *DbContext, crud store.StoreBase[M]) error {
+	models, err := crud.Get()
+	if err != nil {
+		return err
+	}
+
+	if models == nil {
+		models = []M{}
+	}
+
+	return cc.JSON(http.StatusOK, models)
+}

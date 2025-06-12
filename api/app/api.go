@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"gym-map/api"
+	"gym-map/api/exercise"
 	"gym-map/api/machine"
 	"gym-map/config"
 	"gym-map/crud"
@@ -35,7 +36,8 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			cc := &api.DbContext{Context: c,
-				MachineCrud: crud.NewMachine(db),
+				MachineCrud:  crud.NewMachine(db),
+				ExerciseCrud: crud.NewExercise(db),
 			}
 
 			return next(cc)
@@ -55,6 +57,12 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	machines.POST("", machine.Post)
 	machines.PATCH("/:id", machine.Patch)
 	machines.DELETE("/:id", machine.Delete)
+
+	exercises := e.Group("/exercises")
+	exercises.GET("", exercise.Get)
+	exercises.POST("", exercise.Post)
+	exercises.PATCH("/:id", exercise.Patch)
+	exercises.DELETE("/:id", exercise.Delete)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
