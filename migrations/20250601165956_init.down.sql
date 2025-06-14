@@ -1,1 +1,3 @@
 DROP TABLE IF EXISTS machine;
+
+DROP TABLE IF EXISTS exercise;

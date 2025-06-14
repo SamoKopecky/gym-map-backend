@@ -60,14 +60,20 @@ type MockMachine_Delete_Call struct {
 }
 
 // Delete is a helper method to define mock.On call
-//   - modelId
+//   - modelId int
 func (_e *MockMachine_Expecter) Delete(modelId interface{}) *MockMachine_Delete_Call {
 	return &MockMachine_Delete_Call{Call: _e.mock.On("Delete", modelId)}
 }
 
 func (_c *MockMachine_Delete_Call) Run(run func(modelId int)) *MockMachine_Delete_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int))
+		var arg0 int
+		if args[0] != nil {
+			arg0 = args[0].(int)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -169,14 +175,20 @@ type MockMachine_GetById_Call struct {
 }
 
 // GetById is a helper method to define mock.On call
-//   - modelId
+//   - modelId int
 func (_e *MockMachine_Expecter) GetById(modelId interface{}) *MockMachine_GetById_Call {
 	return &MockMachine_GetById_Call{Call: _e.mock.On("GetById", modelId)}
 }
 
 func (_c *MockMachine_GetById_Call) Run(run func(modelId int)) *MockMachine_GetById_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int))
+		var arg0 int
+		if args[0] != nil {
+			arg0 = args[0].(int)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -214,14 +226,20 @@ type MockMachine_Insert_Call struct {
 }
 
 // Insert is a helper method to define mock.On call
-//   - model1
+//   - model1 *model.Machine
 func (_e *MockMachine_Expecter) Insert(model1 interface{}) *MockMachine_Insert_Call {
 	return &MockMachine_Insert_Call{Call: _e.mock.On("Insert", model1)}
 }
 
 func (_c *MockMachine_Insert_Call) Run(run func(model1 *model.Machine)) *MockMachine_Insert_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(*model.Machine))
+		var arg0 *model.Machine
+		if args[0] != nil {
+			arg0 = args[0].(*model.Machine)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
@@ -259,14 +277,20 @@ type MockMachine_Update_Call struct {
 }
 
 // Update is a helper method to define mock.On call
-//   - model1
+//   - model1 *model.Machine
 func (_e *MockMachine_Expecter) Update(model1 interface{}) *MockMachine_Update_Call {
 	return &MockMachine_Update_Call{Call: _e.mock.On("Update", model1)}
 }
 
 func (_c *MockMachine_Update_Call) Run(run func(model1 *model.Machine)) *MockMachine_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(*model.Machine))
+		var arg0 *model.Machine
+		if args[0] != nil {
+			arg0 = args[0].(*model.Machine)
+		}
+		run(
+			arg0,
+		)
 	})
 	return _c
 }
