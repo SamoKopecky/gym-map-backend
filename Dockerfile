@@ -12,10 +12,10 @@ WORKDIR /app
 
 RUN apt update -y && apt install -y netcat-traditional
 
-COPY --from=builder /app/trainer-helper trainer-helper
+COPY --from=builder /app/gym-map gym-map
 COPY migrations/ migrations/
 COPY wait-for.sh wait-for.sh
 
 EXPOSE 2001
-CMD ["/app/trainer-helper"]
+CMD ["/app/gym-map"]
 
