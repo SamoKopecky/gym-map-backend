@@ -13,14 +13,14 @@ type CRUDBase[T any] struct {
 	db bun.IDB
 }
 
-func (c CRUDBase[T]) Update(model *T) (err error) {
+func (c CRUDBase[T]) Update(model *T) error {
 	query := c.db.NewUpdate().
 		Model(model).
 		OmitZero().
 		WherePK()
 
-	_, err = query.Exec(context.Background())
-	return
+	_, err := query.Exec(context.Background())
+	return err
 }
 
 func (c CRUDBase[T]) Insert(model *T) error {

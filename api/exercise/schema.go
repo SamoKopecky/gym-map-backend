@@ -5,6 +5,10 @@ import (
 	"gym-map/model"
 )
 
+type exerciseGetRequest struct {
+	MachineId *int `query:"machine_id"`
+}
+
 type exercisePostRequest struct {
 	Name         string    `json:"name"`
 	Description  *string   `json:"description"`

@@ -9,10 +9,13 @@ type machinePatchRequest struct {
 	Name         *string   `json:"name"`
 	Description  *string   `json:"description"`
 	MuscleGroups *[]string `json:"muscle_groups"`
-	Width        *int      `json:"width"`
-	Height       *int      `json:"height"`
-	PositionX    *int      `json:"position_x"`
-	PositionY    *int      `json:"position_y"`
+}
+
+type machinePositionsPatchRequest struct {
+	Width     int `json:"width"`
+	Height    int `json:"height"`
+	PositionX int `json:"position_x"`
+	PositionY int `json:"position_y"`
 }
 
 type machinePostRequest struct {
@@ -22,7 +25,7 @@ type machinePostRequest struct {
 }
 
 func (mpr machinePostRequest) ToNewModel() model.Machine {
-	return model.BuildMachine(mpr.Name, mpr.Description, mpr.MuscleGroups, 0, 0, 0, 0)
+	return model.BuildMachine(mpr.Name, mpr.Description, mpr.MuscleGroups, 150, 150, 0, 0)
 }
 
 func (mpr machinePatchRequest) ToExistingModel(id int) model.Machine {
@@ -31,9 +34,15 @@ func (mpr machinePatchRequest) ToExistingModel(id int) model.Machine {
 		Name:         api.DerefString(mpr.Name),
 		Description:  mpr.Description,
 		MuscleGroups: mpr.MuscleGroups,
-		Width:        api.DerefInt(mpr.Width),
-		Height:       api.DerefInt(mpr.Height),
-		PositionX:    api.DerefInt(mpr.PositionX),
-		PositionY:    api.DerefInt(mpr.PositionY),
+	}
+}
+
+func (mppr machinePositionsPatchRequest) ToExistingModel(id int) model.Machine {
+	return model.Machine{
+		IdModel:   model.IdModel{Id: id},
+		Width:     mppr.Width,
+		Height:    mppr.Height,
+		PositionX: mppr.PositionX,
+		PositionY: mppr.PositionY,
 	}
 }

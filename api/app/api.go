@@ -50,6 +50,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	e.HTTPErrorHandler = logError
 	e.Use(contextMiddleware(db, appConfig))
 	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
 	e.GET("/-/ping", pong)
 
 	machines := e.Group("/machines")
@@ -57,6 +58,9 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	machines.POST("", machine.Post)
 	machines.PATCH("/:id", machine.Patch)
 	machines.DELETE("/:id", machine.Delete)
+
+	positions := machines.Group("/:id/positions")
+	positions.PATCH("", machine.PatchPositions)
 
 	exercises := e.Group("/exercises")
 	exercises.GET("", exercise.Get)
