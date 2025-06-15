@@ -1,0 +1,2 @@
+ALTER TABLE exercise
+ADD COLUMN difficulty VARCHAR(255);

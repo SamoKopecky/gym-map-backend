@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"gym-map/model"
 	"gym-map/store"
 	"net/http"
 
