@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"gym-map/schema"
 	"gym-map/store"
 	"net/http"
 
@@ -21,6 +22,8 @@ type DbContext struct {
 
 	MachineCrud  store.Machine
 	ExerciseCrud store.Exercise
+
+	Claims *schema.JwtClaims
 }
 
 func (c DbContext) BadRequest(err error) error {

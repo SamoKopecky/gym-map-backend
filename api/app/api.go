@@ -7,8 +7,11 @@ import (
 	"gym-map/api/machine"
 	"gym-map/config"
 	"gym-map/crud"
+	"gym-map/schema"
 	"net/http"
 
+	"github.com/golang-jwt/jwt/v5"
+	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/uptrace/bun"
@@ -45,6 +48,27 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 	}
 }
 
+func jwtMiddleware(cfg *config.Config) echo.MiddlewareFunc {
+	keyFunc := func(token *jwt.Token) (any, error) {
+		return getKey(cfg, token)
+	}
+	return echojwt.WithConfig(echojwt.Config{
+		KeyFunc:       keyFunc,
+		SigningMethod: "RS256",
+		NewClaimsFunc: func(c echo.Context) jwt.Claims {
+			return new(schema.JwtClaims)
+		},
+	})
+}
+
+func claimContextMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		cc := c.(*api.DbContext)
+		cc.Claims = cc.Get("user").(*jwt.Token).Claims.(*schema.JwtClaims)
+		return next(c)
+	}
+}
+
 func RunApi(db *bun.DB, appConfig *config.Config) {
 	e := echo.New()
 	e.HTTPErrorHandler = logError
@@ -55,18 +79,28 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	machines := e.Group("/machines")
 	machines.GET("", machine.Get)
-	machines.POST("", machine.Post)
-	machines.PATCH("/:id", machine.Patch)
-	machines.DELETE("/:id", machine.Delete)
+
+	jwtMachines := machines.Group("")
+	jwtMachines.Use(jwtMiddleware(appConfig))
+	jwtMachines.Use(claimContextMiddleware)
+	jwtMachines.POST("", machine.Post)
+	jwtMachines.PATCH("/:id", machine.Patch)
+	jwtMachines.DELETE("/:id", machine.Delete)
 
 	positions := machines.Group("/:id/positions")
+	positions.Use(jwtMiddleware(appConfig))
+	positions.Use(claimContextMiddleware)
 	positions.PATCH("", machine.PatchPositions)
 
 	exercises := e.Group("/exercises")
 	exercises.GET("", exercise.Get)
-	exercises.POST("", exercise.Post)
-	exercises.PATCH("/:id", exercise.Patch)
-	exercises.DELETE("/:id", exercise.Delete)
+
+	jwtExercises := machines.Group("")
+	jwtExercises.Use(jwtMiddleware(appConfig))
+	jwtExercises.Use(claimContextMiddleware)
+	jwtExercises.POST("", exercise.Post)
+	jwtExercises.PATCH("/:id", exercise.Patch)
+	jwtExercises.DELETE("/:id", exercise.Delete)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
