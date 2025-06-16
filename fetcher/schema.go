@@ -25,8 +25,10 @@ func (ku KeycloakUser) FullName() *string {
 
 func (ku KeycloakUser) ToUserModel() model.User {
 	return model.User{
-		Id:    ku.Id,
-		Email: ku.Email,
-		Name:  ku.FullName(),
+		Id:        ku.Id,
+		Email:     ku.Email,
+		Name:      ku.FullName(),
+		FirstName: ku.FirstName,
+		LastName:  ku.LastName,
 	}
 }

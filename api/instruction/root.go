@@ -43,7 +43,19 @@ func Get(c echo.Context) error {
 
 func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PostModel[instructionPostRequest](cc, cc.InstructionCrud)
+
+	params, err := api.BindParams[instructionPostRequest](cc)
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
+	newModel := params.ToNewModel()
+	userInstruction, err := cc.InstructionService.Insert(&newModel)
+	if err != nil {
+		return err
+	}
+
+	return cc.JSON(http.StatusOK, userInstruction)
 }
 
 func Patch(c echo.Context) error {

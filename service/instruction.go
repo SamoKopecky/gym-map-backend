@@ -50,6 +50,27 @@ func (i Instruction) GetByUserId(userId string) (userInstructions []schema.Instr
 	return
 }
 
+func (i Instruction) Insert(instruction *model.Instruction) (userInstruction schema.Instruction, err error) {
+	err = i.InstructionCrud.Insert(instruction)
+	if err != nil {
+		return
+	}
+
+	// TODO: Use single query for single user id
+	userInstructions, err := i.withUsers([]model.Instruction{*instruction})
+	if err != nil {
+		return
+	}
+
+	if len(userInstructions) < 1 {
+		return
+	}
+
+	userInstruction = userInstructions[0]
+	return
+
+}
+
 func (i Instruction) withUsers(instructions []model.Instruction) (userInstructions []schema.Instruction, err error) {
 	// TODO: Cache fetching users
 	users, err := i.IAM.GetUsers()
