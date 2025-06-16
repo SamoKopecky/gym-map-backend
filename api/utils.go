@@ -20,8 +20,9 @@ func BindParams[T any](c echo.Context) (T, error) {
 type DbContext struct {
 	echo.Context
 
-	MachineCrud  store.Machine
-	ExerciseCrud store.Exercise
+	MachineCrud     store.Machine
+	ExerciseCrud    store.Exercise
+	InstructionCrud store.Instruction
 
 	Claims *schema.JwtClaims
 }

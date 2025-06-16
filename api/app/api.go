@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gym-map/api"
 	"gym-map/api/exercise"
+	"gym-map/api/instruction"
 	"gym-map/api/machine"
 	"gym-map/config"
 	"gym-map/crud"
@@ -39,8 +40,9 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			cc := &api.DbContext{Context: c,
-				MachineCrud:  crud.NewMachine(db),
-				ExerciseCrud: crud.NewExercise(db),
+				MachineCrud:     crud.NewMachine(db),
+				ExerciseCrud:    crud.NewExercise(db),
+				InstructionCrud: crud.NewInstruction(db),
 			}
 
 			return next(cc)
@@ -69,16 +71,16 @@ func claimContextMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
-// func trainerOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
-// 	return func(c echo.Context) error {
-// 		cc := c.(*api.DbContext)
-// 		if !cc.Claims.IsTrainer() {
-// 			return cc.NoContent(http.StatusForbidden)
-// 		}
-//
-// 		return next(c)
-// 	}
-// }
+func trainerOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		cc := c.(*api.DbContext)
+		if !cc.Claims.IsTrainer() && !cc.Claims.IsAdmin() {
+			return cc.NoContent(http.StatusForbidden)
+		}
+
+		return next(c)
+	}
+}
 
 func adminOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
@@ -123,6 +125,17 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtExercises.POST("", exercise.Post)
 	jwtExercises.PATCH("/:id", exercise.Patch)
 	jwtExercises.DELETE("/:id", exercise.Delete)
+
+	instructions := e.Group("/instructions")
+	instructions.GET("", instruction.Get)
+
+	jwtInstructions := instructions.Group("")
+	jwtInstructions.Use(jwtMiddleware(appConfig))
+	jwtInstructions.Use(claimContextMiddleware)
+	jwtInstructions.Use(trainerOnlyMiddleware)
+	jwtInstructions.POST("", instruction.Post)
+	jwtInstructions.PATCH("/:id", instruction.Patch)
+	jwtInstructions.DELETE("/:id", instruction.Delete)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }

@@ -60,20 +60,14 @@ type MockExercise_Delete_Call struct {
 }
 
 // Delete is a helper method to define mock.On call
-//   - modelId int
+//   - modelId
 func (_e *MockExercise_Expecter) Delete(modelId interface{}) *MockExercise_Delete_Call {
 	return &MockExercise_Delete_Call{Call: _e.mock.On("Delete", modelId)}
 }
 
 func (_c *MockExercise_Delete_Call) Run(run func(modelId int)) *MockExercise_Delete_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 int
-		if args[0] != nil {
-			arg0 = args[0].(int)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(int))
 	})
 	return _c
 }
@@ -175,20 +169,14 @@ type MockExercise_GetById_Call struct {
 }
 
 // GetById is a helper method to define mock.On call
-//   - modelId int
+//   - modelId
 func (_e *MockExercise_Expecter) GetById(modelId interface{}) *MockExercise_GetById_Call {
 	return &MockExercise_GetById_Call{Call: _e.mock.On("GetById", modelId)}
 }
 
 func (_c *MockExercise_GetById_Call) Run(run func(modelId int)) *MockExercise_GetById_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 int
-		if args[0] != nil {
-			arg0 = args[0].(int)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(int))
 	})
 	return _c
 }
@@ -199,6 +187,62 @@ func (_c *MockExercise_GetById_Call) Return(model1 model.Exercise, err error) *M
 }
 
 func (_c *MockExercise_GetById_Call) RunAndReturn(run func(modelId int) (model.Exercise, error)) *MockExercise_GetById_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetByMachineId provides a mock function for the type MockExercise
+func (_mock *MockExercise) GetByMachineId(machineId int) ([]model.Exercise, error) {
+	ret := _mock.Called(machineId)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetByMachineId")
+	}
+
+	var r0 []model.Exercise
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(int) ([]model.Exercise, error)); ok {
+		return returnFunc(machineId)
+	}
+	if returnFunc, ok := ret.Get(0).(func(int) []model.Exercise); ok {
+		r0 = returnFunc(machineId)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Exercise)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(int) error); ok {
+		r1 = returnFunc(machineId)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockExercise_GetByMachineId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByMachineId'
+type MockExercise_GetByMachineId_Call struct {
+	*mock.Call
+}
+
+// GetByMachineId is a helper method to define mock.On call
+//   - machineId
+func (_e *MockExercise_Expecter) GetByMachineId(machineId interface{}) *MockExercise_GetByMachineId_Call {
+	return &MockExercise_GetByMachineId_Call{Call: _e.mock.On("GetByMachineId", machineId)}
+}
+
+func (_c *MockExercise_GetByMachineId_Call) Run(run func(machineId int)) *MockExercise_GetByMachineId_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(int))
+	})
+	return _c
+}
+
+func (_c *MockExercise_GetByMachineId_Call) Return(exercises []model.Exercise, err error) *MockExercise_GetByMachineId_Call {
+	_c.Call.Return(exercises, err)
+	return _c
+}
+
+func (_c *MockExercise_GetByMachineId_Call) RunAndReturn(run func(machineId int) ([]model.Exercise, error)) *MockExercise_GetByMachineId_Call {
 	_c.Call.Return(run)
 	return _c
 }
@@ -226,20 +270,14 @@ type MockExercise_Insert_Call struct {
 }
 
 // Insert is a helper method to define mock.On call
-//   - model1 *model.Exercise
+//   - model1
 func (_e *MockExercise_Expecter) Insert(model1 interface{}) *MockExercise_Insert_Call {
 	return &MockExercise_Insert_Call{Call: _e.mock.On("Insert", model1)}
 }
 
 func (_c *MockExercise_Insert_Call) Run(run func(model1 *model.Exercise)) *MockExercise_Insert_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 *model.Exercise
-		if args[0] != nil {
-			arg0 = args[0].(*model.Exercise)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(*model.Exercise))
 	})
 	return _c
 }
@@ -277,20 +315,14 @@ type MockExercise_Update_Call struct {
 }
 
 // Update is a helper method to define mock.On call
-//   - model1 *model.Exercise
+//   - model1
 func (_e *MockExercise_Expecter) Update(model1 interface{}) *MockExercise_Update_Call {
 	return &MockExercise_Update_Call{Call: _e.mock.On("Update", model1)}
 }
 
 func (_c *MockExercise_Update_Call) Run(run func(model1 *model.Exercise)) *MockExercise_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 *model.Exercise
-		if args[0] != nil {
-			arg0 = args[0].(*model.Exercise)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(*model.Exercise))
 	})
 	return _c
 }
