@@ -2,7 +2,9 @@ package api
 
 import (
 	"fmt"
+	"gym-map/fetcher"
 	"gym-map/schema"
+	"gym-map/service"
 	"gym-map/store"
 	"net/http"
 
@@ -23,6 +25,10 @@ type DbContext struct {
 	MachineCrud     store.Machine
 	ExerciseCrud    store.Exercise
 	InstructionCrud store.Instruction
+
+	IAMFetcher fetcher.IAM
+
+	InstructionService service.Instruction
 
 	Claims *schema.JwtClaims
 }

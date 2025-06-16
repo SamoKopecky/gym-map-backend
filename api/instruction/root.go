@@ -2,7 +2,7 @@ package instruction
 
 import (
 	"gym-map/api"
-	"gym-map/model"
+	"gym-map/schema"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -16,26 +16,26 @@ func Get(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	instructions := []model.Instruction{}
+	instructions := []schema.Instruction{}
 	if params.ExerciseId != nil {
-		instructions, err = cc.InstructionCrud.GetByExerciseId(*params.ExerciseId)
+		instructions, err = cc.InstructionService.GetByExerciseId(*params.ExerciseId)
 		if err != nil {
 			return err
 		}
 	} else if params.UserId != nil {
-		instructions, err = cc.InstructionCrud.GetByUserId(*params.UserId)
+		instructions, err = cc.InstructionService.GetByUserId(*params.UserId)
 		if err != nil {
 			return err
 		}
 	} else {
-		instructions, err = cc.InstructionCrud.Get()
+		instructions, err = cc.InstructionService.Get()
 		if err != nil {
 			return err
 		}
 	}
 
 	if instructions == nil {
-		instructions = []model.Instruction{}
+		instructions = []schema.Instruction{}
 	}
 
 	return cc.JSON(http.StatusOK, instructions)

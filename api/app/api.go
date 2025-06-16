@@ -8,7 +8,9 @@ import (
 	"gym-map/api/machine"
 	"gym-map/config"
 	"gym-map/crud"
+	"gym-map/fetcher"
 	"gym-map/schema"
+	"gym-map/service"
 	"net/http"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -39,12 +41,22 @@ func logError(err error, c echo.Context) {
 func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
+			instructionCrud := crud.NewInstruction(db)
+			iamFetcher := fetcher.IAM{
+				AppConfig:  cfg,
+				AuthConfig: fetcher.CreateAuthConfig(cfg),
+			}
+
 			cc := &api.DbContext{Context: c,
 				MachineCrud:     crud.NewMachine(db),
 				ExerciseCrud:    crud.NewExercise(db),
-				InstructionCrud: crud.NewInstruction(db),
+				InstructionCrud: instructionCrud,
+				IAMFetcher:      iamFetcher,
+				InstructionService: service.Instruction{
+					IAM:             iamFetcher,
+					InstructionCrud: instructionCrud,
+				},
 			}
-
 			return next(cc)
 		}
 	}
