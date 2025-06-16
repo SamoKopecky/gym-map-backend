@@ -69,6 +69,28 @@ func claimContextMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
+// func trainerOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+// 	return func(c echo.Context) error {
+// 		cc := c.(*api.DbContext)
+// 		if !cc.Claims.IsTrainer() {
+// 			return cc.NoContent(http.StatusForbidden)
+// 		}
+//
+// 		return next(c)
+// 	}
+// }
+
+func adminOnlyMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		cc := c.(*api.DbContext)
+		if !cc.Claims.IsAdmin() {
+			return cc.NoContent(http.StatusForbidden)
+		}
+
+		return next(c)
+	}
+}
+
 func RunApi(db *bun.DB, appConfig *config.Config) {
 	e := echo.New()
 	e.HTTPErrorHandler = logError
@@ -83,21 +105,21 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtMachines := machines.Group("")
 	jwtMachines.Use(jwtMiddleware(appConfig))
 	jwtMachines.Use(claimContextMiddleware)
+	jwtMachines.Use(adminOnlyMiddleware)
 	jwtMachines.POST("", machine.Post)
 	jwtMachines.PATCH("/:id", machine.Patch)
 	jwtMachines.DELETE("/:id", machine.Delete)
 
-	positions := machines.Group("/:id/positions")
-	positions.Use(jwtMiddleware(appConfig))
-	positions.Use(claimContextMiddleware)
+	positions := jwtMachines.Group("/:id/positions")
 	positions.PATCH("", machine.PatchPositions)
 
 	exercises := e.Group("/exercises")
 	exercises.GET("", exercise.Get)
 
-	jwtExercises := machines.Group("")
+	jwtExercises := exercises.Group("")
 	jwtExercises.Use(jwtMiddleware(appConfig))
 	jwtExercises.Use(claimContextMiddleware)
+	jwtExercises.Use(adminOnlyMiddleware)
 	jwtExercises.POST("", exercise.Post)
 	jwtExercises.PATCH("/:id", exercise.Patch)
 	jwtExercises.DELETE("/:id", exercise.Delete)
