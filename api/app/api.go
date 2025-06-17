@@ -147,6 +147,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtInstructions.Use(jwtMiddleware(appConfig))
 	jwtInstructions.Use(claimContextMiddleware)
 	jwtInstructions.Use(trainerOnlyMiddleware)
+	// TODO: Implement check that will deny endpoints for trainers that don't own the instruction
 	jwtInstructions.POST("", instruction.Post)
 	jwtInstructions.PATCH("/:id", instruction.Patch)
 	jwtInstructions.DELETE("/:id", instruction.Delete)
