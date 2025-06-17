@@ -12,6 +12,19 @@ type Instruction struct {
 	InstructionCrud store.Instruction
 }
 
+func (i Instruction) IsTrainerOwned(userId string, id int) (bool, error) {
+	instruction, err := i.InstructionCrud.GetById(id)
+	if err != nil {
+		return false, err
+	}
+
+	if instruction.UserId == userId {
+		return true, nil
+	}
+
+	return false, nil
+}
+
 func (i Instruction) Get() (userInstructions []schema.Instruction, err error) {
 	instructions, err := i.InstructionCrud.Get()
 	if err != nil {

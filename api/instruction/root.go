@@ -4,9 +4,29 @@ import (
 	"gym-map/api"
 	"gym-map/schema"
 	"net/http"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
+
+func checkOwner(cc *api.DbContext) (bool, error) {
+	if isAdmin := cc.Claims.IsAdmin(); isAdmin {
+		return true, nil
+	}
+
+	id, err := strconv.Atoi(cc.Param("id"))
+	if err != nil {
+		return false, cc.BadRequest(err)
+	}
+
+	if isOwned, err := cc.InstructionService.IsTrainerOwned(cc.Claims.Subject, id); err != nil {
+		return false, err
+	} else if isOwned {
+		return true, nil
+	}
+
+	return false, nil
+}
 
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
@@ -60,10 +80,22 @@ func Post(c echo.Context) error {
 
 func Patch(c echo.Context) error {
 	cc := c.(*api.DbContext)
+	if isOwned, err := checkOwner(cc); err != nil {
+		return err
+	} else if !isOwned {
+		return cc.NoContent(http.StatusForbidden)
+	}
+
 	return api.PatchModel[instructionPatchRequest](cc, cc.InstructionCrud)
 }
 
 func Delete(c echo.Context) error {
 	cc := c.(*api.DbContext)
+	if isOwned, err := checkOwner(cc); err != nil {
+		return err
+	} else if !isOwned {
+		return cc.NoContent(http.StatusForbidden)
+	}
+
 	return api.DeleteModel(cc, cc.InstructionCrud)
 }
