@@ -37,6 +37,53 @@ func (_m *MockInstruction) EXPECT() *MockInstruction_Expecter {
 	return &MockInstruction_Expecter{mock: &_m.Mock}
 }
 
+// CreateFile provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) CreateFile(id int, fileId string, fileName string) error {
+	ret := _mock.Called(id, fileId, fileName)
+
+	if len(ret) == 0 {
+		panic("no return value specified for CreateFile")
+	}
+
+	var r0 error
+	if returnFunc, ok := ret.Get(0).(func(int, string, string) error); ok {
+		r0 = returnFunc(id, fileId, fileName)
+	} else {
+		r0 = ret.Error(0)
+	}
+	return r0
+}
+
+// MockInstruction_CreateFile_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateFile'
+type MockInstruction_CreateFile_Call struct {
+	*mock.Call
+}
+
+// CreateFile is a helper method to define mock.On call
+//   - id
+//   - fileId
+//   - fileName
+func (_e *MockInstruction_Expecter) CreateFile(id interface{}, fileId interface{}, fileName interface{}) *MockInstruction_CreateFile_Call {
+	return &MockInstruction_CreateFile_Call{Call: _e.mock.On("CreateFile", id, fileId, fileName)}
+}
+
+func (_c *MockInstruction_CreateFile_Call) Run(run func(id int, fileId string, fileName string)) *MockInstruction_CreateFile_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(int), args[1].(string), args[2].(string))
+	})
+	return _c
+}
+
+func (_c *MockInstruction_CreateFile_Call) Return(err error) *MockInstruction_CreateFile_Call {
+	_c.Call.Return(err)
+	return _c
+}
+
+func (_c *MockInstruction_CreateFile_Call) RunAndReturn(run func(id int, fileId string, fileName string) error) *MockInstruction_CreateFile_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Delete provides a mock function for the type MockInstruction
 func (_mock *MockInstruction) Delete(modelId int) error {
 	ret := _mock.Called(modelId)
@@ -137,6 +184,62 @@ func (_c *MockInstruction_Get_Call) RunAndReturn(run func() ([]model.Instruction
 	return _c
 }
 
+// GetByExerciseId provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) GetByExerciseId(exerciseId int) ([]model.Instruction, error) {
+	ret := _mock.Called(exerciseId)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetByExerciseId")
+	}
+
+	var r0 []model.Instruction
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(int) ([]model.Instruction, error)); ok {
+		return returnFunc(exerciseId)
+	}
+	if returnFunc, ok := ret.Get(0).(func(int) []model.Instruction); ok {
+		r0 = returnFunc(exerciseId)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Instruction)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(int) error); ok {
+		r1 = returnFunc(exerciseId)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockInstruction_GetByExerciseId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByExerciseId'
+type MockInstruction_GetByExerciseId_Call struct {
+	*mock.Call
+}
+
+// GetByExerciseId is a helper method to define mock.On call
+//   - exerciseId
+func (_e *MockInstruction_Expecter) GetByExerciseId(exerciseId interface{}) *MockInstruction_GetByExerciseId_Call {
+	return &MockInstruction_GetByExerciseId_Call{Call: _e.mock.On("GetByExerciseId", exerciseId)}
+}
+
+func (_c *MockInstruction_GetByExerciseId_Call) Run(run func(exerciseId int)) *MockInstruction_GetByExerciseId_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(int))
+	})
+	return _c
+}
+
+func (_c *MockInstruction_GetByExerciseId_Call) Return(instructions []model.Instruction, err error) *MockInstruction_GetByExerciseId_Call {
+	_c.Call.Return(instructions, err)
+	return _c
+}
+
+func (_c *MockInstruction_GetByExerciseId_Call) RunAndReturn(run func(exerciseId int) ([]model.Instruction, error)) *MockInstruction_GetByExerciseId_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetById provides a mock function for the type MockInstruction
 func (_mock *MockInstruction) GetById(modelId int) (model.Instruction, error) {
 	ret := _mock.Called(modelId)
@@ -187,6 +290,62 @@ func (_c *MockInstruction_GetById_Call) Return(model1 model.Instruction, err err
 }
 
 func (_c *MockInstruction_GetById_Call) RunAndReturn(run func(modelId int) (model.Instruction, error)) *MockInstruction_GetById_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetByUserId provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) GetByUserId(userId string) ([]model.Instruction, error) {
+	ret := _mock.Called(userId)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetByUserId")
+	}
+
+	var r0 []model.Instruction
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func(string) ([]model.Instruction, error)); ok {
+		return returnFunc(userId)
+	}
+	if returnFunc, ok := ret.Get(0).(func(string) []model.Instruction); ok {
+		r0 = returnFunc(userId)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Instruction)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func(string) error); ok {
+		r1 = returnFunc(userId)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockInstruction_GetByUserId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByUserId'
+type MockInstruction_GetByUserId_Call struct {
+	*mock.Call
+}
+
+// GetByUserId is a helper method to define mock.On call
+//   - userId
+func (_e *MockInstruction_Expecter) GetByUserId(userId interface{}) *MockInstruction_GetByUserId_Call {
+	return &MockInstruction_GetByUserId_Call{Call: _e.mock.On("GetByUserId", userId)}
+}
+
+func (_c *MockInstruction_GetByUserId_Call) Run(run func(userId string)) *MockInstruction_GetByUserId_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(string))
+	})
+	return _c
+}
+
+func (_c *MockInstruction_GetByUserId_Call) Return(instructions []model.Instruction, err error) *MockInstruction_GetByUserId_Call {
+	_c.Call.Return(instructions, err)
+	return _c
+}
+
+func (_c *MockInstruction_GetByUserId_Call) RunAndReturn(run func(userId string) ([]model.Instruction, error)) *MockInstruction_GetByUserId_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -17,7 +17,7 @@ type instructionPostRequest struct {
 }
 
 func (ipr instructionPostRequest) ToNewModel() model.Instruction {
-	return model.BuildInstruction(ipr.UserId, ipr.Description, ipr.ExerciseId)
+	return model.BuildInstruction(ipr.UserId, ipr.Description, ipr.ExerciseId, nil, nil)
 }
 
 type instructionPatchRequest struct {

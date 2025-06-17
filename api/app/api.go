@@ -48,6 +48,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 			}
 
 			cc := &api.DbContext{Context: c,
+				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
 				ExerciseCrud:    crud.NewExercise(db),
 				InstructionCrud: instructionCrud,
@@ -140,6 +141,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	instructions := e.Group("/instructions")
 	instructions.GET("", instruction.Get)
+	instructions.GET("/:id/media", instruction.GetMedia)
 
 	jwtInstructions := instructions.Group("")
 	jwtInstructions.Use(jwtMiddleware(appConfig))
@@ -148,6 +150,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtInstructions.POST("", instruction.Post)
 	jwtInstructions.PATCH("/:id", instruction.Patch)
 	jwtInstructions.DELETE("/:id", instruction.Delete)
+	jwtInstructions.POST("/:id/media", instruction.PostMedia)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }

@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	"gym-map/config"
 	"gym-map/fetcher"
 	"gym-map/schema"
 	"gym-map/service"
@@ -31,6 +32,8 @@ type DbContext struct {
 	InstructionService service.Instruction
 
 	Claims *schema.JwtClaims
+
+	Config config.Config
 }
 
 func (c DbContext) BadRequest(err error) error {
