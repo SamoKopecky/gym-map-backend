@@ -6,6 +6,7 @@ import (
 	"gym-map/api/exercise"
 	"gym-map/api/instruction"
 	"gym-map/api/machine"
+	"gym-map/api/user"
 	"gym-map/config"
 	"gym-map/crud"
 	"gym-map/fetcher"
@@ -151,6 +152,12 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtInstructions.PATCH("/:id", instruction.Patch)
 	jwtInstructions.DELETE("/:id", instruction.Delete)
 	jwtInstructions.POST("/:id/media", instruction.PostMedia)
+
+	jwtUsers := e.Group("/users")
+	jwtUsers.Use(jwtMiddleware(appConfig))
+	jwtUsers.Use(claimContextMiddleware)
+	jwtUsers.Use(adminOnlyMiddleware)
+	jwtUsers.GET("", user.Get)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
