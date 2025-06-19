@@ -151,7 +151,6 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtInstructions.PATCH("/:id", instruction.Patch)
 	jwtInstructions.DELETE("/:id", instruction.Delete)
 	jwtInstructions.POST("/:id/media", instruction.PostMedia)
-	jwtInstructions.GET("/:id/media", instruction.GetMedia)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
