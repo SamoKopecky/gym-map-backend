@@ -14,6 +14,11 @@ import (
 
 func PostMedia(c echo.Context) error {
 	cc := c.(*api.DbContext)
+	if isOwned, err := checkOwner(cc); err != nil {
+		return err
+	} else if !isOwned {
+		return cc.NoContent(http.StatusForbidden)
+	}
 
 	id, err := strconv.Atoi(cc.Param("id"))
 	if err != nil {
