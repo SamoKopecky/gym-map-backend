@@ -60,20 +60,14 @@ type MockMachine_Delete_Call struct {
 }
 
 // Delete is a helper method to define mock.On call
-//   - modelId int
+//   - modelId
 func (_e *MockMachine_Expecter) Delete(modelId interface{}) *MockMachine_Delete_Call {
 	return &MockMachine_Delete_Call{Call: _e.mock.On("Delete", modelId)}
 }
 
 func (_c *MockMachine_Delete_Call) Run(run func(modelId int)) *MockMachine_Delete_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 int
-		if args[0] != nil {
-			arg0 = args[0].(int)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(int))
 	})
 	return _c
 }
@@ -175,20 +169,14 @@ type MockMachine_GetById_Call struct {
 }
 
 // GetById is a helper method to define mock.On call
-//   - modelId int
+//   - modelId
 func (_e *MockMachine_Expecter) GetById(modelId interface{}) *MockMachine_GetById_Call {
 	return &MockMachine_GetById_Call{Call: _e.mock.On("GetById", modelId)}
 }
 
 func (_c *MockMachine_GetById_Call) Run(run func(modelId int)) *MockMachine_GetById_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 int
-		if args[0] != nil {
-			arg0 = args[0].(int)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(int))
 	})
 	return _c
 }
@@ -226,20 +214,14 @@ type MockMachine_Insert_Call struct {
 }
 
 // Insert is a helper method to define mock.On call
-//   - model1 *model.Machine
+//   - model1
 func (_e *MockMachine_Expecter) Insert(model1 interface{}) *MockMachine_Insert_Call {
 	return &MockMachine_Insert_Call{Call: _e.mock.On("Insert", model1)}
 }
 
 func (_c *MockMachine_Insert_Call) Run(run func(model1 *model.Machine)) *MockMachine_Insert_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 *model.Machine
-		if args[0] != nil {
-			arg0 = args[0].(*model.Machine)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(*model.Machine))
 	})
 	return _c
 }
@@ -277,20 +259,14 @@ type MockMachine_Update_Call struct {
 }
 
 // Update is a helper method to define mock.On call
-//   - model1 *model.Machine
+//   - model1
 func (_e *MockMachine_Expecter) Update(model1 interface{}) *MockMachine_Update_Call {
 	return &MockMachine_Update_Call{Call: _e.mock.On("Update", model1)}
 }
 
 func (_c *MockMachine_Update_Call) Run(run func(model1 *model.Machine)) *MockMachine_Update_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		var arg0 *model.Machine
-		if args[0] != nil {
-			arg0 = args[0].(*model.Machine)
-		}
-		run(
-			arg0,
-		)
+		run(args[0].(*model.Machine))
 	})
 	return _c
 }
@@ -301,6 +277,51 @@ func (_c *MockMachine_Update_Call) Return(err error) *MockMachine_Update_Call {
 }
 
 func (_c *MockMachine_Update_Call) RunAndReturn(run func(model1 *model.Machine) error) *MockMachine_Update_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// UpdatePosition provides a mock function for the type MockMachine
+func (_mock *MockMachine) UpdatePosition(model1 *model.Machine) error {
+	ret := _mock.Called(model1)
+
+	if len(ret) == 0 {
+		panic("no return value specified for UpdatePosition")
+	}
+
+	var r0 error
+	if returnFunc, ok := ret.Get(0).(func(*model.Machine) error); ok {
+		r0 = returnFunc(model1)
+	} else {
+		r0 = ret.Error(0)
+	}
+	return r0
+}
+
+// MockMachine_UpdatePosition_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'UpdatePosition'
+type MockMachine_UpdatePosition_Call struct {
+	*mock.Call
+}
+
+// UpdatePosition is a helper method to define mock.On call
+//   - model1
+func (_e *MockMachine_Expecter) UpdatePosition(model1 interface{}) *MockMachine_UpdatePosition_Call {
+	return &MockMachine_UpdatePosition_Call{Call: _e.mock.On("UpdatePosition", model1)}
+}
+
+func (_c *MockMachine_UpdatePosition_Call) Run(run func(model1 *model.Machine)) *MockMachine_UpdatePosition_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(*model.Machine))
+	})
+	return _c
+}
+
+func (_c *MockMachine_UpdatePosition_Call) Return(err error) *MockMachine_UpdatePosition_Call {
+	_c.Call.Return(err)
+	return _c
+}
+
+func (_c *MockMachine_UpdatePosition_Call) RunAndReturn(run func(model1 *model.Machine) error) *MockMachine_UpdatePosition_Call {
 	_c.Call.Return(run)
 	return _c
 }

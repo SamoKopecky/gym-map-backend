@@ -2,6 +2,10 @@ package api
 
 import (
 	"fmt"
+	"gym-map/config"
+	"gym-map/fetcher"
+	"gym-map/schema"
+	"gym-map/service"
 	"gym-map/store"
 	"net/http"
 
@@ -19,8 +23,17 @@ func BindParams[T any](c echo.Context) (T, error) {
 type DbContext struct {
 	echo.Context
 
-	MachineCrud  store.Machine
-	ExerciseCrud store.Exercise
+	MachineCrud     store.Machine
+	ExerciseCrud    store.Exercise
+	InstructionCrud store.Instruction
+
+	IAMFetcher fetcher.IAM
+
+	InstructionService service.Instruction
+
+	Claims *schema.JwtClaims
+
+	Config config.Config
 }
 
 func (c DbContext) BadRequest(err error) error {

@@ -15,6 +15,13 @@ type Config struct {
 	DatabaseName     string `env:"DB_NAME" envDefault:"gym_map"`
 
 	Env string `env:"ENV" envDefault:"dev"`
+
+	KeycloakBaseUrl           string `env:"KC_BASE_URL" envDefault:"http://localhost:8080"`
+	KeycloakAdminClientId     string `env:"KC_ADMIN_CLIENT_ID" envDefault:"admin-cli"`
+	KeycloakAdminClientSecret string `env:"KC_ADMIN_CLIENT_SECRET"`
+	KeycloakRealm             string `env:"KC_REALM" envDefault:"gym-map"`
+
+	MediaFileRepository string `env:"FILE_REPOSITORY" envDefault:"./files"`
 }
 
 func (c Config) GetDSN() string {

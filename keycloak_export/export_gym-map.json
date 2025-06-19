@@ -61,6 +61,14 @@
       "containerId" : "1f1a970d-0206-4964-9dcd-f415ed701893",
       "attributes" : { }
     }, {
+      "id" : "424511ab-080d-432f-8e5a-44d1f6fd4032",
+      "name" : "trainer",
+      "description" : "",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "1f1a970d-0206-4964-9dcd-f415ed701893",
+      "attributes" : { }
+    }, {
       "id" : "85cd56d2-f91f-42a1-9660-84cb0edfa50c",
       "name" : "offline_access",
       "description" : "${role_offline-access}",
@@ -72,6 +80,14 @@
       "id" : "fa144f85-7f60-4b5e-a9c3-ac370fcaf192",
       "name" : "uma_authorization",
       "description" : "${role_uma_authorization}",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "1f1a970d-0206-4964-9dcd-f415ed701893",
+      "attributes" : { }
+    }, {
+      "id" : "03841931-ab62-4c26-a5dd-30c673e52339",
+      "name" : "admin",
+      "description" : "",
       "composite" : false,
       "clientRole" : false,
       "containerId" : "1f1a970d-0206-4964-9dcd-f415ed701893",
@@ -387,10 +403,40 @@
     "createdTimestamp" : 1750013268289,
     "enabled" : true,
     "totp" : false,
-    "credentials" : [ ],
+    "credentials" : [ {
+      "id" : "a8e3f96c-1d89-4b2c-a5fc-377be5c39138",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1750013699747,
+      "secretData" : "{\"value\":\"VWTt23cyYBzyO4jFtsxAZV6aenNm7CCyJTCAEcqvZzA=\",\"salt\":\"QYjIMIL3NHzv2a/+2WxPgg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-gym-map" ],
+    "realmRoles" : [ "default-roles-gym-map", "admin" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "e5c51408-7e0c-4643-bfa7-e8277ac2e01e",
+    "username" : "samot",
+    "firstName" : "samot",
+    "lastName" : "kopecky",
+    "email" : "sano.kopecky@gmail.com",
+    "emailVerified" : true,
+    "createdTimestamp" : 1750016849829,
+    "enabled" : true,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "b7e3843b-6664-43a2-a38d-af4d98599006",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1750016860499,
+      "secretData" : "{\"value\":\"01cVVetzZMNno8CHdnEwZdom5eEpgP73Ina/WOpFBgk=\",\"salt\":\"H0ewFVwAdgG0TSJ047DtNQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-gym-map", "trainer" ],
     "notBefore" : 0,
     "groups" : [ ]
   } ],
