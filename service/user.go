@@ -1,0 +1,55 @@
+package service
+
+import (
+	"errors"
+	"gym-map/fetcher"
+)
+
+type User struct {
+	IAM fetcher.IAM
+}
+
+func (u User) RegisterUser(email string) (userId string, err error) {
+	userLocation, err := u.IAM.CreateUser(email)
+	if errors.Is(err, fetcher.ErrUserAlreadyExists) {
+		// If use is already created, get user id by email
+		userLocation, err = u.IAM.GetUserLocationByEmail(email)
+		if err != nil {
+			return
+		}
+	} else if err == nil {
+		// If user is created, invoke user update to set password etc.
+		err = u.IAM.InvokeUserUpdate(userLocation)
+		if err != nil {
+			return
+		}
+	} else {
+		return
+	}
+
+	trainer_role, err := u.IAM.GetRole(fetcher.TRAINER_ROLE)
+	if err != nil {
+		return
+	}
+
+	err = u.IAM.AddUserRoles(userLocation, trainer_role)
+	if err != nil {
+		return
+	}
+
+	return userLocation.UserId(), nil
+}
+
+func (u User) UnregisterUser(userId string) error {
+	userLocation := u.IAM.GetUserLocation(userId)
+	trainerRole, err := u.IAM.GetRole(fetcher.TRAINER_ROLE)
+	if err != nil {
+		return err
+	}
+
+	err = u.IAM.RemoveUserRoles(userLocation, trainerRole)
+	if err != nil {
+		return err
+	}
+	return nil
+}

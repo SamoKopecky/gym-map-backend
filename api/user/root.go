@@ -23,3 +23,33 @@ func Get(c echo.Context) error {
 
 	return cc.JSON(http.StatusOK, userModels)
 }
+
+func Post(c echo.Context) (err error) {
+	cc := c.(*api.DbContext)
+
+	params, err := api.BindParams[userPostRequest](cc)
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
+	userId, err := cc.UserService.RegisterUser(params.Email)
+	if err != nil {
+		return err
+	}
+
+	return cc.JSON(http.StatusCreated, struct {
+		UserId string `json:"user_id"`
+	}{UserId: userId})
+}
+
+func Delete(c echo.Context) (err error) {
+	cc := c.(*api.DbContext)
+
+	id := cc.Param("id")
+
+	err = cc.UserService.UnregisterUser(id)
+	if err != nil {
+		return
+	}
+	return cc.NoContent(http.StatusOK)
+}

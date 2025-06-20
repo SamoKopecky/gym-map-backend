@@ -58,6 +58,9 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,
 				},
+				UserService: service.User{
+					IAM: iamFetcher,
+				},
 			}
 			return next(cc)
 		}
