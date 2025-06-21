@@ -14,13 +14,8 @@ func (u User) GetUsers() (users []fetcher.KeycloakUser, err error) {
 	if err != nil {
 		return
 	}
-	admins, err := u.IAM.GetUsersByRole(fetcher.ADMIN_ROLE)
-	if err != nil {
-		return
-	}
 
 	users = append(users, trainers...)
-	users = append(users, admins...)
 	return
 }
 
