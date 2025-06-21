@@ -30,6 +30,7 @@ type DbContext struct {
 	IAMFetcher fetcher.IAM
 
 	InstructionService service.Instruction
+	UserService        service.User
 
 	Claims *schema.JwtClaims
 

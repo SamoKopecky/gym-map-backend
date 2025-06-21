@@ -6,5 +6,5 @@ import (
 
 type Instruction struct {
 	model.Instruction
-	model.User
+	model.UserBase
 }

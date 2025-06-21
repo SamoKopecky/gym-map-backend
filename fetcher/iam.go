@@ -1,14 +1,12 @@
 package fetcher
 
 import (
-	"bytes"
-	"context"
 	"fmt"
 	"gym-map/config"
-	"io"
+	"gym-map/utils"
 	"net/http"
+	"strings"
 
-	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/clientcredentials"
 )
 
@@ -19,36 +17,14 @@ type IAM struct {
 	AuthConfig clientcredentials.Config
 }
 
-func CreateAuthConfig(appConfig *config.Config) clientcredentials.Config {
-	return clientcredentials.Config{
-		ClientID:     appConfig.KeycloakAdminClientId,
-		ClientSecret: appConfig.KeycloakAdminClientSecret,
-		TokenURL:     fmt.Sprintf("%s/%s", appConfig.KeycloakBaseUrl, MASTER_TOKEN_ENDPOINT),
-	}
-}
-
-func (i IAM) baseUrl(endpoint string) string {
-	return fmt.Sprintf("%s/%s", i.AppConfig.KeycloakBaseUrl, endpoint)
-}
-
-func (i IAM) userUrl() string {
-	return i.baseUrl(fmt.Sprintf("admin/realms/%s/users", i.AppConfig.KeycloakRealm))
-}
-
-func (i IAM) authedRequest(method, url string, body *bytes.Buffer) (*http.Response, error) {
-	var reqBody io.Reader
-	if body != nil {
-		reqBody = body
-	} else {
-		reqBody = nil
-	}
-	request, err := http.NewRequest(method, url, reqBody)
+func (i IAM) GetUsersByRole(role string) ([]KeycloakUser, error) {
+	resp, err := i.authedRequest(http.MethodGet, fmt.Sprintf("%s/users", i.roleUrl(role)), nil)
 
 	if err != nil {
 		return nil, err
 	}
-	client := oauth2.NewClient(context.Background(), i.AuthConfig.TokenSource(context.Background()))
-	return client.Do(request)
+
+	return responseData[[]KeycloakUser](resp)
 }
 
 func (i IAM) GetUsers() ([]KeycloakUser, error) {
@@ -59,4 +35,84 @@ func (i IAM) GetUsers() ([]KeycloakUser, error) {
 	}
 
 	return responseData[[]KeycloakUser](resp)
+}
+
+func (i IAM) CreateUser(email string) (userLocation UserLocation, err error) {
+	username := strings.Split(email, "@")[0]
+	newUser := NewKeycloakUser{
+		Email:           email,
+		Username:        username,
+		Enabled:         true,
+		EmailVerified:   false,
+		RequiredActions: newRequiredActions,
+	}
+	buf := createParamsBuf(newUser)
+	resp, err := i.authedRequest(http.MethodPost, i.userUrl(), &buf)
+	if err != nil {
+		return
+	}
+	if resp.StatusCode == http.StatusConflict {
+		return "", ErrUserAlreadyExists
+	}
+
+	if resp.StatusCode != http.StatusCreated {
+		return "", ErrUserNotCreated
+	}
+
+	userLocation = UserLocation(resp.Header.Get("Location"))
+	return
+}
+
+func (i IAM) GetUserLocationByEmail(email string) (UserLocation, error) {
+	baseUrl := fmt.Sprintf("%s", i.userUrl())
+	queryParams := map[string]string{"email": email, "exact": "true"}
+	resp, err := i.authedRequest(
+		http.MethodGet,
+		utils.AddQueryParam(baseUrl, queryParams),
+		nil)
+
+	if err != nil {
+		return "", err
+	}
+
+	users, err := responseData[[]KeycloakUser](resp)
+	if err != nil {
+		return "", err
+	}
+
+	// TODO: Properly check len
+	user := users[0]
+	userLocation := i.GetUserLocation(user.Id)
+	return userLocation, nil
+}
+
+func (i IAM) InvokeUserUpdate(userLocation UserLocation) error {
+	buf := createParamsBuf(newRequiredActions)
+
+	resp, err := i.authedRequest(http.MethodPut, fmt.Sprintf("%s/execute-actions-email", userLocation), &buf)
+	if err != nil {
+		return err
+	}
+
+	if resp.StatusCode != http.StatusNoContent {
+		return ErrUserActionTriggerFailed
+	}
+	return nil
+}
+
+func (i IAM) GetRole(roleName string) (KeycloakRole, error) {
+	resp, err := i.authedRequest(http.MethodGet, i.roleUrl(roleName), nil)
+	if err != nil {
+		return KeycloakRole{}, err
+	}
+
+	return responseData[KeycloakRole](resp)
+}
+
+func (i IAM) AddUserRoles(userLocation UserLocation, kcRole KeycloakRole) error {
+	return i.editUserRoles(http.MethodPost, userLocation, kcRole)
+}
+
+func (i IAM) RemoveUserRoles(userLocation UserLocation, kcRole KeycloakRole) error {
+	return i.editUserRoles(http.MethodDelete, userLocation, kcRole)
 }
