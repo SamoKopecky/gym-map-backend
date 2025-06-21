@@ -16,6 +16,7 @@ import (
 )
 
 const TRAINER_ROLE = "trainer"
+const ADMIN_ROLE = "admin"
 
 var ErrUserAlreadyExists = errors.New("iam: user already exists")
 var ErrUserNotCreated = errors.New("iam: user not created due to invalid status code")

@@ -11,14 +11,14 @@ import (
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	users, err := cc.IAMFetcher.GetUsers()
+	users, err := cc.UserService.GetUsers()
 	if err != nil {
 		return cc.BadRequest(err)
 	}
 
 	userModels := make([]model.User, len(users))
 	for i := range users {
-		userModels[i] = users[i].ToUserModel()
+		userModels[i] = users[i].ToUser()
 	}
 
 	return cc.JSON(http.StatusOK, userModels)
@@ -32,14 +32,12 @@ func Post(c echo.Context) (err error) {
 		return cc.BadRequest(err)
 	}
 
-	userId, err := cc.UserService.RegisterUser(params.Email)
+	_, err = cc.UserService.RegisterUser(params.Email)
 	if err != nil {
 		return err
 	}
 
-	return cc.JSON(http.StatusCreated, struct {
-		UserId string `json:"user_id"`
-	}{UserId: userId})
+	return cc.NoContent(http.StatusNoContent)
 }
 
 func Delete(c echo.Context) (err error) {
@@ -51,5 +49,5 @@ func Delete(c echo.Context) (err error) {
 	if err != nil {
 		return
 	}
-	return cc.NoContent(http.StatusOK)
+	return cc.NoContent(http.StatusNoContent)
 }

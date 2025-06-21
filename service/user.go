@@ -9,6 +9,21 @@ type User struct {
 	IAM fetcher.IAM
 }
 
+func (u User) GetUsers() (users []fetcher.KeycloakUser, err error) {
+	trainers, err := u.IAM.GetUsersByRole(fetcher.TRAINER_ROLE)
+	if err != nil {
+		return
+	}
+	admins, err := u.IAM.GetUsersByRole(fetcher.ADMIN_ROLE)
+	if err != nil {
+		return
+	}
+
+	users = append(users, trainers...)
+	users = append(users, admins...)
+	return
+}
+
 func (u User) RegisterUser(email string) (userId string, err error) {
 	userLocation, err := u.IAM.CreateUser(email)
 	if errors.Is(err, fetcher.ErrUserAlreadyExists) {

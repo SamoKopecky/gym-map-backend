@@ -32,13 +32,19 @@ func (ku KeycloakUser) FullName() *string {
 	return nil
 }
 
-func (ku KeycloakUser) ToUserModel() model.User {
-	return model.User{
-		Id:        ku.Id,
+func (ku KeycloakUser) ToUserBase() model.UserBase {
+	return model.UserBase{
 		Email:     ku.Email,
 		Name:      ku.FullName(),
 		FirstName: ku.FirstName,
 		LastName:  ku.LastName,
+	}
+}
+
+func (ku KeycloakUser) ToUser() model.User {
+	return model.User{
+		Id:       ku.Id,
+		UserBase: ku.ToUserBase(),
 	}
 }
 

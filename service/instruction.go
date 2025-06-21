@@ -99,7 +99,7 @@ func (i Instruction) withUsers(instructions []model.Instruction) (userInstructio
 		if user, ok := usersMap[instruction.UserId]; ok {
 			userInstructions = append(userInstructions, schema.Instruction{
 				Instruction: instruction,
-				User:        user.ToUserModel(),
+				UserBase:    user.ToUserBase(),
 			})
 		}
 	}

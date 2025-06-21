@@ -17,6 +17,16 @@ type IAM struct {
 	AuthConfig clientcredentials.Config
 }
 
+func (i IAM) GetUsersByRole(role string) ([]KeycloakUser, error) {
+	resp, err := i.authedRequest(http.MethodGet, fmt.Sprintf("%s/users", i.roleUrl(role)), nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return responseData[[]KeycloakUser](resp)
+}
+
 func (i IAM) GetUsers() ([]KeycloakUser, error) {
 	resp, err := i.authedRequest(http.MethodGet, i.userUrl(), nil)
 
@@ -44,6 +54,7 @@ func (i IAM) CreateUser(email string) (userLocation UserLocation, err error) {
 	if resp.StatusCode == http.StatusConflict {
 		return "", ErrUserAlreadyExists
 	}
+
 	if resp.StatusCode != http.StatusCreated {
 		return "", ErrUserNotCreated
 	}

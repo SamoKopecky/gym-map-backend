@@ -161,6 +161,8 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtUsers.Use(claimContextMiddleware)
 	jwtUsers.Use(adminOnlyMiddleware)
 	jwtUsers.GET("", user.Get)
+	jwtUsers.POST("", user.Post)
+	jwtUsers.DELETE("/:id", user.Delete)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
