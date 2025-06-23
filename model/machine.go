@@ -28,8 +28,7 @@ func BuildMachine(name string, description *string, muscleGroups *[]string, widt
 	}
 }
 
-// TODO: Add FKs and cascade on delete
-// TOOD: Adjust get endpoints to use cruds that compute count everytime
+// TODO: Adjust get endpoints to use cruds that compute count everytime
 // TODO: If the performance will be bad, split get into 2 endpoints
 // /get -- just returns the tntieis
 // /get/counts -- returuns only the counts, then combine them on FE
