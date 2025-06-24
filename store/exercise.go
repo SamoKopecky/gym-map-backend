@@ -5,5 +5,5 @@ import "gym-map/model"
 type Exercise interface {
 	StoreBase[model.Exercise]
 	GetByMachineId(machineId int) (exercises []model.Exercise, err error)
-	GetWithCount() (exercises []model.Exercise, err error)
+	GetWithCount() (exercises []model.ExerciseWithCount, err error)
 }
