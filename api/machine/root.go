@@ -2,6 +2,7 @@ package machine
 
 import (
 	"gym-map/api"
+	"gym-map/model"
 	"net/http"
 	"strconv"
 
@@ -10,7 +11,16 @@ import (
 
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.GetModels(cc, cc.MachineCrud)
+
+	machines, err := cc.MachineCrud.GetWithCount()
+	if err != nil {
+		return err
+	}
+	if machines == nil {
+		machines = []model.MachineWithCount{}
+	}
+
+	return cc.JSON(http.StatusOK, machines)
 }
 
 func Post(c echo.Context) error {

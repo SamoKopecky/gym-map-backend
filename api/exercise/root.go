@@ -31,21 +31,21 @@ func Get(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	exercises := []model.Exercise{}
+	exercises := []model.ExerciseWithCount{}
 	if params.MachineId == nil {
-		exercises, err = cc.ExerciseCrud.Get()
+		exercises, err = cc.ExerciseCrud.GetWithCount()
 		if err != nil {
 			return err
 		}
 	} else {
-		exercises, err = cc.ExerciseCrud.GetByMachineId(*params.MachineId)
+		exercises, err = cc.ExerciseCrud.GetWithCountMachineId(*params.MachineId)
 		if err != nil {
 			return err
 		}
 	}
 
 	if exercises == nil {
-		exercises = []model.Exercise{}
+		exercises = []model.ExerciseWithCount{}
 	}
 
 	return cc.JSON(http.StatusOK, exercises)

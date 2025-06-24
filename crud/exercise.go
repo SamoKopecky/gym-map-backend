@@ -42,12 +42,3 @@ func (e Exercise) getWithCountQuery() *bun.SelectQuery {
 		ColumnExpr("counts.instruction_count AS instruction_count").
 		Join("LEFT JOIN counts on exercise.id = counts.exercise_id")
 }
-
-func (e Exercise) GetByMachineId(machineId int) (exercises []model.Exercise, err error) {
-	err = e.db.NewSelect().
-		Model(&exercises).
-		Where("machine_id = ?", machineId).
-		Scan(context.Background())
-
-	return
-}
