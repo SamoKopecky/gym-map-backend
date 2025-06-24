@@ -34,7 +34,6 @@ func (ku KeycloakUser) FullName() *string {
 
 func (ku KeycloakUser) ToUserBase() model.UserBase {
 	return model.UserBase{
-		Email:     ku.Email,
 		Name:      ku.FullName(),
 		FirstName: ku.FirstName,
 		LastName:  ku.LastName,
@@ -44,6 +43,7 @@ func (ku KeycloakUser) ToUserBase() model.UserBase {
 func (ku KeycloakUser) ToUser() model.User {
 	return model.User{
 		Id:       ku.Id,
+		Email:    ku.Email,
 		UserBase: ku.ToUserBase(),
 	}
 }
