@@ -32,9 +32,3 @@ func BuildMachine(name string, description *string, muscleGroups *[]string, widt
 		PositionY:    positionY,
 	}
 }
-
-// TODO: Adjust get endpoints to use cruds that compute count everytime
-// TODO: If the performance will be bad, split get into 2 endpoints
-// /get -- just returns the tntieis
-// /get/counts -- returuns only the counts, then combine them on FE
-// USe counts in delete dialogs and card info bottom right corner probably or middle cause of decsription
