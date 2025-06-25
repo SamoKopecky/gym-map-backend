@@ -25,7 +25,24 @@ func Get(c echo.Context) error {
 
 func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PostModel[machinePostRequest](cc, cc.MachineCrud)
+
+	params, err := api.BindParams[machinePostRequest](cc)
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
+	machine := params.ToNewModel()
+	err = cc.MachineCrud.Insert(&machine)
+	if err != nil {
+		return err
+	}
+
+	exerciseWithCount := model.MachineWithCount{
+		Machine:       machine,
+		ExerciseCount: 0,
+	}
+
+	return cc.JSON(http.StatusOK, exerciseWithCount)
 }
 
 func Patch(c echo.Context) error {

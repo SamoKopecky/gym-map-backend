@@ -10,7 +10,24 @@ import (
 
 func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PostModel[exercisePostRequest](cc, cc.ExerciseCrud)
+
+	params, err := api.BindParams[exercisePostRequest](cc)
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
+	exercise := params.ToNewModel()
+	err = cc.ExerciseCrud.Insert(&exercise)
+	if err != nil {
+		return err
+	}
+
+	exerciseWithCount := model.ExerciseWithCount{
+		Exercise:         exercise,
+		InstructionCount: 0,
+	}
+
+	return cc.JSON(http.StatusOK, exerciseWithCount)
 }
 
 func Patch(c echo.Context) error {
