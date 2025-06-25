@@ -2,7 +2,7 @@ package machine
 
 import (
 	"gym-map/api"
-	"gym-map/model"
+	"gym-map/schema"
 	"net/http"
 	"strconv"
 
@@ -17,7 +17,7 @@ func Get(c echo.Context) error {
 		return err
 	}
 	if machines == nil {
-		machines = []model.MachineWithCount{}
+		machines = []schema.Machine{}
 	}
 
 	return cc.JSON(http.StatusOK, machines)
@@ -37,7 +37,7 @@ func Post(c echo.Context) error {
 		return err
 	}
 
-	exerciseWithCount := model.MachineWithCount{
+	exerciseWithCount := schema.Machine{
 		Machine:       machine,
 		ExerciseCount: 0,
 	}

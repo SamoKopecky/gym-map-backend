@@ -2,7 +2,7 @@ package exercise
 
 import (
 	"gym-map/api"
-	"gym-map/model"
+	"gym-map/schema"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -22,7 +22,7 @@ func Post(c echo.Context) error {
 		return err
 	}
 
-	exerciseWithCount := model.ExerciseWithCount{
+	exerciseWithCount := schema.Exercise{
 		Exercise:         exercise,
 		InstructionCount: 0,
 	}
@@ -48,7 +48,7 @@ func Get(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	exercises := []model.ExerciseWithCount{}
+	exercises := []schema.Exercise{}
 	if params.MachineId == nil {
 		exercises, err = cc.ExerciseCrud.GetWithCount()
 		if err != nil {
@@ -62,7 +62,7 @@ func Get(c echo.Context) error {
 	}
 
 	if exercises == nil {
-		exercises = []model.ExerciseWithCount{}
+		exercises = []schema.Exercise{}
 	}
 
 	return cc.JSON(http.StatusOK, exercises)

@@ -16,11 +16,6 @@ type Machine struct {
 	PositionY    int       `json:"position_y" bun:"position_y"`
 }
 
-type MachineWithCount struct {
-	Machine
-	ExerciseCount int `json:"exercise_count"`
-}
-
 func BuildMachine(name string, description *string, muscleGroups *[]string, width, height, positionX, positionY int) Machine {
 	return Machine{
 		Name:         name,

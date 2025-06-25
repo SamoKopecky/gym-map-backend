@@ -3,6 +3,7 @@ package crud
 import (
 	"context"
 	"gym-map/model"
+	"gym-map/schema"
 
 	"github.com/uptrace/bun"
 )
@@ -29,7 +30,7 @@ func (m Machine) UpdatePosition(model *model.Machine) error {
 	return err
 }
 
-func (m Machine) GetWithCount() (machines []model.MachineWithCount, err error) {
+func (m Machine) GetWithCount() (machines []schema.Machine, err error) {
 	subq := m.db.NewSelect().
 		Model((*model.Machine)(nil)).
 		ColumnExpr("machine.id AS machine_id").

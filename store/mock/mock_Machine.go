@@ -6,6 +6,7 @@ package store
 
 import (
 	"gym-map/model"
+	"gym-map/schema"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -192,23 +193,23 @@ func (_c *MockMachine_GetById_Call) RunAndReturn(run func(modelId int) (model.Ma
 }
 
 // GetWithCount provides a mock function for the type MockMachine
-func (_mock *MockMachine) GetWithCount() ([]model.MachineWithCount, error) {
+func (_mock *MockMachine) GetWithCount() ([]schema.Machine, error) {
 	ret := _mock.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetWithCount")
 	}
 
-	var r0 []model.MachineWithCount
+	var r0 []schema.Machine
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func() ([]model.MachineWithCount, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func() ([]schema.Machine, error)); ok {
 		return returnFunc()
 	}
-	if returnFunc, ok := ret.Get(0).(func() []model.MachineWithCount); ok {
+	if returnFunc, ok := ret.Get(0).(func() []schema.Machine); ok {
 		r0 = returnFunc()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]model.MachineWithCount)
+			r0 = ret.Get(0).([]schema.Machine)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func() error); ok {
@@ -236,12 +237,12 @@ func (_c *MockMachine_GetWithCount_Call) Run(run func()) *MockMachine_GetWithCou
 	return _c
 }
 
-func (_c *MockMachine_GetWithCount_Call) Return(machines []model.MachineWithCount, err error) *MockMachine_GetWithCount_Call {
+func (_c *MockMachine_GetWithCount_Call) Return(machines []schema.Machine, err error) *MockMachine_GetWithCount_Call {
 	_c.Call.Return(machines, err)
 	return _c
 }
 
-func (_c *MockMachine_GetWithCount_Call) RunAndReturn(run func() ([]model.MachineWithCount, error)) *MockMachine_GetWithCount_Call {
+func (_c *MockMachine_GetWithCount_Call) RunAndReturn(run func() ([]schema.Machine, error)) *MockMachine_GetWithCount_Call {
 	_c.Call.Return(run)
 	return _c
 }

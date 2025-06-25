@@ -3,6 +3,7 @@ package crud
 import (
 	"context"
 	"gym-map/model"
+	"gym-map/schema"
 
 	"github.com/uptrace/bun"
 )
@@ -15,13 +16,13 @@ func NewExercise(db bun.IDB) Exercise {
 	return Exercise{CRUDBase: CRUDBase[model.Exercise]{db: db}}
 }
 
-func (e Exercise) GetWithCount() (exercises []model.ExerciseWithCount, err error) {
+func (e Exercise) GetWithCount() (exercises []schema.Exercise, err error) {
 	query := e.getWithCountQuery()
 	err = query.Scan(context.Background(), &exercises)
 	return
 }
 
-func (e Exercise) GetWithCountMachineId(machineId int) (exercises []model.ExerciseWithCount, err error) {
+func (e Exercise) GetWithCountMachineId(machineId int) (exercises []schema.Exercise, err error) {
 	query := e.getWithCountQuery().Where("exercise.machine_id = ?", machineId)
 	err = query.Scan(context.Background(), &exercises)
 	return

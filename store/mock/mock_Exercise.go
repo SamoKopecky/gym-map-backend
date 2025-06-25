@@ -6,6 +6,7 @@ package store
 
 import (
 	"gym-map/model"
+	"gym-map/schema"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -192,23 +193,23 @@ func (_c *MockExercise_GetById_Call) RunAndReturn(run func(modelId int) (model.E
 }
 
 // GetWithCount provides a mock function for the type MockExercise
-func (_mock *MockExercise) GetWithCount() ([]model.ExerciseWithCount, error) {
+func (_mock *MockExercise) GetWithCount() ([]schema.Exercise, error) {
 	ret := _mock.Called()
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetWithCount")
 	}
 
-	var r0 []model.ExerciseWithCount
+	var r0 []schema.Exercise
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func() ([]model.ExerciseWithCount, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func() ([]schema.Exercise, error)); ok {
 		return returnFunc()
 	}
-	if returnFunc, ok := ret.Get(0).(func() []model.ExerciseWithCount); ok {
+	if returnFunc, ok := ret.Get(0).(func() []schema.Exercise); ok {
 		r0 = returnFunc()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]model.ExerciseWithCount)
+			r0 = ret.Get(0).([]schema.Exercise)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func() error); ok {
@@ -236,34 +237,34 @@ func (_c *MockExercise_GetWithCount_Call) Run(run func()) *MockExercise_GetWithC
 	return _c
 }
 
-func (_c *MockExercise_GetWithCount_Call) Return(exercises []model.ExerciseWithCount, err error) *MockExercise_GetWithCount_Call {
+func (_c *MockExercise_GetWithCount_Call) Return(exercises []schema.Exercise, err error) *MockExercise_GetWithCount_Call {
 	_c.Call.Return(exercises, err)
 	return _c
 }
 
-func (_c *MockExercise_GetWithCount_Call) RunAndReturn(run func() ([]model.ExerciseWithCount, error)) *MockExercise_GetWithCount_Call {
+func (_c *MockExercise_GetWithCount_Call) RunAndReturn(run func() ([]schema.Exercise, error)) *MockExercise_GetWithCount_Call {
 	_c.Call.Return(run)
 	return _c
 }
 
 // GetWithCountMachineId provides a mock function for the type MockExercise
-func (_mock *MockExercise) GetWithCountMachineId(machineId int) ([]model.ExerciseWithCount, error) {
+func (_mock *MockExercise) GetWithCountMachineId(machineId int) ([]schema.Exercise, error) {
 	ret := _mock.Called(machineId)
 
 	if len(ret) == 0 {
 		panic("no return value specified for GetWithCountMachineId")
 	}
 
-	var r0 []model.ExerciseWithCount
+	var r0 []schema.Exercise
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(int) ([]model.ExerciseWithCount, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(int) ([]schema.Exercise, error)); ok {
 		return returnFunc(machineId)
 	}
-	if returnFunc, ok := ret.Get(0).(func(int) []model.ExerciseWithCount); ok {
+	if returnFunc, ok := ret.Get(0).(func(int) []schema.Exercise); ok {
 		r0 = returnFunc(machineId)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]model.ExerciseWithCount)
+			r0 = ret.Get(0).([]schema.Exercise)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(int) error); ok {
@@ -292,12 +293,12 @@ func (_c *MockExercise_GetWithCountMachineId_Call) Run(run func(machineId int)) 
 	return _c
 }
 
-func (_c *MockExercise_GetWithCountMachineId_Call) Return(exercises []model.ExerciseWithCount, err error) *MockExercise_GetWithCountMachineId_Call {
+func (_c *MockExercise_GetWithCountMachineId_Call) Return(exercises []schema.Exercise, err error) *MockExercise_GetWithCountMachineId_Call {
 	_c.Call.Return(exercises, err)
 	return _c
 }
 
-func (_c *MockExercise_GetWithCountMachineId_Call) RunAndReturn(run func(machineId int) ([]model.ExerciseWithCount, error)) *MockExercise_GetWithCountMachineId_Call {
+func (_c *MockExercise_GetWithCountMachineId_Call) RunAndReturn(run func(machineId int) ([]schema.Exercise, error)) *MockExercise_GetWithCountMachineId_Call {
 	_c.Call.Return(run)
 	return _c
 }

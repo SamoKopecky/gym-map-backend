@@ -23,11 +23,6 @@ type Exercise struct {
 	Difficulty   *Difficulty `json:"difficulty"`
 }
 
-type ExerciseWithCount struct {
-	Exercise
-	InstructionCount int `json:"instruction_count"`
-}
-
 func BuildExercise(name string, description *string, muscleGroups *[]string, machineId int, difficulty *Difficulty) Exercise {
 	return Exercise{
 		Name:         name,
