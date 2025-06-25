@@ -1,8 +1,12 @@
 package store
 
-import "gym-map/model"
+import (
+	"gym-map/model"
+	"gym-map/schema"
+)
 
 type Exercise interface {
 	StoreBase[model.Exercise]
-	GetByMachineId(machineId int) (exercises []model.Exercise, err error)
+	GetWithCount() (exercises []schema.Exercise, err error)
+	GetWithCountMachineId(machineId int) (exercises []schema.Exercise, err error)
 }

@@ -6,6 +6,7 @@ package store
 
 import (
 	"gym-map/model"
+	"gym-map/schema"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -191,24 +192,79 @@ func (_c *MockExercise_GetById_Call) RunAndReturn(run func(modelId int) (model.E
 	return _c
 }
 
-// GetByMachineId provides a mock function for the type MockExercise
-func (_mock *MockExercise) GetByMachineId(machineId int) ([]model.Exercise, error) {
+// GetWithCount provides a mock function for the type MockExercise
+func (_mock *MockExercise) GetWithCount() ([]schema.Exercise, error) {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetWithCount")
+	}
+
+	var r0 []schema.Exercise
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func() ([]schema.Exercise, error)); ok {
+		return returnFunc()
+	}
+	if returnFunc, ok := ret.Get(0).(func() []schema.Exercise); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]schema.Exercise)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func() error); ok {
+		r1 = returnFunc()
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockExercise_GetWithCount_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetWithCount'
+type MockExercise_GetWithCount_Call struct {
+	*mock.Call
+}
+
+// GetWithCount is a helper method to define mock.On call
+func (_e *MockExercise_Expecter) GetWithCount() *MockExercise_GetWithCount_Call {
+	return &MockExercise_GetWithCount_Call{Call: _e.mock.On("GetWithCount")}
+}
+
+func (_c *MockExercise_GetWithCount_Call) Run(run func()) *MockExercise_GetWithCount_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *MockExercise_GetWithCount_Call) Return(exercises []schema.Exercise, err error) *MockExercise_GetWithCount_Call {
+	_c.Call.Return(exercises, err)
+	return _c
+}
+
+func (_c *MockExercise_GetWithCount_Call) RunAndReturn(run func() ([]schema.Exercise, error)) *MockExercise_GetWithCount_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetWithCountMachineId provides a mock function for the type MockExercise
+func (_mock *MockExercise) GetWithCountMachineId(machineId int) ([]schema.Exercise, error) {
 	ret := _mock.Called(machineId)
 
 	if len(ret) == 0 {
-		panic("no return value specified for GetByMachineId")
+		panic("no return value specified for GetWithCountMachineId")
 	}
 
-	var r0 []model.Exercise
+	var r0 []schema.Exercise
 	var r1 error
-	if returnFunc, ok := ret.Get(0).(func(int) ([]model.Exercise, error)); ok {
+	if returnFunc, ok := ret.Get(0).(func(int) ([]schema.Exercise, error)); ok {
 		return returnFunc(machineId)
 	}
-	if returnFunc, ok := ret.Get(0).(func(int) []model.Exercise); ok {
+	if returnFunc, ok := ret.Get(0).(func(int) []schema.Exercise); ok {
 		r0 = returnFunc(machineId)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]model.Exercise)
+			r0 = ret.Get(0).([]schema.Exercise)
 		}
 	}
 	if returnFunc, ok := ret.Get(1).(func(int) error); ok {
@@ -219,30 +275,30 @@ func (_mock *MockExercise) GetByMachineId(machineId int) ([]model.Exercise, erro
 	return r0, r1
 }
 
-// MockExercise_GetByMachineId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByMachineId'
-type MockExercise_GetByMachineId_Call struct {
+// MockExercise_GetWithCountMachineId_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetWithCountMachineId'
+type MockExercise_GetWithCountMachineId_Call struct {
 	*mock.Call
 }
 
-// GetByMachineId is a helper method to define mock.On call
+// GetWithCountMachineId is a helper method to define mock.On call
 //   - machineId
-func (_e *MockExercise_Expecter) GetByMachineId(machineId interface{}) *MockExercise_GetByMachineId_Call {
-	return &MockExercise_GetByMachineId_Call{Call: _e.mock.On("GetByMachineId", machineId)}
+func (_e *MockExercise_Expecter) GetWithCountMachineId(machineId interface{}) *MockExercise_GetWithCountMachineId_Call {
+	return &MockExercise_GetWithCountMachineId_Call{Call: _e.mock.On("GetWithCountMachineId", machineId)}
 }
 
-func (_c *MockExercise_GetByMachineId_Call) Run(run func(machineId int)) *MockExercise_GetByMachineId_Call {
+func (_c *MockExercise_GetWithCountMachineId_Call) Run(run func(machineId int)) *MockExercise_GetWithCountMachineId_Call {
 	_c.Call.Run(func(args mock.Arguments) {
 		run(args[0].(int))
 	})
 	return _c
 }
 
-func (_c *MockExercise_GetByMachineId_Call) Return(exercises []model.Exercise, err error) *MockExercise_GetByMachineId_Call {
+func (_c *MockExercise_GetWithCountMachineId_Call) Return(exercises []schema.Exercise, err error) *MockExercise_GetWithCountMachineId_Call {
 	_c.Call.Return(exercises, err)
 	return _c
 }
 
-func (_c *MockExercise_GetByMachineId_Call) RunAndReturn(run func(machineId int) ([]model.Exercise, error)) *MockExercise_GetByMachineId_Call {
+func (_c *MockExercise_GetWithCountMachineId_Call) RunAndReturn(run func(machineId int) ([]schema.Exercise, error)) *MockExercise_GetWithCountMachineId_Call {
 	_c.Call.Return(run)
 	return _c
 }

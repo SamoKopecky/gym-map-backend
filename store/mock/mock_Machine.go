@@ -6,6 +6,7 @@ package store
 
 import (
 	"gym-map/model"
+	"gym-map/schema"
 
 	mock "github.com/stretchr/testify/mock"
 )
@@ -187,6 +188,61 @@ func (_c *MockMachine_GetById_Call) Return(model1 model.Machine, err error) *Moc
 }
 
 func (_c *MockMachine_GetById_Call) RunAndReturn(run func(modelId int) (model.Machine, error)) *MockMachine_GetById_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetWithCount provides a mock function for the type MockMachine
+func (_mock *MockMachine) GetWithCount() ([]schema.Machine, error) {
+	ret := _mock.Called()
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetWithCount")
+	}
+
+	var r0 []schema.Machine
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func() ([]schema.Machine, error)); ok {
+		return returnFunc()
+	}
+	if returnFunc, ok := ret.Get(0).(func() []schema.Machine); ok {
+		r0 = returnFunc()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]schema.Machine)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func() error); ok {
+		r1 = returnFunc()
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockMachine_GetWithCount_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetWithCount'
+type MockMachine_GetWithCount_Call struct {
+	*mock.Call
+}
+
+// GetWithCount is a helper method to define mock.On call
+func (_e *MockMachine_Expecter) GetWithCount() *MockMachine_GetWithCount_Call {
+	return &MockMachine_GetWithCount_Call{Call: _e.mock.On("GetWithCount")}
+}
+
+func (_c *MockMachine_GetWithCount_Call) Run(run func()) *MockMachine_GetWithCount_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run()
+	})
+	return _c
+}
+
+func (_c *MockMachine_GetWithCount_Call) Return(machines []schema.Machine, err error) *MockMachine_GetWithCount_Call {
+	_c.Call.Return(machines, err)
+	return _c
+}
+
+func (_c *MockMachine_GetWithCount_Call) RunAndReturn(run func() ([]schema.Machine, error)) *MockMachine_GetWithCount_Call {
 	_c.Call.Return(run)
 	return _c
 }

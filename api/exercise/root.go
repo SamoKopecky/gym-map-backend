@@ -2,7 +2,7 @@ package exercise
 
 import (
 	"gym-map/api"
-	"gym-map/model"
+	"gym-map/schema"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,7 +10,24 @@ import (
 
 func Post(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	return api.PostModel[exercisePostRequest](cc, cc.ExerciseCrud)
+
+	params, err := api.BindParams[exercisePostRequest](cc)
+	if err != nil {
+		return cc.BadRequest(err)
+	}
+
+	exercise := params.ToNewModel()
+	err = cc.ExerciseCrud.Insert(&exercise)
+	if err != nil {
+		return err
+	}
+
+	exerciseWithCount := schema.Exercise{
+		Exercise:         exercise,
+		InstructionCount: 0,
+	}
+
+	return cc.JSON(http.StatusOK, exerciseWithCount)
 }
 
 func Patch(c echo.Context) error {
@@ -31,21 +48,21 @@ func Get(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	exercises := []model.Exercise{}
+	exercises := []schema.Exercise{}
 	if params.MachineId == nil {
-		exercises, err = cc.ExerciseCrud.Get()
+		exercises, err = cc.ExerciseCrud.GetWithCount()
 		if err != nil {
 			return err
 		}
 	} else {
-		exercises, err = cc.ExerciseCrud.GetByMachineId(*params.MachineId)
+		exercises, err = cc.ExerciseCrud.GetWithCountMachineId(*params.MachineId)
 		if err != nil {
 			return err
 		}
 	}
 
 	if exercises == nil {
-		exercises = []model.Exercise{}
+		exercises = []schema.Exercise{}
 	}
 
 	return cc.JSON(http.StatusOK, exercises)
