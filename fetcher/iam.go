@@ -27,6 +27,16 @@ func (i IAM) GetUsersByRole(role string) ([]KeycloakUser, error) {
 	return responseData[[]KeycloakUser](resp)
 }
 
+func (i IAM) GetUsersById(id string) (KeycloakUser, error) {
+	resp, err := i.authedRequest(http.MethodGet, fmt.Sprintf("%s/%s", i.userUrl(), id), nil)
+
+	if err != nil {
+		return KeycloakUser{}, err
+	}
+
+	return responseData[KeycloakUser](resp)
+}
+
 func (i IAM) GetUsers() ([]KeycloakUser, error) {
 	resp, err := i.authedRequest(http.MethodGet, i.userUrl(), nil)
 
@@ -115,4 +125,20 @@ func (i IAM) AddUserRoles(userLocation UserLocation, kcRole KeycloakRole) error 
 
 func (i IAM) RemoveUserRoles(userLocation UserLocation, kcRole KeycloakRole) error {
 	return i.editUserRoles(http.MethodDelete, userLocation, kcRole)
+}
+
+func (i IAM) UpdateUser(user KeycloakUser) error {
+	buf := createParamsBuf(user)
+
+	resp, err := i.authedRequest(http.MethodPut, i.userIdUrl(user.Id), &buf)
+	if err != nil {
+		return err
+	}
+
+	// TODO: return status code
+	if resp.StatusCode != http.StatusNoContent {
+		return ErrUserNotUpdated
+	}
+
+	return nil
 }

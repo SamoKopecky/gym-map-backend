@@ -7,11 +7,15 @@ import (
 	"path"
 )
 
+// URL path to the user
+type UserLocation string
+
 type KeycloakUser struct {
-	Id        string  `json:"id"`
-	Email     string  `json:"email"`
-	FirstName *string `json:"firstName"`
-	LastName  *string `json:"lastName"`
+	Id         string             `json:"id"`
+	Email      string             `json:"email"`
+	FirstName  *string            `json:"firstName"`
+	LastName   *string            `json:"lastName"`
+	Attributes KeycloakAttributes `json:"attributes"`
 }
 
 type NewKeycloakUser struct {
@@ -20,6 +24,15 @@ type NewKeycloakUser struct {
 	Enabled         bool     `json:"enabled"`
 	EmailVerified   bool     `json:"emailVerified"`
 	RequiredActions []string `json:"requiredActions"`
+}
+
+type KeycloakRole struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type KeycloakAttributes struct {
+	AvatarId []string `json:"avatarId"`
 }
 
 func (ku KeycloakUser) FullName() *string {
@@ -33,11 +46,16 @@ func (ku KeycloakUser) FullName() *string {
 }
 
 func (ku KeycloakUser) ToUserBase() model.UserBase {
-	return model.UserBase{
+	user := model.UserBase{
 		Name:      ku.FullName(),
 		FirstName: ku.FirstName,
 		LastName:  ku.LastName,
+		AvatarId:  nil,
 	}
+	if len(ku.Attributes.AvatarId) > 0 {
+		user.AvatarId = &ku.Attributes.AvatarId[0]
+	}
+	return user
 }
 
 func (ku KeycloakUser) ToUser() model.User {
@@ -48,19 +66,6 @@ func (ku KeycloakUser) ToUser() model.User {
 	}
 }
 
-type KeycloakRole struct {
-	Id   string `json:"id"`
-	Name string `json:"name"`
-}
-
-// URL path to the user
-type UserLocation string
-
 func (ul UserLocation) UserId() string {
 	return path.Base(string(ul))
-}
-
-func (i IAM) GetUserLocation(userId string) UserLocation {
-	return UserLocation(
-		fmt.Sprintf("%s/%s", i.userUrl(), userId))
 }

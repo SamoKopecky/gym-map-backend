@@ -160,10 +160,17 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtUsers := e.Group("/users")
 	jwtUsers.Use(jwtMiddleware(appConfig))
 	jwtUsers.Use(claimContextMiddleware)
-	jwtUsers.Use(adminOnlyMiddleware)
-	jwtUsers.GET("", user.Get)
-	jwtUsers.POST("", user.Post)
-	jwtUsers.DELETE("/:id", user.Delete)
+
+	jwtUsersTrainerOnly := jwtUsers.Group("")
+	jwtUsersTrainerOnly.Use(trainerOnlyMiddleware)
+	jwtUsersTrainerOnly.GET("/:id", user.GetUser)
+	jwtUsersTrainerOnly.PATCH("/profile", user.PatchProfile)
+
+	jwtUsersAdminOnly := jwtUsers.Group("")
+	jwtUsersAdminOnly.Use(adminOnlyMiddleware)
+	jwtUsersAdminOnly.GET("", user.Get)
+	jwtUsersAdminOnly.POST("", user.Post)
+	jwtUsersAdminOnly.DELETE("/:id", user.Delete)
 
 	mediaGroup := e.Group("/media")
 	mediaGroup.GET("/:id", media.GetMedia)

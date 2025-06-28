@@ -63,3 +63,32 @@ func (u User) UnregisterUser(userId string) error {
 	}
 	return nil
 }
+
+func (u User) updateAttributes(userId string, attributes fetcher.KeycloakAttributes) error {
+	user, err := u.IAM.GetUsersById(userId)
+	if err != nil {
+		return err
+	}
+
+	if len(attributes.AvatarId) > 0 {
+		user.Attributes.AvatarId = attributes.AvatarId
+	}
+
+	err = u.IAM.UpdateUser(user)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (u User) UpdateAvatarId(userId, avatarId string) error {
+	attributes := fetcher.KeycloakAttributes{AvatarId: []string{avatarId}}
+	err := u.updateAttributes(userId, attributes)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

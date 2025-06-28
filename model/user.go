@@ -10,4 +10,5 @@ type UserBase struct {
 	Name      *string `json:"name"`
 	FirstName *string `json:"first_name"`
 	LastName  *string `json:"last_name"`
+	AvatarId  *string `json:"avatar_id"`
 }
