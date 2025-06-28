@@ -4,6 +4,6 @@ type userPostRequest struct {
 	Email string `json:"email"`
 }
 
-type userGetRequest struct {
-	Id *string `json:"id"`
+type userPatchResponse struct {
+	AvatarId string `json:"avatar_id"`
 }

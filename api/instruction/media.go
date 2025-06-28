@@ -2,11 +2,7 @@ package instruction
 
 import (
 	"gym-map/api"
-	"gym-map/media"
-	"gym-map/model"
-	"mime"
 	"net/http"
-	"path/filepath"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -25,25 +21,10 @@ func PostMedia(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	file, err := c.FormFile("file")
+	newMedia, err := api.CreateFileFromRequest(cc)
 	if err != nil {
-		return err
+		return cc.BadRequest(err)
 	}
-
-	fileId, err := media.SaveFile(file, cc.Config.MediaFileRepository)
-	if err != nil {
-		return err
-	}
-
-	mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
-	newMedia := model.Media{
-		OriginalFileName: file.Filename,
-		DiskFileName:     fileId,
-		ContentType:      mediaType,
-	}
-	// TODO: Make a service function
-	// Create record in media table
-	err = cc.MediaCrud.Insert(&newMedia)
 
 	// Update instructions table
 	err = cc.InstructionCrud.SaveFile(id, newMedia.Id)

@@ -19,6 +19,7 @@ const TRAINER_ROLE = "trainer"
 const ADMIN_ROLE = "admin"
 
 var ErrUserAlreadyExists = errors.New("iam: user already exists")
+var ErrUserNotUpdated = errors.New("iam: user not updated due to invalid status code")
 var ErrUserNotCreated = errors.New("iam: user not created due to invalid status code")
 var ErrUserActionTriggerFailed = errors.New("iam: user trigger failed because of unknown status code")
 
@@ -38,6 +39,10 @@ func (i IAM) baseUrl(endpoint string) string {
 
 func (i IAM) userUrl() string {
 	return i.baseUrl(fmt.Sprintf("admin/realms/%s/users", i.AppConfig.KeycloakRealm))
+}
+
+func (i IAM) userIdUrl(userId string) string {
+	return fmt.Sprintf("%s/%s", i.userUrl(), userId)
 }
 
 func (i IAM) roleUrl(role string) string {
@@ -72,6 +77,11 @@ func (i IAM) editUserRoles(method string, userLocation UserLocation, kcRole Keyc
 	}
 
 	return nil
+}
+
+func (i IAM) GetUserLocation(userId string) UserLocation {
+	return UserLocation(
+		fmt.Sprintf("%s/%s", i.userUrl(), userId))
 }
 
 func responseData[T any](response *http.Response) (data T, err error) {

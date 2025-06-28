@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"gym-map/config"
 	"gym-map/fetcher"
+	"gym-map/media"
+	"gym-map/model"
 	"gym-map/schema"
 	"gym-map/service"
 	"gym-map/store"
+	"mime"
 	"net/http"
+	"path/filepath"
 
 	"github.com/labstack/echo/v4"
 )
@@ -57,4 +61,26 @@ func DerefInt(ptr *int) int {
 	}
 	return *ptr
 
+}
+
+func CreateFileFromRequest(cc *DbContext) (newMedia model.Media, err error) {
+	file, err := cc.FormFile("file")
+	if err != nil {
+		return
+	}
+
+	fileId, err := media.SaveFile(file, cc.Config.MediaFileRepository)
+	if err != nil {
+		return
+	}
+
+	mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
+	newMedia = model.Media{
+		OriginalFileName: file.Filename,
+		DiskFileName:     fileId,
+		ContentType:      mediaType,
+	}
+	// Create record in media table
+	err = cc.MediaCrud.Insert(&newMedia)
+	return
 }
