@@ -6,6 +6,7 @@ import (
 	"gym-map/api/exercise"
 	"gym-map/api/instruction"
 	"gym-map/api/machine"
+	"gym-map/api/media"
 	"gym-map/api/user"
 	"gym-map/config"
 	"gym-map/crud"
@@ -53,6 +54,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				MachineCrud:     crud.NewMachine(db),
 				ExerciseCrud:    crud.NewExercise(db),
 				InstructionCrud: instructionCrud,
+				MediaCrud:       crud.NewMedia(db),
 				IAMFetcher:      iamFetcher,
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
@@ -145,7 +147,6 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	instructions := e.Group("/instructions")
 	instructions.GET("", instruction.Get)
-	instructions.GET("/:id/media", instruction.GetMedia)
 
 	jwtInstructions := instructions.Group("")
 	jwtInstructions.Use(jwtMiddleware(appConfig))
@@ -163,6 +164,10 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	jwtUsers.GET("", user.Get)
 	jwtUsers.POST("", user.Post)
 	jwtUsers.DELETE("/:id", user.Delete)
+
+	mediaGroup := e.Group("/media")
+	mediaGroup.GET("/:id", media.GetMedia)
+	mediaGroup.GET("/:id/metadata", media.GetMetadata)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }

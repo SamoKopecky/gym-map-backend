@@ -37,53 +37,6 @@ func (_m *MockInstruction) EXPECT() *MockInstruction_Expecter {
 	return &MockInstruction_Expecter{mock: &_m.Mock}
 }
 
-// CreateFile provides a mock function for the type MockInstruction
-func (_mock *MockInstruction) CreateFile(id int, fileId string, fileName string) error {
-	ret := _mock.Called(id, fileId, fileName)
-
-	if len(ret) == 0 {
-		panic("no return value specified for CreateFile")
-	}
-
-	var r0 error
-	if returnFunc, ok := ret.Get(0).(func(int, string, string) error); ok {
-		r0 = returnFunc(id, fileId, fileName)
-	} else {
-		r0 = ret.Error(0)
-	}
-	return r0
-}
-
-// MockInstruction_CreateFile_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'CreateFile'
-type MockInstruction_CreateFile_Call struct {
-	*mock.Call
-}
-
-// CreateFile is a helper method to define mock.On call
-//   - id
-//   - fileId
-//   - fileName
-func (_e *MockInstruction_Expecter) CreateFile(id interface{}, fileId interface{}, fileName interface{}) *MockInstruction_CreateFile_Call {
-	return &MockInstruction_CreateFile_Call{Call: _e.mock.On("CreateFile", id, fileId, fileName)}
-}
-
-func (_c *MockInstruction_CreateFile_Call) Run(run func(id int, fileId string, fileName string)) *MockInstruction_CreateFile_Call {
-	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int), args[1].(string), args[2].(string))
-	})
-	return _c
-}
-
-func (_c *MockInstruction_CreateFile_Call) Return(err error) *MockInstruction_CreateFile_Call {
-	_c.Call.Return(err)
-	return _c
-}
-
-func (_c *MockInstruction_CreateFile_Call) RunAndReturn(run func(id int, fileId string, fileName string) error) *MockInstruction_CreateFile_Call {
-	_c.Call.Return(run)
-	return _c
-}
-
 // Delete provides a mock function for the type MockInstruction
 func (_mock *MockInstruction) Delete(modelId int) error {
 	ret := _mock.Called(modelId)
@@ -391,6 +344,52 @@ func (_c *MockInstruction_Insert_Call) Return(err error) *MockInstruction_Insert
 }
 
 func (_c *MockInstruction_Insert_Call) RunAndReturn(run func(model1 *model.Instruction) error) *MockInstruction_Insert_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// SaveFile provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) SaveFile(id int, media_id int) error {
+	ret := _mock.Called(id, media_id)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SaveFile")
+	}
+
+	var r0 error
+	if returnFunc, ok := ret.Get(0).(func(int, int) error); ok {
+		r0 = returnFunc(id, media_id)
+	} else {
+		r0 = ret.Error(0)
+	}
+	return r0
+}
+
+// MockInstruction_SaveFile_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SaveFile'
+type MockInstruction_SaveFile_Call struct {
+	*mock.Call
+}
+
+// SaveFile is a helper method to define mock.On call
+//   - id
+//   - media_id
+func (_e *MockInstruction_Expecter) SaveFile(id interface{}, media_id interface{}) *MockInstruction_SaveFile_Call {
+	return &MockInstruction_SaveFile_Call{Call: _e.mock.On("SaveFile", id, media_id)}
+}
+
+func (_c *MockInstruction_SaveFile_Call) Run(run func(id int, media_id int)) *MockInstruction_SaveFile_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].(int), args[1].(int))
+	})
+	return _c
+}
+
+func (_c *MockInstruction_SaveFile_Call) Return(err error) *MockInstruction_SaveFile_Call {
+	_c.Call.Return(err)
+	return _c
+}
+
+func (_c *MockInstruction_SaveFile_Call) RunAndReturn(run func(id int, media_id int) error) *MockInstruction_SaveFile_Call {
 	_c.Call.Return(run)
 	return _c
 }

@@ -26,6 +26,7 @@ type DbContext struct {
 	MachineCrud     store.Machine
 	ExerciseCrud    store.Exercise
 	InstructionCrud store.Instruction
+	MediaCrud       store.Media
 
 	IAMFetcher fetcher.IAM
 

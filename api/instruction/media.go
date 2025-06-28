@@ -3,9 +3,9 @@ package instruction
 import (
 	"gym-map/api"
 	"gym-map/media"
+	"gym-map/model"
 	"mime"
 	"net/http"
-	"os"
 	"path/filepath"
 	"strconv"
 
@@ -35,35 +35,21 @@ func PostMedia(c echo.Context) error {
 		return err
 	}
 
-	err = cc.InstructionCrud.CreateFile(id, fileId, file.Filename)
+	mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
+	newMedia := model.Media{
+		OriginalFileName: file.Filename,
+		DiskFileName:     fileId,
+		ContentType:      mediaType,
+	}
+	// TODO: Make a service function
+	// Create record in media table
+	err = cc.MediaCrud.Insert(&newMedia)
+
+	// Update instructions table
+	err = cc.InstructionCrud.SaveFile(id, newMedia.Id)
 	if err != nil {
 		return err
 	}
 
-	return cc.NoContent(http.StatusCreated)
-}
-
-func GetMedia(c echo.Context) error {
-	cc := c.(*api.DbContext)
-
-	id, err := strconv.Atoi(cc.Param("id"))
-	if err != nil {
-		return cc.BadRequest(err)
-	}
-
-	model, err := cc.InstructionCrud.GetById(id)
-	if err != nil {
-		return cc.BadRequest(err)
-	}
-	if model.FileId == nil {
-		return cc.NoContent(http.StatusNotFound)
-	}
-
-	fileData, err := os.ReadFile(filepath.Join(cc.Config.MediaFileRepository, *model.FileId))
-	if err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, "Could not read file")
-	}
-
-	mediaType := mime.TypeByExtension(filepath.Ext(*model.FileName))
-	return cc.Blob(http.StatusOK, mediaType, fileData)
+	return cc.JSON(http.StatusCreated, instructionPostResponse{MediaId: newMedia.Id})
 }
