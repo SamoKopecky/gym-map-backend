@@ -43,6 +43,7 @@ func Get(c echo.Context) error {
 			return err
 		}
 	} else if params.UserId != nil {
+		// TODO: Where is this used
 		instructions, err = cc.InstructionService.GetByUserId(*params.UserId)
 		if err != nil {
 			return err

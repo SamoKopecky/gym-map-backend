@@ -46,24 +46,24 @@ func (ku KeycloakUser) FullName() *string {
 }
 
 func (ku KeycloakUser) ToUserBase() model.UserBase {
-	return model.UserBase{
+	user := model.UserBase{
 		Name:      ku.FullName(),
 		FirstName: ku.FirstName,
 		LastName:  ku.LastName,
-	}
-}
-
-func (ku KeycloakUser) ToUser() model.User {
-	user := model.User{
-		Id:       ku.Id,
-		Email:    ku.Email,
-		UserBase: ku.ToUserBase(),
-		AvatarId: nil,
+		AvatarId:  nil,
 	}
 	if len(ku.Attributes.AvatarId) > 0 {
 		user.AvatarId = &ku.Attributes.AvatarId[0]
 	}
 	return user
+}
+
+func (ku KeycloakUser) ToUser() model.User {
+	return model.User{
+		Id:       ku.Id,
+		Email:    ku.Email,
+		UserBase: ku.ToUserBase(),
+	}
 }
 
 func (ul UserLocation) UserId() string {
