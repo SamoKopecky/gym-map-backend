@@ -17,7 +17,7 @@ type instructionPostRequest struct {
 }
 
 func (ipr instructionPostRequest) ToNewModel() model.Instruction {
-	return model.BuildInstruction(ipr.UserId, ipr.Description, ipr.ExerciseId, nil, nil)
+	return model.BuildInstruction(ipr.UserId, ipr.Description, ipr.ExerciseId, nil)
 }
 
 type instructionPatchRequest struct {
@@ -29,4 +29,8 @@ func (ipr instructionPatchRequest) ToExistingModel(id int) model.Instruction {
 		IdModel:     model.IdModel{Id: id},
 		Description: api.DerefString(ipr.Description),
 	}
+}
+
+type instructionPostResponse struct {
+	MediaId int `json:"media_id"`
 }

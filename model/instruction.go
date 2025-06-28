@@ -7,19 +7,17 @@ type Instruction struct {
 	IdModel
 	Timestamp
 
-	UserId      string  `json:"user_id"`
-	ExerciseId  int     `json:"exercise_id"`
-	Description string  `json:"description"`
-	FileId      *string `json:"file_id"`
-	FileName    *string `json:"file_name"`
+	UserId      string `json:"user_id"`
+	ExerciseId  int    `json:"exercise_id"`
+	Description string `json:"description"`
+	MediaId     *int   `json:"media_id"`
 }
 
-func BuildInstruction(userId, description string, exerciseId int, fileId, fileName *string) Instruction {
+func BuildInstruction(userId, description string, exerciseId int, mediaId *int) Instruction {
 	return Instruction{
 		UserId:      userId,
 		Description: description,
 		ExerciseId:  exerciseId,
-		FileId:      fileId,
-		FileName:    fileName,
+		MediaId:     mediaId,
 	}
 }

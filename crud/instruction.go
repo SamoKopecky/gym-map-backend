@@ -33,11 +33,10 @@ func (i Instruction) GetByUserId(userId string) (instructions []model.Instructio
 	return
 }
 
-func (i Instruction) CreateFile(id int, fileId, fileName string) error {
+func (i Instruction) SaveFile(id int, media_id int) error {
 	_, err := i.db.NewUpdate().
 		Model((*model.Instruction)(nil)).
-		Set("file_id = ?", fileId).
-		Set("file_name = ?", fileName).
+		Set("media_id = ?", media_id).
 		Where("id = ?", id).
 		Exec(context.Background())
 

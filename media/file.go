@@ -1,6 +1,7 @@
 package media
 
 import (
+	"fmt"
 	"io"
 	"mime/multipart"
 	"os"
@@ -10,7 +11,7 @@ import (
 )
 
 func SaveFile(file *multipart.FileHeader, rootFilePath string) (name string, err error) {
-	name = uuid.New().String()
+	name = fmt.Sprintf("%s%s", uuid.New().String(), filepath.Ext(file.Filename))
 
 	// Source file
 	src, err := file.Open()
@@ -33,4 +34,3 @@ func SaveFile(file *multipart.FileHeader, rootFilePath string) (name string, err
 
 	return
 }
-
