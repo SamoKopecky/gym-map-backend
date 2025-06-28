@@ -2,6 +2,7 @@ package user
 
 import (
 	"gym-map/api"
+	"gym-map/fetcher"
 	"gym-map/model"
 	"net/http"
 
@@ -11,9 +12,22 @@ import (
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	users, err := cc.UserService.GetUsers()
+	params, err := api.BindParams[userGetRequest](cc)
 	if err != nil {
 		return cc.BadRequest(err)
+	}
+
+	var users []fetcher.KeycloakUser
+	if params.Id != nil {
+		users, err = cc.IAMFetcher.GetUsersById(*params.Id)
+		if err != nil {
+			return cc.BadRequest(err)
+		}
+	} else {
+		users, err = cc.UserService.GetUsers()
+		if err != nil {
+			return cc.BadRequest(err)
+		}
 	}
 
 	userModels := make([]model.User, len(users))

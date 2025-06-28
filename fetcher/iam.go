@@ -27,6 +27,16 @@ func (i IAM) GetUsersByRole(role string) ([]KeycloakUser, error) {
 	return responseData[[]KeycloakUser](resp)
 }
 
+func (i IAM) GetUsersById(id string) ([]KeycloakUser, error) {
+	resp, err := i.authedRequest(http.MethodGet, fmt.Sprintf("%s/%s", i.userUrl(), id), nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return responseData[[]KeycloakUser](resp)
+}
+
 func (i IAM) GetUsers() ([]KeycloakUser, error) {
 	resp, err := i.authedRequest(http.MethodGet, i.userUrl(), nil)
 
