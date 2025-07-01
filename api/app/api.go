@@ -176,6 +176,8 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	mediaGroup.GET("/:id", media.GetMedia)
 	mediaGroup.GET("/:id/metadata", media.GetMetadata)
 
+	floorMap := e.Group("/map")
+
 	e.Logger.Fatal(e.Start(":2001"))
 }
 
