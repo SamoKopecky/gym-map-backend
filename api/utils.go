@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"gym-map/config"
 	"gym-map/fetcher"
-	"gym-map/media"
+	fileio "gym-map/file_io"
 	"gym-map/model"
 	"gym-map/schema"
 	"gym-map/service"
@@ -31,6 +31,8 @@ type DbContext struct {
 	ExerciseCrud    store.Exercise
 	InstructionCrud store.Instruction
 	MediaCrud       store.Media
+
+	FloorMapCrud fileio.FloorMap
 
 	IAMFetcher fetcher.IAM
 
@@ -69,7 +71,7 @@ func CreateFileFromRequest(cc *DbContext) (newMedia model.Media, err error) {
 		return
 	}
 
-	fileId, err := media.SaveFile(file, cc.Config.MediaFileRepository)
+	fileId, err := fileio.SaveFile(file, cc.Config.MediaFileRepository)
 	if err != nil {
 		return
 	}

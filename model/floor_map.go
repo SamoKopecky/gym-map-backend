@@ -1,3 +1,3 @@
 package model
 
-type FloorMap string
+type FloorMap []byte
