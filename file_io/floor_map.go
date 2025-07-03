@@ -1,7 +1,6 @@
 package fileio
 
 import (
-	"fmt"
 	"gym-map/config"
 	"gym-map/model"
 	"os"
@@ -14,15 +13,25 @@ type FloorMap struct {
 	Config config.Config
 }
 
+func (fm FloorMap) getMapPath() string {
+	return filepath.Join(fm.Config.MapFileRepository, MAP_NAME)
+}
+
 func (fm FloorMap) GetMap() (floorMap model.FloorMap, err error) {
-	path := filepath.Join(fm.Config.MapFileRepository, MAP_NAME)
-	fmt.Println(path)
-	fmt.Println(fm.Config.MapFileRepository)
-	content, err := os.ReadFile(filepath.Join(fm.Config.MapFileRepository, MAP_NAME))
+	content, err := os.ReadFile(fm.getMapPath())
 	if err != nil {
 		return
 	}
 	floorMap = model.FloorMap(content)
 	return
 
+}
+
+func (fm FloorMap) SaveMap(floorMap model.FloorMap) (err error) {
+	err = os.WriteFile(filepath.Join(fm.getMapPath()), []byte(floorMap), 0644)
+	if err != nil {
+		return
+	}
+
+	return
 }

@@ -181,6 +181,11 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)
+	floorMapJwt := floorMap.Group("")
+	floorMapJwt.Use(jwtMiddleware(appConfig))
+	floorMapJwt.Use(claimContextMiddleware)
+	floorMapJwt.Use(adminOnlyMiddleware)
+	floorMapJwt.PUT("", floormap.Put)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
