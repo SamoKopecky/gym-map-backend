@@ -1,8 +1,11 @@
 package floormap
 
 import (
+	"fmt"
 	"gym-map/api"
 	"net/http"
+	"os"
+	"path/filepath"
 
 	"github.com/labstack/echo/v4"
 )
@@ -21,11 +24,13 @@ func Get(c echo.Context) error {
 func Put(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	floorMap, err := cc.FloorMapCrud.GetMap()
+	file := cc.FormValue("file")
+
+	// Destination
+	err := os.WriteFile(filepath.Join("./files/map", "map.svg"), []byte(file), 0644)
 	if err != nil {
-		cc.BadRequest(err)
+		return err
 	}
 
-	return cc.HTML(http.StatusOK, string(floorMap))
-
+	return cc.NoContent(http.StatusOK)
 }
