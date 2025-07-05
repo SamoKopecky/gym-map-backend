@@ -27,7 +27,7 @@ func Put(c echo.Context) error {
 	println(file)
 
 	// Destination
-	err := os.WriteFile(filepath.Join("./files/map", "map.svg"), []byte(file), 0644)
+	err := os.WriteFile(filepath.Join(cc.Config.MapFileRepository, "map.svg"), []byte(file), 0644)
 	if err != nil {
 		return err
 	}
