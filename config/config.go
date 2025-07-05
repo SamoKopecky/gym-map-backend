@@ -22,6 +22,7 @@ type Config struct {
 	KeycloakRealm             string `env:"KC_REALM" envDefault:"gym-map"`
 
 	MediaFileRepository string `env:"FILE_REPOSITORY" envDefault:"./files"`
+	MapFileRepository   string `env:"MAP_REPOSITORY" envDefault:"./files/map"`
 }
 
 func (c Config) GetDSN() string {

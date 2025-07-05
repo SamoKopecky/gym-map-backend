@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gym-map/api"
 	"gym-map/api/exercise"
+	floormap "gym-map/api/floor_map"
 	"gym-map/api/instruction"
 	"gym-map/api/machine"
 	"gym-map/api/media"
@@ -11,6 +12,7 @@ import (
 	"gym-map/config"
 	"gym-map/crud"
 	"gym-map/fetcher"
+	fileio "gym-map/file_io"
 	"gym-map/schema"
 	"gym-map/service"
 	"net/http"
@@ -56,6 +58,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				InstructionCrud: instructionCrud,
 				MediaCrud:       crud.NewMedia(db),
 				IAMFetcher:      iamFetcher,
+				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,
@@ -175,6 +178,14 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	mediaGroup := e.Group("/media")
 	mediaGroup.GET("/:id", media.GetMedia)
 	mediaGroup.GET("/:id/metadata", media.GetMetadata)
+
+	floorMap := e.Group("/map")
+	floorMap.GET("", floormap.Get)
+	floorMapJwt := floorMap.Group("")
+	floorMapJwt.Use(jwtMiddleware(appConfig))
+	floorMapJwt.Use(claimContextMiddleware)
+	floorMapJwt.Use(adminOnlyMiddleware)
+	floorMapJwt.PUT("", floormap.Put)
 
 	e.Logger.Fatal(e.Start(":2001"))
 }
