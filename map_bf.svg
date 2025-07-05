@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="4400"
+   height="6400"
+   viewBox="0 0 4400 6400"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="map_bf.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.125"
+     inkscape:cx="596"
+     inkscape:cy="3820"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="1920"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="20"
+       spacingy="20"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14902"
+       empspacing="0"
+       enabled="true"
+       visible="true"
+       dotted="false"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <linearGradient
+       id="swatch18"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop18" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:0.542491;stroke-dasharray:none"
+       id="rect13"
+       width="1880"
+       height="20"
+       x="0"
+       y="2080" />
+    <rect
+       style="fill:#000000;stroke-width:0.573352;stroke-dasharray:none"
+       id="rect13-1"
+       width="20"
+       height="2100"
+       x="2280"
+       y="0" />
+    <rect
+       style="fill:#000000;stroke-width:0.347182;stroke-dasharray:none"
+       id="rect13-1-3"
+       width="20"
+       height="770"
+       x="3900"
+       y="2100" />
+    <rect
+       style="fill:#000000;stroke-width:0.230702;stroke-dasharray:none"
+       id="rect13-1-3-6"
+       width="20"
+       height="340"
+       x="3900"
+       y="3080" />
+    <rect
+       style="fill:#000000;stroke-width:0.230702;stroke-dasharray:none"
+       id="rect13-1-3-6-2"
+       width="20"
+       height="340"
+       x="3900"
+       y="3620" />
+    <rect
+       style="fill:#000000;stroke-width:0.494168;stroke-dasharray:none"
+       id="rect23"
+       width="20"
+       height="1560"
+       x="3900"
+       y="4160" />
+    <g
+       id="SVGRepo_bgCarrier-2"
+       stroke-width="0"
+       transform="matrix(8.3421053,0,0,8.3421053,3458.2895,5544.9211)" />
+    <g
+       id="SVGRepo_tracerCarrier-9"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(8.3421053,0,0,8.3421053,3458.2895,5544.9211)" />
+    <rect
+       style="fill:#000000;stroke-width:0.335721;stroke-dasharray:none"
+       id="rect23-6"
+       width="20"
+       height="720"
+       x="560"
+       y="5680" />
+    <rect
+       style="fill:#000000;stroke-width:0.379495;stroke-dasharray:none"
+       id="rect23-6-4"
+       width="20"
+       height="920"
+       x="5660"
+       y="-1480"
+       transform="rotate(90)" />
+    <rect
+       style="fill:#000000;stroke-width:0.403486;stroke-dasharray:none"
+       id="rect23-6-4-2"
+       width="20"
+       height="1040"
+       x="-1500"
+       y="-5680"
+       transform="scale(-1)" />
+    <rect
+       style="fill:#000000;stroke-width:0.395651;stroke-dasharray:none"
+       id="rect23-6-4-2-7"
+       width="20"
+       height="1000"
+       x="-2420"
+       y="-5660"
+       transform="scale(-1)" />
+    <rect
+       style="fill:#000000;stroke-width:0.353881;stroke-dasharray:none"
+       id="rect23-6-4-2-1"
+       width="20"
+       height="800"
+       x="-5680"
+       y="2400"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:#000000;stroke-width:0.34943;stroke-dasharray:none"
+       id="rect23-6-4-2-1-5"
+       width="20"
+       height="780"
+       x="-4660"
+       y="2400"
+       transform="rotate(-90)" />
+    <rect
+       style="fill:#000000;stroke-width:0.600035;stroke-dasharray:none"
+       id="rect23-6-4-2-1-9"
+       width="20"
+       height="2300"
+       x="-3200"
+       y="-5660"
+       transform="scale(-1)" />
+    <rect
+       style="fill:#000000;stroke-width:0.331025;stroke-dasharray:none"
+       id="rect23-6-4-2-1-9-1"
+       width="20"
+       height="700"
+       x="-3200"
+       y="-2800"
+       transform="scale(-1)" />
+    <rect
+       style="fill:#000000;stroke-width:0.250232;stroke-dasharray:none"
+       id="rect13-1-3-6-2-9-7"
+       width="20"
+       height="400"
+       x="3900"
+       y="6000" />
+    <rect
+       style="fill:#000000;stroke-width:0.274117;stroke-dasharray:none"
+       id="rect13-3"
+       width="480"
+       height="20"
+       x="2720"
+       y="2080" />
+    <rect
+       style="fill:#000000;stroke-width:0.279769;stroke-dasharray:none"
+       id="rect13-3-4"
+       width="500"
+       height="20"
+       x="3900"
+       y="2080" />
+    <rect
+       style="fill:#000000;stroke-width:0.2769;stroke-dasharray:none"
+       id="rect13-3-5"
+       width="489.79593"
+       height="20"
+       x="3910.2041"
+       y="2620" />
+    <rect
+       style="fill:#000000;stroke-width:0.274117;stroke-dasharray:none"
+       id="rect13-3-5-0"
+       width="480"
+       height="20"
+       x="3920"
+       y="3240" />
+    <rect
+       style="fill:#000000;stroke-width:0.274117;stroke-dasharray:none"
+       id="rect13-3-5-0-6"
+       width="480.00003"
+       height="20"
+       x="3920"
+       y="3780" />
+    <rect
+       style="fill:#000000;stroke-width:0.274117;stroke-dasharray:none"
+       id="rect13-3-5-0-6-7"
+       width="480.00003"
+       height="20"
+       x="3920"
+       y="4320" />
+    <rect
+       style="fill:#000000;stroke-width:0.274117;stroke-dasharray:none"
+       id="rect13-3-5-0-6-7-6"
+       width="480.00003"
+       height="20"
+       x="3920"
+       y="5540" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <g
+       id="SVGRepo_iconCarrier"
+       transform="matrix(0.27034141,0,0,0.27034141,4224.1505,2661.5852)"
+       style="fill:#000000;fill-opacity:1"> <style
+   type="text/css"
+   id="style1"> .st0{fill:#000000;} </style>
+ <g
+   id="g2"
+   style="fill:#000000;fill-opacity:1"> <path
+   class="st0"
+   d="m 73.41,512 h 233.41 v -63.997 c 60.239,-7.534 131.77,-101.65 131.77,-161.88 H 73.41 Z"
+   id="path1"
+   style="fill:#000000;fill-opacity:1" />
+ <rect
+   x="73.410004"
+   class="st0"
+   width="128.002"
+   height="267.289"
+   id="rect1"
+   y="0"
+   style="fill:#000000;fill-opacity:1" />
+ <path
+   class="st0"
+   d="M 413.848,222.118 H 222.744 v 45.17 H 438.59 V 246.85 c 0,-13.652 -11.08,-24.732 -24.742,-24.732 z"
+   id="path2"
+   style="fill:#000000;fill-opacity:1" />
+ </g>
+ </g>
+    <g
+       id="SVGRepo_iconCarrier-3"
+       transform="matrix(0.31766191,0,0,0.31766191,4219.6077,5597.3571)"
+       style="fill:#000000;fill-opacity:1"> <style
+   type="text/css"
+   id="style1-9"> .st0{fill:#000000;} </style>
+ <g
+   id="g2-4"
+   style="fill:#000000;fill-opacity:1"> <path
+   class="st0"
+   d="m 73.41,512 h 233.41 v -63.997 c 60.239,-7.534 131.77,-101.65 131.77,-161.88 H 73.41 Z"
+   id="path1-8"
+   style="fill:#000000;fill-opacity:1" />
+ <rect
+   x="73.410004"
+   class="st0"
+   width="128.002"
+   height="267.289"
+   id="rect1-1"
+   y="0"
+   style="fill:#000000;fill-opacity:1" />
+ <path
+   class="st0"
+   d="M 413.848,222.118 H 222.744 v 45.17 H 438.59 V 246.85 c 0,-13.652 -11.08,-24.732 -24.742,-24.732 z"
+   id="path2-2"
+   style="fill:#000000;fill-opacity:1" />
+ </g>
+ </g>
+    <g
+       id="SVGRepo_bgCarrier-9"
+       stroke-width="0"
+       transform="translate(4032.15,2607.7)" />
+    <g
+       id="SVGRepo_tracerCarrier-0"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(4032.15,2607.7)" />
+    <g
+       id="SVGRepo_iconCarrier-8"
+       transform="translate(4032.15,2607.7)"> <path
+   d="m -40.5,84.8 c 0,0 1,0 1.4,0 0.4,0 15,-3.7 18.6,-4.5 0.7,2.5 2.2,4.6 4.4,5.9 v 7.2 H -6 v -7.5 c 1.9,-1.3 3.3,-3.1 4,-5.4 4.5,1.1 17.3,4.3 17.7,4.3 0.5,0.1 1.4,0 1.4,0 4,0 7.3,-3.3 7.3,-7.3 0,-4 -3.3,-7.3 -7.3,-7.3 -0.5,0 -1.2,0.1 -1.2,0.1 l -18.1,4 c -1.4,-3.6 -4.9,-6.2 -9,-6.2 -4.2,0 -7.7,2.7 -9.1,6.4 l -19,-4.3 c 0,0 -0.7,-0.1 -1.2,-0.1 -4,0 -7.3,3.3 -7.3,7.3 0,4.1 3.3,7.4 7.3,7.4 m 77.9,67.3 v 0.2 c 0,0 -10.6,21.7 -10.8,22.4 -0.3,1.1 -0.7,2.6 -0.7,4.1 0,6.3 5.1,11.4 11.4,11.4 6.3,0 11.4,-5.1 11.4,-11.4 -0.1,-2.4 -1,-4.3 -1,-4.3 z m 11.1,-12.2 v -12.1 c 0,-18.1 -17.4,-17.4 -17.4,-17.4 H 9.2 V 104 L -2.4,97.8 h -17.1 l -11.5,6.3 v 6.4 h -19.7 v 21.8 h 77.1 v 7.6 H 24 v 8.2 h 26.5 v -8.2 z"
+   id="path1-85" />
+ </g>
+    <g
+       id="SVGRepo_iconCarrier-8-4"
+       transform="translate(3832.15,2367.7)"> <path
+   d="m -40.5,84.8 c 0,0 1,0 1.4,0 0.4,0 15,-3.7 18.6,-4.5 0.7,2.5 2.2,4.6 4.4,5.9 v 7.2 H -6 v -7.5 c 1.9,-1.3 3.3,-3.1 4,-5.4 4.5,1.1 17.3,4.3 17.7,4.3 0.5,0.1 1.4,0 1.4,0 4,0 7.3,-3.3 7.3,-7.3 0,-4 -3.3,-7.3 -7.3,-7.3 -0.5,0 -1.2,0.1 -1.2,0.1 l -18.1,4 c -1.4,-3.6 -4.9,-6.2 -9,-6.2 -4.2,0 -7.7,2.7 -9.1,6.4 l -19,-4.3 c 0,0 -0.7,-0.1 -1.2,-0.1 -4,0 -7.3,3.3 -7.3,7.3 0,4.1 3.3,7.4 7.3,7.4 m 77.9,67.3 v 0.2 c 0,0 -10.6,21.7 -10.8,22.4 -0.3,1.1 -0.7,2.6 -0.7,4.1 0,6.3 5.1,11.4 11.4,11.4 6.3,0 11.4,-5.1 11.4,-11.4 -0.1,-2.4 -1,-4.3 -1,-4.3 z m 11.1,-12.2 v -12.1 c 0,-18.1 -17.4,-17.4 -17.4,-17.4 H 9.2 V 104 L -2.4,97.8 h -17.1 l -11.5,6.3 v 6.4 h -19.7 v 21.8 h 77.1 v 7.6 H 24 v 8.2 h 26.5 v -8.2 z"
+   id="path1-85-8" />
+ </g>
+    <g
+       id="SVGRepo_bgCarrier-9-8"
+       stroke-width="0"
+       transform="translate(4052.15,5547.7)" />
+    <g
+       id="SVGRepo_tracerCarrier-0-5"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(4052.15,5547.7)" />
+    <g
+       id="SVGRepo_iconCarrier-8-6"
+       transform="translate(4052.15,5547.7)"> <path
+   d="m -40.5,84.8 c 0,0 1,0 1.4,0 0.4,0 15,-3.7 18.6,-4.5 0.7,2.5 2.2,4.6 4.4,5.9 v 7.2 H -6 v -7.5 c 1.9,-1.3 3.3,-3.1 4,-5.4 4.5,1.1 17.3,4.3 17.7,4.3 0.5,0.1 1.4,0 1.4,0 4,0 7.3,-3.3 7.3,-7.3 0,-4 -3.3,-7.3 -7.3,-7.3 -0.5,0 -1.2,0.1 -1.2,0.1 l -18.1,4 c -1.4,-3.6 -4.9,-6.2 -9,-6.2 -4.2,0 -7.7,2.7 -9.1,6.4 l -19,-4.3 c 0,0 -0.7,-0.1 -1.2,-0.1 -4,0 -7.3,3.3 -7.3,7.3 0,4.1 3.3,7.4 7.3,7.4 m 77.9,67.3 v 0.2 c 0,0 -10.6,21.7 -10.8,22.4 -0.3,1.1 -0.7,2.6 -0.7,4.1 0,6.3 5.1,11.4 11.4,11.4 6.3,0 11.4,-5.1 11.4,-11.4 -0.1,-2.4 -1,-4.3 -1,-4.3 z m 11.1,-12.2 v -12.1 c 0,-18.1 -17.4,-17.4 -17.4,-17.4 H 9.2 V 104 L -2.4,97.8 h -17.1 l -11.5,6.3 v 6.4 h -19.7 v 21.8 h 77.1 v 7.6 H 24 v 8.2 h 26.5 v -8.2 z"
+   id="path1-85-1" />
+ </g>
+    <g
+       id="SVGRepo_bgCarrier"
+       stroke-width="0"
+       transform="translate(1433.18,3271.997)" />
+    <g
+       id="SVGRepo_tracerCarrier"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(1433.18,3271.997)" />
+    <g
+       id="SVGRepo_bgCarrier-4"
+       stroke-width="0"
+       transform="translate(1440,6146)" />
+    <g
+       id="SVGRepo_tracerCarrier-7"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(1440,6146)" />
+    <g
+       id="SVGRepo_iconCarrier-6"
+       transform="matrix(0,-18.214287,18.214287,0,869.10714,6400)">
+      <metadata
+         id="metadata8">
+        <rdf:rdf>
+          <cc:work
+             rdf:about="">
+            <dc:format>image/svg+xml</dc:format>
+            <dc:type
+               rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            <dc:title />
+          </cc:work>
+        </rdf:rdf>
+      </metadata>
+      <defs
+         id="defs6" />
+      <rect
+         width="14"
+         height="14"
+         x="0"
+         y="0"
+         id="canvas"
+         style="visibility:hidden;fill:none;stroke:none" />
+      <path
+         d="M 4,0 V 4 H 6 V 2 h 6 V 12 H 6 V 10 H 4 v 4 H 14 V 0 Z M 7,3.5 V 5.75 H 1 v 2.5 H 7 V 10.5 L 11,7 Z"
+         id="entrance"
+         style="fill:#000000;fill-opacity:1;stroke:none" />
+    </g>
+    <g
+       id="SVGRepo_bgCarrier-3"
+       stroke-width="0"
+       transform="matrix(0.49161489,0,0,0.49161489,4033.8541,2890.244)" />
+    <g
+       id="SVGRepo_tracerCarrier-1"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(0.49161489,0,0,0.49161489,4033.8541,2890.244)" />
+    <g
+       id="SVGRepo_bgCarrier-3-8"
+       stroke-width="0"
+       transform="matrix(0.49161489,0,0,0.49161489,4043.9034,3402.4391)" />
+    <g
+       id="SVGRepo_tracerCarrier-1-5"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(0.49161489,0,0,0.49161489,4043.9034,3402.4391)" />
+    <g
+       id="SVGRepo_bgCarrier-3-89"
+       stroke-width="0"
+       transform="matrix(0.49161489,0,0,0.49161489,4064.3907,3921.4635)" />
+    <g
+       id="SVGRepo_tracerCarrier-1-7"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(0.49161489,0,0,0.49161489,4064.3907,3921.4635)" />
+    <g
+       id="SVGRepo_iconCarrier-7-76-8"
+       transform="matrix(0.49161489,0,0,0.49161489,4064.0945,5856.5861)"> <g
+   id="g2-5-43-0"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g1-0-2"> <path
+   d="m 0,44.651 v 392.93 h 23.814 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.409 v 29.767 h 35.721 V 437.581 H 512 V 44.651 Z m 158.759,357.21 H 35.721 V 80.372 h 123.038 z m 158.76,0 H 194.48 V 80.372 h 123.038 v 321.489 z m 158.76,0 H 353.241 V 80.372 h 123.038 z"
+   id="path1-9-3-1" />
+ </g>
+ </g>
+ <g
+   id="g4-0-0"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g3-92-5"> <rect
+   x="232.78101"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect2-5-1" />
+ </g>
+ </g>
+ <g
+   id="g6-4-1"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g5-0-0"> <rect
+   x="232.78101"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect4-5-8" />
+ </g>
+ </g>
+ <g
+   id="g8-9-5"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g7-4-0"> <rect
+   x="391.53699"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect6-6-6" />
+ </g>
+ </g>
+ <g
+   id="g10-9-4"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g9-2-6"> <rect
+   x="391.53699"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect8-2-2" />
+ </g>
+ </g>
+ <g
+   id="g12-47-5"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g11-7-8"> <rect
+   x="74.026001"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect10-5-6" />
+ </g>
+ </g>
+ <g
+   id="g14-4-2"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g13-81-8"> <rect
+   x="74.026001"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect12-2-4" />
+ </g>
+ </g>
+ </g>
+    <g
+       id="SVGRepo_bgCarrier-7"
+       stroke-width="0"
+       transform="translate(4395.75,5497.25)" />
+    <g
+       id="SVGRepo_tracerCarrier-2"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(4395.75,5497.25)" />
+    <g
+       id="SVGRepo_bgCarrier-0"
+       stroke-width="0"
+       transform="matrix(9.4117673,0,0,9.4117673,3096.4705,4385.8823)" />
+    <g
+       id="SVGRepo_tracerCarrier-3"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(9.4117673,0,0,9.4117673,3096.4705,4385.8823)" />
+    <g
+       id="SVGRepo_iconCarrier-4"
+       transform="matrix(7.3152146,0,0,7.0316792,4091.6075,6153.1356)">
+      <path
+         fill-rule="evenodd"
+         clip-rule="evenodd"
+         d="M 12,2.75 C 8.54822,2.75 5.75,5.54822 5.75,9 c 0,3.4518 2.79802,6.25 6.2498,6.25 C 15.4516,15.25 18.25,12.4517 18.25,9 18.25,5.54822 15.4518,2.75 12,2.75 Z M 4.25,9 c 0,-4.28021 3.46979,-7.75 7.75,-7.75 4.2802,0 7.75,3.46979 7.75,7.75 0,4.0272 -3.0719,7.337 -7.0002,7.7142 V 17.75 H 14.5 c 0.4142,0 0.75,0.3358 0.75,0.75 0,0.4142 -0.3358,0.75 -0.75,0.75 h -1.7502 l 2e-4,2.7499 c 10e-5,0.4143 -0.3357,0.7501 -0.7499,0.7501 -0.4142,0 -0.75,-0.3357 -0.7501,-0.7499 L 11.2498,19.25 H 9.50003 c -0.41421,0 -0.75,-0.3358 -0.75,-0.75 0,-0.4142 0.33579,-0.75 0.75,-0.75 H 11.2498 V 16.7142 C 7.32147,16.3369 4.25,13.0272 4.25,9 Z"
+         fill="#000000"
+         id="path1-0" />
+    </g>
+    <g
+       id="SVGRepo_bgCarrier-96"
+       stroke-width="0"
+       transform="translate(2878.75,5577.25)" />
+    <g
+       id="SVGRepo_tracerCarrier-93"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(2878.75,5577.25)" />
+    <g
+       id="SVGRepo_bgCarrier-00"
+       stroke-width="0"
+       transform="matrix(7.5,0,0,7.5,3550.625,5729.125)" />
+    <g
+       id="SVGRepo_tracerCarrier-4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(7.5,0,0,7.5,3550.625,5729.125)" />
+    <g
+       id="g27">
+      <g
+         id="SVGRepo_iconCarrier-7-76"
+         transform="matrix(0.49161489,0,0,0.49161489,4064.0945,3921.4635)"> <g
+   id="g2-5-43"
+   transform="translate(-37.102921,-164.71342)"> <g
+   id="g1-0"> <path
+   d="m 0,44.651 v 392.93 h 23.814 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.409 v 29.767 h 35.721 V 437.581 H 512 V 44.651 Z m 158.759,357.21 H 35.721 V 80.372 h 123.038 z m 158.76,0 H 194.48 V 80.372 h 123.038 v 321.489 z m 158.76,0 H 353.241 V 80.372 h 123.038 z"
+   id="path1-9-3" />
+ </g>
+ </g>
+ <g
+   id="g4-0"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g3-92"> <rect
+   x="232.78101"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect2-5" />
+ </g>
+ </g>
+ <g
+   id="g6-4"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g5-0"> <rect
+   x="232.78101"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect4-5" />
+ </g>
+ </g>
+ <g
+   id="g8-9"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g7-4"> <rect
+   x="391.53699"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect6-6" />
+ </g>
+ </g>
+ <g
+   id="g10-9"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g9-2"> <rect
+   x="391.53699"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect8-2" />
+ </g>
+ </g>
+ <g
+   id="g12-47"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g11-7"> <rect
+   x="74.026001"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect10-5" />
+ </g>
+ </g>
+ <g
+   id="g14-4"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g13-81"> <rect
+   x="74.026001"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect12-2" />
+ </g>
+ </g>
+ </g>
+      <g
+         id="SVGRepo_iconCarrier-62"
+         transform="matrix(6.61924,0,0,7.0316792,4089.4123,4120.0293)">
+        <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="m 16.25,2 c 0,-0.41421 0.3358,-0.75 0.75,-0.75 h 5 c 0.4142,0 0.75,0.33579 0.75,0.75 V 7 C 22.75,7.41421 22.4142,7.75 22,7.75 21.5858,7.75 21.25,7.41421 21.25,7 V 3.81066 L 16.6949,8.36578 C 17.9773,9.88802 18.75,11.8538 18.75,14 c 0,4.8325 -3.9175,8.75 -8.75,8.75 -4.83249,0 -8.75,-3.9175 -8.75,-8.75 0,-4.83249 3.91751,-8.75 8.75,-8.75 2.1462,0 4.112,0.77271 5.6342,2.05512 L 20.1893,2.75 H 17 C 16.5858,2.75 16.25,2.41421 16.25,2 Z M 10,6.75 c -4.00406,0 -7.25,3.24594 -7.25,7.25 0,4.0041 3.24594,7.25 7.25,7.25 4.0041,0 7.25,-3.2459 7.25,-7.25 0,-4.00406 -3.2459,-7.25 -7.25,-7.25 z"
+           fill="#000000"
+           id="path1-6" />
+      </g>
+    </g>
+    <g
+       id="g27-9"
+       transform="translate(-1.7596634,-558.04878)">
+      <g
+         id="SVGRepo_iconCarrier-7-76-6"
+         transform="matrix(0.49161489,0,0,0.49161489,4064.0945,3921.4635)"> <g
+   id="g2-5-43-02"
+   transform="translate(-37.102921,-164.71342)"> <g
+   id="g1-0-7"> <path
+   d="m 0,44.651 v 392.93 h 23.814 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.409 v 29.767 h 35.721 V 437.581 H 512 V 44.651 Z m 158.759,357.21 H 35.721 V 80.372 h 123.038 z m 158.76,0 H 194.48 V 80.372 h 123.038 v 321.489 z m 158.76,0 H 353.241 V 80.372 h 123.038 z"
+   id="path1-9-3-6" />
+ </g>
+ </g>
+ <g
+   id="g4-0-1"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g3-92-3"> <rect
+   x="232.78101"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect2-5-2" />
+ </g>
+ </g>
+ <g
+   id="g6-4-15"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g5-0-9"> <rect
+   x="232.78101"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect4-5-9" />
+ </g>
+ </g>
+ <g
+   id="g8-9-1"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g7-4-4"> <rect
+   x="391.53699"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect6-6-9" />
+ </g>
+ </g>
+ <g
+   id="g10-9-1"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g9-2-0"> <rect
+   x="391.53699"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect8-2-7" />
+ </g>
+ </g>
+ <g
+   id="g12-47-58"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g11-7-7"> <rect
+   x="74.026001"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect10-5-0" />
+ </g>
+ </g>
+ <g
+   id="g14-4-4"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g13-81-80"> <rect
+   x="74.026001"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect12-2-42" />
+ </g>
+ </g>
+ </g>
+      <g
+         id="SVGRepo_iconCarrier-62-9"
+         transform="matrix(6.61924,0,0,7.0316792,4089.4123,4120.0293)">
+        <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="m 16.25,2 c 0,-0.41421 0.3358,-0.75 0.75,-0.75 h 5 c 0.4142,0 0.75,0.33579 0.75,0.75 V 7 C 22.75,7.41421 22.4142,7.75 22,7.75 21.5858,7.75 21.25,7.41421 21.25,7 V 3.81066 L 16.6949,8.36578 C 17.9773,9.88802 18.75,11.8538 18.75,14 c 0,4.8325 -3.9175,8.75 -8.75,8.75 -4.83249,0 -8.75,-3.9175 -8.75,-8.75 0,-4.83249 3.91751,-8.75 8.75,-8.75 2.1462,0 4.112,0.77271 5.6342,2.05512 L 20.1893,2.75 H 17 C 16.5858,2.75 16.25,2.41421 16.25,2 Z M 10,6.75 c -4.00406,0 -7.25,3.24594 -7.25,7.25 0,4.0041 3.24594,7.25 7.25,7.25 4.0041,0 7.25,-3.2459 7.25,-7.25 0,-4.00406 -3.2459,-7.25 -7.25,-7.25 z"
+           fill="#000000"
+           id="path1-6-6" />
+      </g>
+    </g>
+    <g
+       id="g27-9-2"
+       transform="translate(-5.8541499,-1055.6093)">
+      <g
+         id="SVGRepo_iconCarrier-7-76-6-2"
+         transform="matrix(0.49161489,0,0,0.49161489,4064.0945,3921.4635)"> <g
+   id="g2-5-43-02-0"
+   transform="translate(-37.102921,-164.71342)"> <g
+   id="g1-0-7-5"> <path
+   d="m 0,44.651 v 392.93 h 23.814 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.412 v 29.767 h 35.721 v -29.767 h 11.907 v 29.767 h 35.721 v -29.767 h 75.409 v 29.767 h 35.721 V 437.581 H 512 V 44.651 Z m 158.759,357.21 H 35.721 V 80.372 h 123.038 z m 158.76,0 H 194.48 V 80.372 h 123.038 v 321.489 z m 158.76,0 H 353.241 V 80.372 h 123.038 z"
+   id="path1-9-3-6-5" />
+ </g>
+ </g>
+ <g
+   id="g4-0-1-2"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g3-92-3-9"> <rect
+   x="232.78101"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect2-5-2-0" />
+ </g>
+ </g>
+ <g
+   id="g6-4-15-2"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g5-0-9-8"> <rect
+   x="232.78101"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect4-5-9-3" />
+ </g>
+ </g>
+ <g
+   id="g8-9-1-8"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g7-4-4-0"> <rect
+   x="391.53699"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect6-6-9-4" />
+ </g>
+ </g>
+ <g
+   id="g10-9-1-0"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g9-2-0-9"> <rect
+   x="391.53699"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect8-2-7-1" />
+ </g>
+ </g>
+ <g
+   id="g12-47-58-9"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g11-7-7-6"> <rect
+   x="74.026001"
+   y="116.093"
+   width="47.627998"
+   height="35.721001"
+   id="rect10-5-0-2" />
+ </g>
+ </g>
+ <g
+   id="g14-4-4-5"
+   transform="translate(-40.682177,83.34908)"> <g
+   id="g13-81-80-4"> <rect
+   x="74.026001"
+   y="187.535"
+   width="47.627998"
+   height="35.721001"
+   id="rect12-2-42-4" />
+ </g>
+ </g>
+ </g>
+      <g
+         id="SVGRepo_iconCarrier-62-9-9"
+         transform="matrix(6.61924,0,0,7.0316792,4089.4123,4120.0293)">
+        <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="m 16.25,2 c 0,-0.41421 0.3358,-0.75 0.75,-0.75 h 5 c 0.4142,0 0.75,0.33579 0.75,0.75 V 7 C 22.75,7.41421 22.4142,7.75 22,7.75 21.5858,7.75 21.25,7.41421 21.25,7 V 3.81066 L 16.6949,8.36578 C 17.9773,9.88802 18.75,11.8538 18.75,14 c 0,4.8325 -3.9175,8.75 -8.75,8.75 -4.83249,0 -8.75,-3.9175 -8.75,-8.75 0,-4.83249 3.91751,-8.75 8.75,-8.75 2.1462,0 4.112,0.77271 5.6342,2.05512 L 20.1893,2.75 H 17 C 16.5858,2.75 16.25,2.41421 16.25,2 Z M 10,6.75 c -4.00406,0 -7.25,3.24594 -7.25,7.25 0,4.0041 3.24594,7.25 7.25,7.25 4.0041,0 7.25,-3.2459 7.25,-7.25 0,-4.00406 -3.2459,-7.25 -7.25,-7.25 z"
+           fill="#000000"
+           id="path1-6-6-9" />
+      </g>
+    </g>
+    <g
+       id="SVGRepo_bgCarrier-05"
+       stroke-width="0"
+       transform="translate(2928,4874)" />
+    <g
+       id="SVGRepo_tracerCarrier-02"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="translate(2928,4874)" />
+    <g
+       id="SVGRepo_iconCarrier-9"
+       transform="matrix(1.8372093,0,0,1.8372093,3150.5244,4654.093)"> <path
+   d="m -209.3,262.6 h -18.3 V 233 c 0,-14.4 11.6,-26 26,-26 h 52.1 c 14.3,0 26,11.7 26,26 v 29.6 h -18 v -24.4 c 0,-1.6 -1.1,-2.7 -2.7,-2.7 -1.6,0 -2.7,1.1 -2.7,2.7 h 0.2 v 24.5 h -57.4 v -24.5 c 0,-1.6 -1.1,-2.7 -2.7,-2.7 -1.6,0 -2.7,1.1 -2.7,2.7 z m 33.7,-60.4 c 11.5,0 20.9,-9.4 20.9,-20.9 0,-11.5 -9.4,-20.9 -20.9,-20.9 -11.5,0 -20.9,9.4 -20.9,20.9 0,11.5 9.4,20.9 20.9,20.9 z M -343,265.7 v 28.2 h 24.1 V 406 H -128 V 294 h 25 v -28.2 -0.1 z m 5.5,-21.4 V 191 c 0,-2.6 2.1,-4.7 4.7,-4.7 h 80.5 c 2.6,0 4.7,2.1 4.7,4.7 v 53.2 c 0,2.6 -2.1,4.7 -4.7,4.7 h -29.1 v 7.3 h 10.7 v 5.2 h -3.2 -37.1 -3.2 v -5.2 h 10.5 v -7.3 h -29.1 c -2.6,0 -4.7,-2 -4.7,-4.6 z m 44.9,1.8 c 1.5,0 2.7,-1.1 2.7,-2.7 0,-1.5 -1.2,-2.7 -2.7,-2.7 -1.5,0 -2.7,1.2 -2.7,2.7 0,1.6 1.2,2.7 2.7,2.7 z m -39,-7.4 h 78.1 v -46.6 h -78.1 z"
+   id="path1-4" />
+ </g>
+  </g>
+</svg>

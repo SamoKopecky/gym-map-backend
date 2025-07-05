@@ -1,7 +1,6 @@
 package floormap
 
 import (
-	"fmt"
 	"gym-map/api"
 	"net/http"
 	"os"
@@ -25,6 +24,7 @@ func Put(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
 	file := cc.FormValue("file")
+	println(file)
 
 	// Destination
 	err := os.WriteFile(filepath.Join("./files/map", "map.svg"), []byte(file), 0644)
