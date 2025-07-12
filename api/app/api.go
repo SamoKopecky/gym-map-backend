@@ -1,6 +1,7 @@
 package app
 
 import (
+	"errors"
 	"fmt"
 	"gym-map/api"
 	"gym-map/api/exercise"
@@ -15,9 +16,11 @@ import (
 	fileio "gym-map/file_io"
 	"gym-map/schema"
 	"gym-map/service"
+	"log"
 	"net/http"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/labstack/echo-contrib/echoprometheus"
 	echojwt "github.com/labstack/echo-jwt/v4"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -119,6 +122,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	e := echo.New()
 	e.HTTPErrorHandler = logError
 	e.Use(contextMiddleware(db, appConfig))
+	e.Use(echoprometheus.NewMiddleware("gym-map"))
 	e.Use(middleware.CORS())
 	e.Use(middleware.Logger())
 	e.GET("/-/ping", pong)
@@ -187,7 +191,9 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	floorMapJwt.Use(adminOnlyMiddleware)
 	floorMapJwt.PUT("", floormap.Put)
 
-	e.Logger.Fatal(e.Start(":2001"))
+	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Fatal(err)
+	}
 }
 
 func pong(c echo.Context) error {
