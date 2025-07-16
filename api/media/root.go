@@ -25,6 +25,9 @@ func GetMedia(c echo.Context) error {
 
 	videoPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.DiskFileName)
 	file, err := os.Open(videoPath)
+	if err != nil {
+		return err
+	}
 	defer file.Close()
 
 	fileInfo, _ := file.Stat()
@@ -32,18 +35,18 @@ func GetMedia(c echo.Context) error {
 	return nil
 }
 
-func GetMetadata(c echo.Context) error {
+func GetMetadataMany(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	id, err := strconv.Atoi(cc.Param("id"))
+	params, err := api.BindParams[MediaGetRequest](cc)
 	if err != nil {
 		return cc.BadRequest(err)
 	}
 
-	mediaMetadata, err := cc.MediaCrud.GetById(id)
+	mediaMetadatas, err := cc.MediaCrud.GetByIds(params.Ids)
 	if err != nil {
-		return cc.BadRequest(err)
+		return err
 	}
 
-	return cc.JSON(http.StatusOK, mediaMetadata)
+	return cc.JSON(http.StatusOK, mediaMetadatas)
 }
