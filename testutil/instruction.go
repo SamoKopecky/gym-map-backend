@@ -15,7 +15,7 @@ func InstructionExerciseId(t *testing.T, exerciseId int) FactoryOption[model.Ins
 func InstructionFactory(t *testing.T, options ...FactoryOption[model.Instruction]) model.Instruction {
 	t.Helper()
 
-	instruction := model.BuildInstruction("123", "foobar", 0, nil)
+	instruction := model.BuildInstruction("123", "foobar", 0, []int{})
 	instruction.Id = RandomInt()
 
 	for _, option := range options {
