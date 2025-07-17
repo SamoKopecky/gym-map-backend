@@ -2,6 +2,7 @@ package instruction
 
 import (
 	"gym-map/api"
+	"gym-map/utils"
 	"net/http"
 	"strconv"
 
@@ -10,9 +11,9 @@ import (
 
 func PostMedia(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	if isOwned, err := checkOwner(cc); err != nil {
+	if hasPermision, err := checkInstructionPermisions(cc); err != nil {
 		return err
-	} else if !isOwned {
+	} else if !hasPermision {
 		return cc.NoContent(http.StatusForbidden)
 	}
 
@@ -21,16 +22,22 @@ func PostMedia(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	newMedia, err := api.CreateFileFromRequest(cc)
+	newMedias, err := api.CreateFilesFromRequest(cc)
+	utils.PrettyPrint(newMedias)
 	if err != nil {
 		return cc.BadRequest(err)
 	}
 
 	// Update instructions table
-	err = cc.InstructionCrud.SaveFile(id, newMedia.Id)
+	newMediaIds := make([]int, len(newMedias))
+	for i, newMedia := range newMedias {
+		newMediaIds[i] = newMedia.Id
+	}
+
+	err = cc.InstructionCrud.SaveFiles(id, newMediaIds)
 	if err != nil {
 		return err
 	}
 
-	return cc.JSON(http.StatusCreated, instructionPostResponse{MediaId: newMedia.Id})
+	return cc.JSON(http.StatusCreated, instructionPostResponse{MediaIds: newMediaIds})
 }

@@ -9,11 +9,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func checkOwner(cc *api.DbContext) (bool, error) {
-	if isAdmin := cc.Claims.IsAdmin(); isAdmin {
-		return true, nil
-	}
-
+func checkInstructionPermisions(cc *api.DbContext) (bool, error) {
 	id, err := strconv.Atoi(cc.Param("id"))
 	if err != nil {
 		return false, cc.BadRequest(err)
@@ -21,11 +17,9 @@ func checkOwner(cc *api.DbContext) (bool, error) {
 
 	if isOwned, err := cc.InstructionService.IsTrainerOwned(cc.Claims.Subject, id); err != nil {
 		return false, err
-	} else if isOwned {
-		return true, nil
+	} else {
+		return api.HasPermisions(cc, isOwned), nil
 	}
-
-	return false, nil
 }
 
 func Get(c echo.Context) error {
@@ -81,9 +75,9 @@ func Post(c echo.Context) error {
 
 func Patch(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	if isOwned, err := checkOwner(cc); err != nil {
+	if hasPermision, err := checkInstructionPermisions(cc); err != nil {
 		return err
-	} else if !isOwned {
+	} else if !hasPermision {
 		return cc.NoContent(http.StatusForbidden)
 	}
 
@@ -92,9 +86,9 @@ func Patch(c echo.Context) error {
 
 func Delete(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	if isOwned, err := checkOwner(cc); err != nil {
+	if hasPermision, err := checkInstructionPermisions(cc); err != nil {
 		return err
-	} else if !isOwned {
+	} else if !hasPermision {
 		return cc.NoContent(http.StatusForbidden)
 	}
 

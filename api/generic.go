@@ -75,3 +75,30 @@ func GetModels[M any](cc *DbContext, crud store.StoreBase[M]) error {
 
 	return cc.JSON(http.StatusOK, models)
 }
+
+func CheckInstructionOwner(cc *DbContext) (bool, error) {
+	if isAdmin := cc.Claims.IsAdmin(); isAdmin {
+		return true, nil
+	}
+
+	id, err := strconv.Atoi(cc.Param("id"))
+	if err != nil {
+		return false, cc.BadRequest(err)
+	}
+
+	if isOwned, err := cc.InstructionService.IsTrainerOwned(cc.Claims.Subject, id); err != nil {
+		return false, err
+	} else if isOwned {
+		return true, nil
+	}
+
+	return false, nil
+}
+
+func HasPermisions(cc *DbContext, isOwned bool) bool {
+	if isAdmin := cc.Claims.IsAdmin(); isAdmin {
+		return true
+	}
+
+	return isOwned
+}

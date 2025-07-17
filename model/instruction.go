@@ -10,14 +10,14 @@ type Instruction struct {
 	UserId      string `json:"user_id"`
 	ExerciseId  int    `json:"exercise_id"`
 	Description string `json:"description"`
-	MediaId     *int   `json:"media_id"`
+	MediaIds    []int  `json:"media_ids" bun:",array"`
 }
 
-func BuildInstruction(userId, description string, exerciseId int, mediaId *int) Instruction {
+func BuildInstruction(userId, description string, exerciseId int, mediaIds []int) Instruction {
 	return Instruction{
 		UserId:      userId,
 		Description: description,
 		ExerciseId:  exerciseId,
-		MediaId:     mediaId,
+		MediaIds:    mediaIds,
 	}
 }

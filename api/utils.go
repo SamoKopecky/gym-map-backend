@@ -37,6 +37,7 @@ type DbContext struct {
 	IAMFetcher fetcher.IAM
 
 	InstructionService service.Instruction
+	MediaService       service.Media
 	UserService        service.User
 
 	Claims *schema.JwtClaims
@@ -65,24 +66,37 @@ func DerefInt(ptr *int) int {
 
 }
 
-func CreateFileFromRequest(cc *DbContext) (newMedia model.Media, err error) {
-	file, err := cc.FormFile("file")
-	if err != nil {
-		return
+func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) {
+	i := 0
+	for {
+		file, err := cc.FormFile(fmt.Sprintf("file_%d", i))
+		// If file not found, there are no more files, break the loop
+		if file == nil {
+			break
+		} else {
+			i += 1
+		}
+
+		if err != nil {
+			return newMedias, err
+		}
+
+		fileId, err := fileio.SaveFile(file, cc.Config.MediaFileRepository)
+		if err != nil {
+			return newMedias, err
+		}
+
+		mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
+		newMedia := model.Media{
+			OriginalFileName: file.Filename,
+			DiskFileName:     fileId,
+			ContentType:      mediaType,
+			UserId:           cc.Claims.Subject,
+		}
+		// Create record in media table
+		err = cc.MediaCrud.Insert(&newMedia)
+		newMedias = append(newMedias, newMedia)
 	}
 
-	fileId, err := fileio.SaveFile(file, cc.Config.MediaFileRepository)
-	if err != nil {
-		return
-	}
-
-	mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
-	newMedia = model.Media{
-		OriginalFileName: file.Filename,
-		DiskFileName:     fileId,
-		ContentType:      mediaType,
-	}
-	// Create record in media table
-	err = cc.MediaCrud.Insert(&newMedia)
 	return
 }

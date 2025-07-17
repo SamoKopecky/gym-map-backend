@@ -73,17 +73,20 @@ func PatchProfile(c echo.Context) error {
 	cc := c.(*api.DbContext)
 	userId := cc.Claims.Subject
 
-	newMedia, err := api.CreateFileFromRequest(cc)
+	newMedias, err := api.CreateFilesFromRequest(cc)
 	if err != nil {
 		return cc.BadRequest(err)
 	}
+	if len(newMedias) == 0 {
+		return cc.NoContent(http.StatusBadRequest)
+	}
 
-	err = cc.UserService.UpdateAvatarId(userId, strconv.Itoa(newMedia.Id))
+	err = cc.UserService.UpdateAvatarId(userId, strconv.Itoa(newMedias[0].Id))
 	if err != nil {
 		return err
 	}
 
 	return cc.JSON(http.StatusOK, userPatchResponse{
-		AvatarId: strconv.Itoa(newMedia.Id),
+		AvatarId: strconv.Itoa(newMedias[0].Id),
 	})
 }
