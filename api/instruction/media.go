@@ -11,9 +11,9 @@ import (
 
 func PostMedia(c echo.Context) error {
 	cc := c.(*api.DbContext)
-	if isOwned, err := checkOwner(cc); err != nil {
+	if hasPermision, err := checkInstructionPermisions(cc); err != nil {
 		return err
-	} else if !isOwned {
+	} else if !hasPermision {
 		return cc.NoContent(http.StatusForbidden)
 	}
 

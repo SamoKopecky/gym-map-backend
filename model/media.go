@@ -10,4 +10,5 @@ type Media struct {
 	OriginalFileName string `json:"original_file_name"`
 	DiskFileName     string `json:"disk_file_name"`
 	ContentType      string `json:"content_type"`
+	UserId           string `json:"user_id"`
 }

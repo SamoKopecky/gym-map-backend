@@ -49,6 +49,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			instructionCrud := crud.NewInstruction(db)
+			mediaCrud := crud.NewMedia(db)
 			iamFetcher := fetcher.IAM{
 				AppConfig:  cfg,
 				AuthConfig: fetcher.CreateAuthConfig(cfg),
@@ -59,12 +60,15 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				MachineCrud:     crud.NewMachine(db),
 				ExerciseCrud:    crud.NewExercise(db),
 				InstructionCrud: instructionCrud,
-				MediaCrud:       crud.NewMedia(db),
+				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
 				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,
+				},
+				MediaService: service.Media{
+					MediaCrud: mediaCrud,
 				},
 				UserService: service.User{
 					IAM: iamFetcher,
@@ -182,6 +186,12 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	mediaGroup := e.Group("/media")
 	mediaGroup.GET("/:id", media.GetMedia)
 	mediaGroup.GET("/metadata", media.GetMetadataMany)
+
+	jwtMediaGroup := mediaGroup.Group("")
+	jwtMediaGroup.Use(jwtMiddleware(appConfig))
+	jwtMediaGroup.Use(claimContextMiddleware)
+	jwtMediaGroup.Use(trainerOnlyMiddleware)
+	jwtMediaGroup.DELETE("/:id", media.DeleteMedia)
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)

@@ -37,6 +37,7 @@ type DbContext struct {
 	IAMFetcher fetcher.IAM
 
 	InstructionService service.Instruction
+	MediaService       service.Media
 	UserService        service.User
 
 	Claims *schema.JwtClaims
@@ -90,6 +91,7 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 			OriginalFileName: file.Filename,
 			DiskFileName:     fileId,
 			ContentType:      mediaType,
+			UserId:           cc.Claims.Subject,
 		}
 		// Create record in media table
 		err = cc.MediaCrud.Insert(&newMedia)
