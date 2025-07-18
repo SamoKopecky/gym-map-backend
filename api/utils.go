@@ -88,10 +88,10 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 
 		mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
 		newMedia := model.Media{
-			OriginalFileName: file.Filename,
-			DiskFileName:     fileId,
-			ContentType:      mediaType,
-			UserId:           cc.Claims.Subject,
+			Name:        file.Filename,
+			Path:        fileId,
+			ContentType: mediaType,
+			UserId:      cc.Claims.Subject,
 		}
 		// Create record in media table
 		err = cc.MediaCrud.Insert(&newMedia)

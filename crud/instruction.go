@@ -34,7 +34,7 @@ func (i Instruction) GetByUserId(userId string) (instructions []model.Instructio
 	return
 }
 
-func (i Instruction) SaveFiles(id int, media_ids []int) error {
+func (i Instruction) SaveMedia(id int, media_ids []int) error {
 	_, err := i.db.NewUpdate().
 		Model((*model.Instruction)(nil)).
 		Set("media_ids = media_ids || ?", pgdialect.Array(media_ids)).

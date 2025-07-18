@@ -8,5 +8,5 @@ type Instruction interface {
 	StoreBase[model.Instruction]
 	GetByExerciseId(exerciseId int) (instructions []model.Instruction, err error)
 	GetByUserId(userId string) (instructions []model.Instruction, err error)
-	SaveFiles(id int, media_ids []int) error
+	SaveMedia(id int, media_ids []int) error
 }
