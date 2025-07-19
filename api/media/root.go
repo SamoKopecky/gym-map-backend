@@ -2,6 +2,7 @@ package media
 
 import (
 	"gym-map/api"
+	"gym-map/model"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -37,7 +38,11 @@ func GetMedia(c echo.Context) error {
 		return err
 	}
 
-	videoPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.DiskFileName)
+	if mediaMetadata.ContentType == model.YOUTUBE_CONTENT_TYPE {
+		return cc.NoContent(http.StatusNoContent)
+	}
+
+	videoPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.Path)
 	file, err := os.Open(videoPath)
 	if err != nil {
 		return err
@@ -72,10 +77,12 @@ func DeleteMedia(c echo.Context) error {
 		return err
 	}
 
-	mediaPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.DiskFileName)
-	err = os.Remove(mediaPath)
-	if err != nil {
-		return err
+	if mediaMetadata.ContentType != model.YOUTUBE_CONTENT_TYPE {
+		mediaPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.Path)
+		err = os.Remove(mediaPath)
+		if err != nil {
+			return err
+		}
 	}
 
 	return cc.NoContent(http.StatusNoContent)
@@ -92,6 +99,10 @@ func GetMetadataMany(c echo.Context) error {
 	mediaMetadatas, err := cc.MediaCrud.GetByIds(params.Ids)
 	if err != nil {
 		return err
+	}
+
+	if mediaMetadatas == nil {
+		return cc.JSON(http.StatusOK, []model.Media{})
 	}
 
 	return cc.JSON(http.StatusOK, mediaMetadatas)

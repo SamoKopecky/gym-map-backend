@@ -2,7 +2,7 @@ package instruction
 
 import (
 	"gym-map/api"
-	"gym-map/utils"
+	"gym-map/model"
 	"net/http"
 	"strconv"
 
@@ -22,10 +22,24 @@ func PostMedia(c echo.Context) error {
 		return cc.BadRequest(err)
 	}
 
-	newMedias, err := api.CreateFilesFromRequest(cc)
-	utils.PrettyPrint(newMedias)
+	params, err := api.BindParams[instructionMediaPostRequest](cc)
 	if err != nil {
 		return cc.BadRequest(err)
+	}
+
+	var newMedias []model.Media
+	if params.YoutubeVideoId == nil || params.Name == nil {
+		newMedias, err = api.CreateFilesFromRequest(cc)
+		if err != nil {
+			return err
+		}
+	} else {
+		newMedia := model.NewYoutubeMedia(*params.YoutubeVideoId, cc.Claims.Subject, *params.Name)
+		err := cc.MediaCrud.Insert(&newMedia)
+		if err != nil {
+			return err
+		}
+		newMedias = append(newMedias, newMedia)
 	}
 
 	// Update instructions table
@@ -33,8 +47,7 @@ func PostMedia(c echo.Context) error {
 	for i, newMedia := range newMedias {
 		newMediaIds[i] = newMedia.Id
 	}
-
-	err = cc.InstructionCrud.SaveFiles(id, newMediaIds)
+	err = cc.InstructionCrud.SaveMedia(id, newMediaIds)
 	if err != nil {
 		return err
 	}
