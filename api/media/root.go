@@ -101,5 +101,9 @@ func GetMetadataMany(c echo.Context) error {
 		return err
 	}
 
+	if mediaMetadatas == nil {
+		return cc.JSON(http.StatusOK, []model.Media{})
+	}
+
 	return cc.JSON(http.StatusOK, mediaMetadatas)
 }

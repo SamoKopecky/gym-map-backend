@@ -15,10 +15,10 @@ type Media struct {
 	UserId      string `json:"user_id"`
 }
 
-func NewYoutubeMedia(youtubeLink, userId string) Media {
+func NewYoutubeMedia(youtubeLink, userId, name string) Media {
 	return Media{
 		Path:        youtubeLink,
-		Name:        "youtube",
+		Name:        name,
 		ContentType: YOUTUBE_CONTENT_TYPE,
 		UserId:      userId,
 	}

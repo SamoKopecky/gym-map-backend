@@ -28,13 +28,13 @@ func PostMedia(c echo.Context) error {
 	}
 
 	var newMedias []model.Media
-	if params.YoutubeVideoId == nil {
+	if params.YoutubeVideoId == nil || params.Name == nil {
 		newMedias, err = api.CreateFilesFromRequest(cc)
 		if err != nil {
 			return err
 		}
 	} else {
-		newMedia := model.NewYoutubeMedia(*params.YoutubeVideoId, cc.Claims.Subject)
+		newMedia := model.NewYoutubeMedia(*params.YoutubeVideoId, cc.Claims.Subject, *params.Name)
 		err := cc.MediaCrud.Insert(&newMedia)
 		if err != nil {
 			return err

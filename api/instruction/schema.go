@@ -18,6 +18,7 @@ type instructionPostRequest struct {
 
 type instructionMediaPostRequest struct {
 	YoutubeVideoId *string `json:"youtube_video_id"`
+	Name           *string `json:"name"`
 }
 
 func (ipr instructionPostRequest) ToNewModel() model.Instruction {
