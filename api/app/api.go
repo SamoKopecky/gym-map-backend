@@ -10,6 +10,7 @@ import (
 	"gym-map/api/instruction"
 	"gym-map/api/machine"
 	"gym-map/api/media"
+	"gym-map/api/property"
 	"gym-map/api/user"
 	"gym-map/config"
 	"gym-map/crud"
@@ -218,6 +219,13 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	categories.POST("", category.Post)
 	categories.PATCH("/:id", category.Patch)
 	categories.DELETE("/:id", category.Delete)
+
+	porperties := e.Group("/properties")
+	porperties.Use(jwtMiddleware(appConfig))
+	porperties.Use(claimContextMiddleware)
+	porperties.Use(adminOnlyMiddleware)
+	porperties.POST("", property.Post)
+	porperties.DELETE("/:id", property.Delete)
 
 	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)

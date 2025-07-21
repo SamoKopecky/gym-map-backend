@@ -21,11 +21,9 @@ func (c Category) GetCategories() (schemaCategories []schema.Category, err error
 	if err != nil {
 		return
 	}
-	var propertiesMap map[int][]model.Property
+	propertiesMap := make(map[int][]model.Property)
 	for _, property := range properties {
-		if val, ok := propertiesMap[property.CategoryId]; ok {
-			val = append(val, property)
-		}
+		propertiesMap[property.CategoryId] = append(propertiesMap[property.CategoryId], property)
 	}
 
 	schemaCategories = make([]schema.Category, len(categories))
