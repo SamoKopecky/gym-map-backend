@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"gym-map/api"
+	"gym-map/api/category"
 	"gym-map/api/exercise"
 	floormap "gym-map/api/floor_map"
 	"gym-map/api/instruction"
@@ -54,12 +55,16 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				AppConfig:  cfg,
 				AuthConfig: fetcher.CreateAuthConfig(cfg),
 			}
+			categoryCrud := crud.NewCategory(db)
+			propertyCrud := crud.NewProperty(db)
 
 			cc := &api.DbContext{Context: c,
 				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
 				ExerciseCrud:    crud.NewExercise(db),
 				InstructionCrud: instructionCrud,
+				CategoryCrud:    categoryCrud,
+				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
 				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
@@ -72,6 +77,10 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				},
 				UserService: service.User{
 					IAM: iamFetcher,
+				},
+				CategoryService: service.Category{
+					CategoryCrud: categoryCrud,
+					PropertyCrud: propertyCrud,
 				},
 			}
 			return next(cc)
@@ -200,6 +209,14 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	floorMapJwt.Use(claimContextMiddleware)
 	floorMapJwt.Use(adminOnlyMiddleware)
 	floorMapJwt.PUT("", floormap.Put)
+
+	categories := e.Group("/categories")
+	categories.Use(jwtMiddleware(appConfig))
+	categories.Use(claimContextMiddleware)
+	categories.Use(adminOnlyMiddleware)
+	categories.GET("", category.GetCategories)
+	categories.POST("", category.Post)
+	categories.PATCH("/:id", category.Patch)
 
 	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)

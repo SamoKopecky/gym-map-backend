@@ -3,7 +3,7 @@ package model
 import "github.com/uptrace/bun"
 
 type Property struct {
-	bun.BaseModel `bun:"table:exercise"`
+	bun.BaseModel `bun:"table:property"`
 	IdModel
 	Timestamp
 

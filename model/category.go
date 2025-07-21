@@ -3,7 +3,7 @@ package model
 import "github.com/uptrace/bun"
 
 type Category struct {
-	bun.BaseModel `bun:"table:exercise"`
+	bun.BaseModel `bun:"table:category"`
 	IdModel
 	Timestamp
 
