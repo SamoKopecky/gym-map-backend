@@ -217,6 +217,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	categories.GET("", category.GetCategories)
 	categories.POST("", category.Post)
 	categories.PATCH("/:id", category.Patch)
+	categories.DELETE("/:id", category.Delete)
 
 	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
