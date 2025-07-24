@@ -58,11 +58,12 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 			}
 			categoryCrud := crud.NewCategory(db)
 			propertyCrud := crud.NewProperty(db)
+			exerciseCrud := crud.NewExercise(db)
 
 			cc := &api.DbContext{Context: c,
 				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
-				ExerciseCrud:    crud.NewExercise(db),
+				ExerciseCrud:    exerciseCrud,
 				InstructionCrud: instructionCrud,
 				CategoryCrud:    categoryCrud,
 				PropertyCrud:    propertyCrud,
@@ -82,6 +83,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				CategoryService: service.Category{
 					CategoryCrud: categoryCrud,
 					PropertyCrud: propertyCrud,
+					ExerciseCrud: exerciseCrud,
 				},
 			}
 			return next(cc)
@@ -215,7 +217,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	categories.Use(jwtMiddleware(appConfig))
 	categories.Use(claimContextMiddleware)
 	categories.Use(adminOnlyMiddleware)
-	categories.GET("", category.GetCategories)
+	categories.GET("", category.Get)
 	categories.POST("", category.Post)
 	categories.PATCH("/:id", category.Patch)
 	categories.DELETE("/:id", category.Delete)

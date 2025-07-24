@@ -7,5 +7,6 @@ type Category struct {
 	IdModel
 	Timestamp
 
-	Name string `json:"name"`
+	Name       string     `json:"name"`
+	Properties []Property `bun:"rel:has-many,join:id=category_id" json:"properties"`
 }

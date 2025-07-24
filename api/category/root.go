@@ -2,7 +2,7 @@ package category
 
 import (
 	"gym-map/api"
-	"gym-map/schema"
+	"gym-map/model"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -23,16 +23,30 @@ func Delete(c echo.Context) error {
 	return api.DeleteModel(cc, cc.CategoryCrud)
 }
 
-func GetCategories(c echo.Context) error {
+func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	categories, err := cc.CategoryService.GetCategories()
+	params, err := api.BindParams[categoryGetRequest](cc)
 	if err != nil {
-		return err
+		return cc.BadRequest(err)
+	}
+
+	var categories []model.Category
+	if params.ExerciseId == nil {
+		categories, err = cc.CategoryCrud.GetCategoryProperties(nil)
+		if err != nil {
+			return err
+		}
+	} else {
+		categories, err = cc.CategoryService.GetCategoriesByExercise(*params.ExerciseId)
+		if err != nil {
+			return err
+		}
+
 	}
 
 	if len(categories) == 0 {
-		categories = []schema.Category{}
+		categories = []model.Category{}
 	}
 
 	return cc.JSON(http.StatusOK, categories)

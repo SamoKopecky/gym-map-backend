@@ -4,6 +4,10 @@ import (
 	"gym-map/model"
 )
 
+type categoryGetRequest struct {
+	ExerciseId *int `json:"exercise_id"`
+}
+
 type categoryPostRequest struct {
 	Name string `json:"name"`
 }

@@ -17,7 +17,7 @@ func ExerciseFactory(t *testing.T, options ...FactoryOption[model.Exercise]) mod
 	description := "foobar"
 	muscleGroups := []string{"foo", "bar"}
 
-	exercise := model.BuildExercise("name", &description, &muscleGroups, 10, nil)
+	exercise := model.BuildExercise("name", &description, &muscleGroups, 10, nil, []int{})
 	exercise.Id = RandomInt()
 
 	for _, option := range options {

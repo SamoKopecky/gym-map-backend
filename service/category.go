@@ -2,41 +2,24 @@ package service
 
 import (
 	"gym-map/model"
-	"gym-map/schema"
 	"gym-map/store"
 )
 
 type Category struct {
 	CategoryCrud store.Category
 	PropertyCrud store.Property
+	ExerciseCrud store.Exercise
 }
 
-func (c Category) GetCategories() (schemaCategories []schema.Category, err error) {
-	categories, err := c.CategoryCrud.Get()
-	if err != nil {
+func (c Category) GetCategoriesByExercise(exerciseId int) (categories []model.Category, err error) {
+	exercise, err := c.ExerciseCrud.GetById(exerciseId)
+	if err != nil || len(exercise.PropertyIds) == 0 {
 		return
 	}
 
-	properties, err := c.PropertyCrud.Get()
+	categories, err = c.CategoryCrud.GetCategoryProperties(&exercise.PropertyIds)
 	if err != nil {
 		return
-	}
-	propertiesMap := make(map[int][]model.Property)
-	for _, property := range properties {
-		propertiesMap[property.CategoryId] = append(propertiesMap[property.CategoryId], property)
-	}
-
-	schemaCategories = make([]schema.Category, len(categories))
-
-	for i, category := range categories {
-		var schemaCategory schema.Category
-		schemaCategory.Category = category
-		if categoryProperties, ok := propertiesMap[category.Id]; ok {
-			schemaCategory.Properties = categoryProperties
-		} else {
-			schemaCategory.Properties = []model.Property{}
-		}
-		schemaCategories[i] = schemaCategory
 	}
 
 	return
