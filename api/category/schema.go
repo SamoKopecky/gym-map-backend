@@ -5,7 +5,7 @@ import (
 )
 
 type categoryGetRequest struct {
-	ExerciseId *int `json:"exercise_id"`
+	PropertyIds *[]int `query:"property_ids"`
 }
 
 type categoryPostRequest struct {

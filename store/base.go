@@ -6,4 +6,5 @@ type StoreBase[T any] interface {
 	Delete(modelId int) error
 	Get() ([]T, error)
 	GetById(modelId int) (model T, err error)
+	GetManyByIds(modelIds []int) (models []T, err error)
 }

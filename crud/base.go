@@ -45,6 +45,14 @@ func (c CRUDBase[T]) GetById(modelId int) (model T, err error) {
 	return
 }
 
+func (c CRUDBase[T]) GetManyByIds(modelIds []int) (models []T, err error) {
+	err = c.db.NewSelect().
+		Model(&models).
+		Where("id in (?)", bun.In(modelIds)).
+		Scan(context.TODO())
+	return
+}
+
 func (c CRUDBase[T]) Delete(modelId int) error {
 	ctx := context.Background()
 

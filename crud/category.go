@@ -15,14 +15,11 @@ func NewCategory(db bun.IDB) Category {
 	return Category{CRUDBase: CRUDBase[model.Category]{db: db}}
 }
 
-func (c Category) GetCategoryProperties(propertyIds *[]int) (categories []model.Category, err error) {
-	query := c.db.NewSelect().
+func (c Category) GetCategoryProperties() (categories []model.Category, err error) {
+	err = c.db.NewSelect().
 		Model(&categories).
-		Relation("Properties")
+		Relation("Properties").
+		Scan(context.Background())
 
-	if propertyIds != nil {
-		query = query.Where("property.id in (?)", bun.In(propertyIds))
-	}
-	err = query.Scan(context.Background())
 	return
 }

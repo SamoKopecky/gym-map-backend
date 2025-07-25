@@ -32,13 +32,13 @@ func Get(c echo.Context) error {
 	}
 
 	var categories []model.Category
-	if params.ExerciseId == nil {
-		categories, err = cc.CategoryCrud.GetCategoryProperties(nil)
+	if params.PropertyIds == nil {
+		categories, err = cc.CategoryCrud.GetCategoryProperties()
 		if err != nil {
 			return err
 		}
 	} else {
-		categories, err = cc.CategoryService.GetCategoriesByExercise(*params.ExerciseId)
+		categories, err = cc.CategoryService.GetByPropertyIds(*params.PropertyIds)
 		if err != nil {
 			return err
 		}

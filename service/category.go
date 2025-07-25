@@ -11,15 +11,36 @@ type Category struct {
 	ExerciseCrud store.Exercise
 }
 
-func (c Category) GetCategoriesByExercise(exerciseId int) (categories []model.Category, err error) {
-	exercise, err := c.ExerciseCrud.GetById(exerciseId)
-	if err != nil || len(exercise.PropertyIds) == 0 {
+func (c Category) GetByPropertyIds(properetyIds []int) (res []model.Category, err error) {
+	properties, err := c.PropertyCrud.GetManyByIds(properetyIds)
+	if err != nil {
 		return
 	}
 
-	categories, err = c.CategoryCrud.GetCategoryProperties(&exercise.PropertyIds)
+	propertiesMap := make(map[int][]model.Property)
+	for _, property := range properties {
+		propertiesMap[property.CategoryId] = append(propertiesMap[property.CategoryId], property)
+	}
+
+	var categoryIds []int
+	for key := range propertiesMap {
+		categoryIds = append(categoryIds, key)
+	}
+
+	categories, err := c.CategoryCrud.GetManyByIds(categoryIds)
 	if err != nil {
 		return
+	}
+
+	res = make([]model.Category, len(categories))
+
+	for i, category := range categories {
+		if categoryProperties, ok := propertiesMap[category.Id]; ok {
+			category.Properties = categoryProperties
+		} else {
+			category.Properties = []model.Property{}
+		}
+		res[i] = category
 	}
 
 	return
