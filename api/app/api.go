@@ -206,6 +206,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)
+
 	floorMapJwt := floorMap.Group("")
 	floorMapJwt.Use(jwtMiddleware(appConfig))
 	floorMapJwt.Use(claimContextMiddleware)
@@ -213,13 +214,15 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	floorMapJwt.PUT("", floormap.Put)
 
 	categories := e.Group("/categories")
-	categories.Use(jwtMiddleware(appConfig))
-	categories.Use(claimContextMiddleware)
-	categories.Use(adminOnlyMiddleware)
 	categories.GET("", category.Get)
-	categories.POST("", category.Post)
-	categories.PATCH("/:id", category.Patch)
-	categories.DELETE("/:id", category.Delete)
+
+	categoriesJwt := categories.Group("")
+	categoriesJwt.Use(jwtMiddleware(appConfig))
+	categoriesJwt.Use(claimContextMiddleware)
+	categoriesJwt.Use(adminOnlyMiddleware)
+	categoriesJwt.POST("", category.Post)
+	categoriesJwt.PATCH("/:id", category.Patch)
+	categoriesJwt.DELETE("/:id", category.Delete)
 
 	porperties := e.Group("/properties")
 	porperties.Use(jwtMiddleware(appConfig))
