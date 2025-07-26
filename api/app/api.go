@@ -83,7 +83,6 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				CategoryService: service.Category{
 					CategoryCrud: categoryCrud,
 					PropertyCrud: propertyCrud,
-					ExerciseCrud: exerciseCrud,
 				},
 			}
 			return next(cc)

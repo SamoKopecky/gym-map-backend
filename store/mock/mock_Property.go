@@ -191,6 +191,62 @@ func (_c *MockProperty_GetById_Call) RunAndReturn(run func(modelId int) (model.P
 	return _c
 }
 
+// GetManyByIds provides a mock function for the type MockProperty
+func (_mock *MockProperty) GetManyByIds(modelIds []int) ([]model.Property, error) {
+	ret := _mock.Called(modelIds)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetManyByIds")
+	}
+
+	var r0 []model.Property
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Property, error)); ok {
+		return returnFunc(modelIds)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Property); ok {
+		r0 = returnFunc(modelIds)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Property)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(modelIds)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockProperty_GetManyByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetManyByIds'
+type MockProperty_GetManyByIds_Call struct {
+	*mock.Call
+}
+
+// GetManyByIds is a helper method to define mock.On call
+//   - modelIds
+func (_e *MockProperty_Expecter) GetManyByIds(modelIds interface{}) *MockProperty_GetManyByIds_Call {
+	return &MockProperty_GetManyByIds_Call{Call: _e.mock.On("GetManyByIds", modelIds)}
+}
+
+func (_c *MockProperty_GetManyByIds_Call) Run(run func(modelIds []int)) *MockProperty_GetManyByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockProperty_GetManyByIds_Call) Return(models []model.Property, err error) *MockProperty_GetManyByIds_Call {
+	_c.Call.Return(models, err)
+	return _c
+}
+
+func (_c *MockProperty_GetManyByIds_Call) RunAndReturn(run func(modelIds []int) ([]model.Property, error)) *MockProperty_GetManyByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Insert provides a mock function for the type MockProperty
 func (_mock *MockProperty) Insert(model1 *model.Property) error {
 	ret := _mock.Called(model1)

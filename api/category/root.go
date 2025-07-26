@@ -26,23 +26,9 @@ func Delete(c echo.Context) error {
 func Get(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
-	params, err := api.BindParams[categoryGetRequest](cc)
+	categories, err := cc.CategoryCrud.GetCategoryProperties()
 	if err != nil {
-		return cc.BadRequest(err)
-	}
-
-	var categories []model.Category
-	if params.PropertyIds == nil {
-		categories, err = cc.CategoryCrud.GetCategoryProperties()
-		if err != nil {
-			return err
-		}
-	} else {
-		categories, err = cc.CategoryService.GetByPropertyIds(*params.PropertyIds)
-		if err != nil {
-			return err
-		}
-
+		return err
 	}
 
 	if len(categories) == 0 {

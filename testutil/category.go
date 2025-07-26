@@ -5,6 +5,13 @@ import (
 	"testing"
 )
 
+func CategoryId(t *testing.T, id int) FactoryOption[model.Category] {
+	t.Helper()
+	return func(p *model.Category) {
+		p.Id = id
+	}
+}
+
 func CategoryFactory(t *testing.T, options ...FactoryOption[model.Category]) model.Category {
 	t.Helper()
 
@@ -18,3 +25,4 @@ func CategoryFactory(t *testing.T, options ...FactoryOption[model.Category]) mod
 	}
 	return category
 }
+

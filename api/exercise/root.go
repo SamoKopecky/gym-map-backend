@@ -2,6 +2,7 @@ package exercise
 
 import (
 	"gym-map/api"
+	"gym-map/model"
 	"gym-map/schema"
 	"net/http"
 
@@ -63,6 +64,19 @@ func Get(c echo.Context) error {
 
 	if exercises == nil {
 		exercises = []schema.Exercise{}
+	}
+
+	categoriesMap, err := cc.CategoryService.GetByExercises(exercises)
+	if err != nil {
+		return err
+	}
+
+	for i, exercise := range exercises {
+		if categories, ok := categoriesMap[exercise.Id]; ok {
+			exercises[i].Categories = categories
+		} else {
+			exercises[i].Categories = []model.Category{}
+		}
 	}
 
 	return cc.JSON(http.StatusOK, exercises)

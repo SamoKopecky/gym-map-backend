@@ -192,6 +192,62 @@ func (_c *MockMachine_GetById_Call) RunAndReturn(run func(modelId int) (model.Ma
 	return _c
 }
 
+// GetManyByIds provides a mock function for the type MockMachine
+func (_mock *MockMachine) GetManyByIds(modelIds []int) ([]model.Machine, error) {
+	ret := _mock.Called(modelIds)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetManyByIds")
+	}
+
+	var r0 []model.Machine
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Machine, error)); ok {
+		return returnFunc(modelIds)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Machine); ok {
+		r0 = returnFunc(modelIds)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Machine)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(modelIds)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockMachine_GetManyByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetManyByIds'
+type MockMachine_GetManyByIds_Call struct {
+	*mock.Call
+}
+
+// GetManyByIds is a helper method to define mock.On call
+//   - modelIds
+func (_e *MockMachine_Expecter) GetManyByIds(modelIds interface{}) *MockMachine_GetManyByIds_Call {
+	return &MockMachine_GetManyByIds_Call{Call: _e.mock.On("GetManyByIds", modelIds)}
+}
+
+func (_c *MockMachine_GetManyByIds_Call) Run(run func(modelIds []int)) *MockMachine_GetManyByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockMachine_GetManyByIds_Call) Return(models []model.Machine, err error) *MockMachine_GetManyByIds_Call {
+	_c.Call.Return(models, err)
+	return _c
+}
+
+func (_c *MockMachine_GetManyByIds_Call) RunAndReturn(run func(modelIds []int) ([]model.Machine, error)) *MockMachine_GetManyByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetWithCount provides a mock function for the type MockMachine
 func (_mock *MockMachine) GetWithCount() ([]schema.Machine, error) {
 	ret := _mock.Called()

@@ -5,6 +5,20 @@ import (
 	"testing"
 )
 
+func ExercisePropertyIds(t *testing.T, propertyids []int) FactoryOption[model.Exercise] {
+	t.Helper()
+	return func(e *model.Exercise) {
+		e.PropertyIds = propertyids
+	}
+}
+
+func ExerciseId(t *testing.T, id int) FactoryOption[model.Exercise] {
+	t.Helper()
+	return func(e *model.Exercise) {
+		e.Id = id
+	}
+}
+
 func ExerciseMachineId(t *testing.T, machineId int) FactoryOption[model.Exercise] {
 	t.Helper()
 	return func(e *model.Exercise) {

@@ -5,6 +5,13 @@ import (
 	"testing"
 )
 
+func PropertyId(t *testing.T, id int) FactoryOption[model.Property] {
+	t.Helper()
+	return func(p *model.Property) {
+		p.Id = id
+	}
+}
+
 func PropertyCategoryId(t *testing.T, categoryId int) FactoryOption[model.Property] {
 	t.Helper()
 	return func(p *model.Property) {
@@ -26,3 +33,4 @@ func PropertyFactory(t *testing.T, options ...FactoryOption[model.Property]) mod
 	}
 	return property
 }
+

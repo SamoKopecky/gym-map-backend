@@ -4,10 +4,6 @@ import (
 	"gym-map/model"
 )
 
-type categoryGetRequest struct {
-	PropertyIds *[]int `query:"property_ids"`
-}
-
 type categoryPostRequest struct {
 	Name string `json:"name"`
 }
