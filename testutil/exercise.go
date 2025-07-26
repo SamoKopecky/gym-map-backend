@@ -15,9 +15,8 @@ func ExerciseMachineId(t *testing.T, machineId int) FactoryOption[model.Exercise
 func ExerciseFactory(t *testing.T, options ...FactoryOption[model.Exercise]) model.Exercise {
 	t.Helper()
 	description := "foobar"
-	muscleGroups := []string{"foo", "bar"}
 
-	exercise := model.BuildExercise("name", &description, &muscleGroups, 10, nil, []int{})
+	exercise := model.BuildExercise("name", &description, 10, nil, []int{})
 	exercise.Id = RandomInt()
 
 	for _, option := range options {
