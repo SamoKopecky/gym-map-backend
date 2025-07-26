@@ -11,6 +11,11 @@ func Post(c echo.Context) error {
 	return api.PostModel[propertyPostRequest](cc, cc.PropertyCrud)
 }
 
+func Patch(c echo.Context) error {
+	cc := c.(*api.DbContext)
+	return api.PatchModel[propertyPatchRequest](cc, cc.PropertyCrud)
+}
+
 func Delete(c echo.Context) error {
 	cc := c.(*api.DbContext)
 	return api.DeleteModel(cc, cc.PropertyCrud)

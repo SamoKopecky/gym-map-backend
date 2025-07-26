@@ -15,3 +15,14 @@ func (ppr propertyPostRequest) ToNewModel() model.Property {
 		Name:       ppr.Name,
 	}
 }
+
+type propertyPatchRequest struct {
+	Name string `json:"name"`
+}
+
+func (cpr propertyPatchRequest) ToExistingModel(id int) model.Property {
+	return model.Property{
+		IdModel: model.IdModel{Id: id},
+		Name:    cpr.Name,
+	}
+}

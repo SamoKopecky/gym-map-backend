@@ -227,6 +227,7 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 	porperties.Use(adminOnlyMiddleware)
 	porperties.POST("", property.Post)
 	porperties.DELETE("/:id", property.Delete)
+	porperties.PATCH("/:id", property.Patch)
 
 	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
