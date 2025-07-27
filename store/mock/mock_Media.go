@@ -191,6 +191,118 @@ func (_c *MockMedia_GetById_Call) RunAndReturn(run func(modelId int) (model.Medi
 	return _c
 }
 
+// GetByIds provides a mock function for the type MockMedia
+func (_mock *MockMedia) GetByIds(ids []int) ([]model.Media, error) {
+	ret := _mock.Called(ids)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetByIds")
+	}
+
+	var r0 []model.Media
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Media, error)); ok {
+		return returnFunc(ids)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Media); ok {
+		r0 = returnFunc(ids)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Media)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(ids)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockMedia_GetByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetByIds'
+type MockMedia_GetByIds_Call struct {
+	*mock.Call
+}
+
+// GetByIds is a helper method to define mock.On call
+//   - ids
+func (_e *MockMedia_Expecter) GetByIds(ids interface{}) *MockMedia_GetByIds_Call {
+	return &MockMedia_GetByIds_Call{Call: _e.mock.On("GetByIds", ids)}
+}
+
+func (_c *MockMedia_GetByIds_Call) Run(run func(ids []int)) *MockMedia_GetByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockMedia_GetByIds_Call) Return(medias []model.Media, err error) *MockMedia_GetByIds_Call {
+	_c.Call.Return(medias, err)
+	return _c
+}
+
+func (_c *MockMedia_GetByIds_Call) RunAndReturn(run func(ids []int) ([]model.Media, error)) *MockMedia_GetByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
+// GetManyByIds provides a mock function for the type MockMedia
+func (_mock *MockMedia) GetManyByIds(modelIds []int) ([]model.Media, error) {
+	ret := _mock.Called(modelIds)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetManyByIds")
+	}
+
+	var r0 []model.Media
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Media, error)); ok {
+		return returnFunc(modelIds)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Media); ok {
+		r0 = returnFunc(modelIds)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Media)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(modelIds)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockMedia_GetManyByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetManyByIds'
+type MockMedia_GetManyByIds_Call struct {
+	*mock.Call
+}
+
+// GetManyByIds is a helper method to define mock.On call
+//   - modelIds
+func (_e *MockMedia_Expecter) GetManyByIds(modelIds interface{}) *MockMedia_GetManyByIds_Call {
+	return &MockMedia_GetManyByIds_Call{Call: _e.mock.On("GetManyByIds", modelIds)}
+}
+
+func (_c *MockMedia_GetManyByIds_Call) Run(run func(modelIds []int)) *MockMedia_GetManyByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockMedia_GetManyByIds_Call) Return(models []model.Media, err error) *MockMedia_GetManyByIds_Call {
+	_c.Call.Return(models, err)
+	return _c
+}
+
+func (_c *MockMedia_GetManyByIds_Call) RunAndReturn(run func(modelIds []int) ([]model.Media, error)) *MockMedia_GetManyByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Insert provides a mock function for the type MockMedia
 func (_mock *MockMedia) Insert(model1 *model.Media) error {
 	ret := _mock.Called(model1)

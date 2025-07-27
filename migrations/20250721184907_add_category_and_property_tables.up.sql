@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS category (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP
+  WITH
+    TIME ZONE NOT NULL,
+    updated_at TIMESTAMP
+  WITH
+    TIME ZONE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS property (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  category_id INTEGER NOT NULL,
+  created_at TIMESTAMP
+  WITH
+    TIME ZONE NOT NULL,
+    updated_at TIMESTAMP
+  WITH
+    TIME ZONE NOT NULL
+);

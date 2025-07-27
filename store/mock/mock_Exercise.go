@@ -192,6 +192,62 @@ func (_c *MockExercise_GetById_Call) RunAndReturn(run func(modelId int) (model.E
 	return _c
 }
 
+// GetManyByIds provides a mock function for the type MockExercise
+func (_mock *MockExercise) GetManyByIds(modelIds []int) ([]model.Exercise, error) {
+	ret := _mock.Called(modelIds)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetManyByIds")
+	}
+
+	var r0 []model.Exercise
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Exercise, error)); ok {
+		return returnFunc(modelIds)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Exercise); ok {
+		r0 = returnFunc(modelIds)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Exercise)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(modelIds)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockExercise_GetManyByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetManyByIds'
+type MockExercise_GetManyByIds_Call struct {
+	*mock.Call
+}
+
+// GetManyByIds is a helper method to define mock.On call
+//   - modelIds
+func (_e *MockExercise_Expecter) GetManyByIds(modelIds interface{}) *MockExercise_GetManyByIds_Call {
+	return &MockExercise_GetManyByIds_Call{Call: _e.mock.On("GetManyByIds", modelIds)}
+}
+
+func (_c *MockExercise_GetManyByIds_Call) Run(run func(modelIds []int)) *MockExercise_GetManyByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockExercise_GetManyByIds_Call) Return(models []model.Exercise, err error) *MockExercise_GetManyByIds_Call {
+	_c.Call.Return(models, err)
+	return _c
+}
+
+func (_c *MockExercise_GetManyByIds_Call) RunAndReturn(run func(modelIds []int) ([]model.Exercise, error)) *MockExercise_GetManyByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // GetWithCount provides a mock function for the type MockExercise
 func (_mock *MockExercise) GetWithCount() ([]schema.Exercise, error) {
 	ret := _mock.Called()

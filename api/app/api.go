@@ -4,11 +4,13 @@ import (
 	"errors"
 	"fmt"
 	"gym-map/api"
+	"gym-map/api/category"
 	"gym-map/api/exercise"
 	floormap "gym-map/api/floor_map"
 	"gym-map/api/instruction"
 	"gym-map/api/machine"
 	"gym-map/api/media"
+	"gym-map/api/property"
 	"gym-map/api/user"
 	"gym-map/config"
 	"gym-map/crud"
@@ -54,12 +56,17 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				AppConfig:  cfg,
 				AuthConfig: fetcher.CreateAuthConfig(cfg),
 			}
+			categoryCrud := crud.NewCategory(db)
+			propertyCrud := crud.NewProperty(db)
+			exerciseCrud := crud.NewExercise(db)
 
 			cc := &api.DbContext{Context: c,
 				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
-				ExerciseCrud:    crud.NewExercise(db),
+				ExerciseCrud:    exerciseCrud,
 				InstructionCrud: instructionCrud,
+				CategoryCrud:    categoryCrud,
+				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
 				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
@@ -72,6 +79,10 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				},
 				UserService: service.User{
 					IAM: iamFetcher,
+				},
+				CategoryService: service.Category{
+					CategoryCrud: categoryCrud,
+					PropertyCrud: propertyCrud,
 				},
 			}
 			return next(cc)
@@ -195,11 +206,31 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)
+
 	floorMapJwt := floorMap.Group("")
 	floorMapJwt.Use(jwtMiddleware(appConfig))
 	floorMapJwt.Use(claimContextMiddleware)
 	floorMapJwt.Use(adminOnlyMiddleware)
 	floorMapJwt.PUT("", floormap.Put)
+
+	categories := e.Group("/categories")
+	categories.GET("", category.Get)
+
+	categoriesJwt := categories.Group("")
+	categoriesJwt.Use(jwtMiddleware(appConfig))
+	categoriesJwt.Use(claimContextMiddleware)
+	categoriesJwt.Use(adminOnlyMiddleware)
+	categoriesJwt.POST("", category.Post)
+	categoriesJwt.PATCH("/:id", category.Patch)
+	categoriesJwt.DELETE("/:id", category.Delete)
+
+	porperties := e.Group("/properties")
+	porperties.Use(jwtMiddleware(appConfig))
+	porperties.Use(claimContextMiddleware)
+	porperties.Use(adminOnlyMiddleware)
+	porperties.POST("", property.Post)
+	porperties.DELETE("/:id", property.Delete)
+	porperties.PATCH("/:id", property.Patch)
 
 	if err := e.Start(":2001"); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)

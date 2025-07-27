@@ -31,6 +31,8 @@ type DbContext struct {
 	ExerciseCrud    store.Exercise
 	InstructionCrud store.Instruction
 	MediaCrud       store.Media
+	CategoryCrud    store.Category
+	PropertyCrud    store.Property
 
 	FloorMapCrud fileio.FloorMap
 
@@ -39,6 +41,7 @@ type DbContext struct {
 	InstructionService service.Instruction
 	MediaService       service.Media
 	UserService        service.User
+	CategoryService    service.Category
 
 	Claims *schema.JwtClaims
 

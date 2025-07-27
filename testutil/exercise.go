@@ -5,6 +5,20 @@ import (
 	"testing"
 )
 
+func ExercisePropertyIds(t *testing.T, propertyids []int) FactoryOption[model.Exercise] {
+	t.Helper()
+	return func(e *model.Exercise) {
+		e.PropertyIds = propertyids
+	}
+}
+
+func ExerciseId(t *testing.T, id int) FactoryOption[model.Exercise] {
+	t.Helper()
+	return func(e *model.Exercise) {
+		e.Id = id
+	}
+}
+
 func ExerciseMachineId(t *testing.T, machineId int) FactoryOption[model.Exercise] {
 	t.Helper()
 	return func(e *model.Exercise) {
@@ -15,9 +29,8 @@ func ExerciseMachineId(t *testing.T, machineId int) FactoryOption[model.Exercise
 func ExerciseFactory(t *testing.T, options ...FactoryOption[model.Exercise]) model.Exercise {
 	t.Helper()
 	description := "foobar"
-	muscleGroups := []string{"foo", "bar"}
 
-	exercise := model.BuildExercise("name", &description, &muscleGroups, 10, nil)
+	exercise := model.BuildExercise("name", &description, 10, nil, []int{})
 	exercise.Id = RandomInt()
 
 	for _, option := range options {

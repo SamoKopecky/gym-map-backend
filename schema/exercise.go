@@ -4,5 +4,6 @@ import "gym-map/model"
 
 type Exercise struct {
 	model.Exercise
-	InstructionCount int `json:"instruction_count"`
+	Categories       []model.Category `json:"categories"`
+	InstructionCount int              `json:"instruction_count"`
 }

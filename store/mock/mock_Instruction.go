@@ -303,6 +303,62 @@ func (_c *MockInstruction_GetByUserId_Call) RunAndReturn(run func(userId string)
 	return _c
 }
 
+// GetManyByIds provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) GetManyByIds(modelIds []int) ([]model.Instruction, error) {
+	ret := _mock.Called(modelIds)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GetManyByIds")
+	}
+
+	var r0 []model.Instruction
+	var r1 error
+	if returnFunc, ok := ret.Get(0).(func([]int) ([]model.Instruction, error)); ok {
+		return returnFunc(modelIds)
+	}
+	if returnFunc, ok := ret.Get(0).(func([]int) []model.Instruction); ok {
+		r0 = returnFunc(modelIds)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).([]model.Instruction)
+		}
+	}
+	if returnFunc, ok := ret.Get(1).(func([]int) error); ok {
+		r1 = returnFunc(modelIds)
+	} else {
+		r1 = ret.Error(1)
+	}
+	return r0, r1
+}
+
+// MockInstruction_GetManyByIds_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'GetManyByIds'
+type MockInstruction_GetManyByIds_Call struct {
+	*mock.Call
+}
+
+// GetManyByIds is a helper method to define mock.On call
+//   - modelIds
+func (_e *MockInstruction_Expecter) GetManyByIds(modelIds interface{}) *MockInstruction_GetManyByIds_Call {
+	return &MockInstruction_GetManyByIds_Call{Call: _e.mock.On("GetManyByIds", modelIds)}
+}
+
+func (_c *MockInstruction_GetManyByIds_Call) Run(run func(modelIds []int)) *MockInstruction_GetManyByIds_Call {
+	_c.Call.Run(func(args mock.Arguments) {
+		run(args[0].([]int))
+	})
+	return _c
+}
+
+func (_c *MockInstruction_GetManyByIds_Call) Return(models []model.Instruction, err error) *MockInstruction_GetManyByIds_Call {
+	_c.Call.Return(models, err)
+	return _c
+}
+
+func (_c *MockInstruction_GetManyByIds_Call) RunAndReturn(run func(modelIds []int) ([]model.Instruction, error)) *MockInstruction_GetManyByIds_Call {
+	_c.Call.Return(run)
+	return _c
+}
+
 // Insert provides a mock function for the type MockInstruction
 func (_mock *MockInstruction) Insert(model1 *model.Instruction) error {
 	ret := _mock.Called(model1)
@@ -348,48 +404,48 @@ func (_c *MockInstruction_Insert_Call) RunAndReturn(run func(model1 *model.Instr
 	return _c
 }
 
-// SaveFile provides a mock function for the type MockInstruction
-func (_mock *MockInstruction) SaveFile(id int, media_id int) error {
-	ret := _mock.Called(id, media_id)
+// SaveMedia provides a mock function for the type MockInstruction
+func (_mock *MockInstruction) SaveMedia(id int, media_ids []int) error {
+	ret := _mock.Called(id, media_ids)
 
 	if len(ret) == 0 {
-		panic("no return value specified for SaveFile")
+		panic("no return value specified for SaveMedia")
 	}
 
 	var r0 error
-	if returnFunc, ok := ret.Get(0).(func(int, int) error); ok {
-		r0 = returnFunc(id, media_id)
+	if returnFunc, ok := ret.Get(0).(func(int, []int) error); ok {
+		r0 = returnFunc(id, media_ids)
 	} else {
 		r0 = ret.Error(0)
 	}
 	return r0
 }
 
-// MockInstruction_SaveFile_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SaveFile'
-type MockInstruction_SaveFile_Call struct {
+// MockInstruction_SaveMedia_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SaveMedia'
+type MockInstruction_SaveMedia_Call struct {
 	*mock.Call
 }
 
-// SaveFile is a helper method to define mock.On call
+// SaveMedia is a helper method to define mock.On call
 //   - id
-//   - media_id
-func (_e *MockInstruction_Expecter) SaveFile(id interface{}, media_id interface{}) *MockInstruction_SaveFile_Call {
-	return &MockInstruction_SaveFile_Call{Call: _e.mock.On("SaveFile", id, media_id)}
+//   - media_ids
+func (_e *MockInstruction_Expecter) SaveMedia(id interface{}, media_ids interface{}) *MockInstruction_SaveMedia_Call {
+	return &MockInstruction_SaveMedia_Call{Call: _e.mock.On("SaveMedia", id, media_ids)}
 }
 
-func (_c *MockInstruction_SaveFile_Call) Run(run func(id int, media_id int)) *MockInstruction_SaveFile_Call {
+func (_c *MockInstruction_SaveMedia_Call) Run(run func(id int, media_ids []int)) *MockInstruction_SaveMedia_Call {
 	_c.Call.Run(func(args mock.Arguments) {
-		run(args[0].(int), args[1].(int))
+		run(args[0].(int), args[1].([]int))
 	})
 	return _c
 }
 
-func (_c *MockInstruction_SaveFile_Call) Return(err error) *MockInstruction_SaveFile_Call {
+func (_c *MockInstruction_SaveMedia_Call) Return(err error) *MockInstruction_SaveMedia_Call {
 	_c.Call.Return(err)
 	return _c
 }
 
-func (_c *MockInstruction_SaveFile_Call) RunAndReturn(run func(id int, media_id int) error) *MockInstruction_SaveFile_Call {
+func (_c *MockInstruction_SaveMedia_Call) RunAndReturn(run func(id int, media_ids []int) error) *MockInstruction_SaveMedia_Call {
 	_c.Call.Return(run)
 	return _c
 }

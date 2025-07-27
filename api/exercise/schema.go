@@ -10,15 +10,15 @@ type exerciseGetRequest struct {
 }
 
 type exercisePostRequest struct {
-	Name         string            `json:"name"`
-	Description  *string           `json:"description"`
-	MuscleGroups *[]string         `json:"muscle_groups"`
-	MachineId    int               `json:"machine_id"`
-	Difficulty   *model.Difficulty `json:"difficulty"`
+	Name        string            `json:"name"`
+	Description *string           `json:"description"`
+	MachineId   int               `json:"machine_id"`
+	Difficulty  *model.Difficulty `json:"difficulty"`
+	PropertyIds []int             `json:"property_ids"`
 }
 
 func (epr exercisePostRequest) ToNewModel() model.Exercise {
-	return model.BuildExercise(epr.Name, epr.Description, epr.MuscleGroups, epr.MachineId, epr.Difficulty)
+	return model.BuildExercise(epr.Name, epr.Description, epr.MachineId, epr.Difficulty, epr.PropertyIds)
 }
 
 type exercisePatchRequest struct {
@@ -26,14 +26,15 @@ type exercisePatchRequest struct {
 	Description  *string           `json:"description"`
 	MuscleGroups *[]string         `json:"muscle_groups"`
 	Difficulty   *model.Difficulty `json:"difficulty"`
+	PropertyIds  []int             `json:"property_ids"`
 }
 
 func (epr exercisePatchRequest) ToExistingModel(id int) model.Exercise {
 	return model.Exercise{
-		IdModel:      model.IdModel{Id: id},
-		Name:         api.DerefString(epr.Name),
-		Description:  epr.Description,
-		MuscleGroups: epr.MuscleGroups,
-		Difficulty:   epr.Difficulty,
+		IdModel:     model.IdModel{Id: id},
+		Name:        api.DerefString(epr.Name),
+		Description: epr.Description,
+		Difficulty:  epr.Difficulty,
+		PropertyIds: epr.PropertyIds,
 	}
 }

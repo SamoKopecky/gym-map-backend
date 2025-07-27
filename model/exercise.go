@@ -16,19 +16,19 @@ type Exercise struct {
 	IdModel
 	Timestamp
 
-	MachineId    int         `json:"machine_id"`
-	Name         string      `json:"name"`
-	Description  *string     `json:"description"`
-	MuscleGroups *[]string   `json:"muscle_groups" bun:",array"`
-	Difficulty   *Difficulty `json:"difficulty"`
+	MachineId   int         `json:"machine_id"`
+	Name        string      `json:"name"`
+	Description *string     `json:"description"`
+	Difficulty  *Difficulty `json:"difficulty"`
+	PropertyIds []int       `json:"property_ids" bun:",array"`
 }
 
-func BuildExercise(name string, description *string, muscleGroups *[]string, machineId int, difficulty *Difficulty) Exercise {
+func BuildExercise(name string, description *string, machineId int, difficulty *Difficulty, propertyIds []int) Exercise {
 	return Exercise{
-		Name:         name,
-		Description:  description,
-		MuscleGroups: muscleGroups,
-		MachineId:    machineId,
-		Difficulty:   difficulty,
+		Name:        name,
+		Description: description,
+		MachineId:   machineId,
+		Difficulty:  difficulty,
+		PropertyIds: propertyIds,
 	}
 }
