@@ -26,6 +26,7 @@ func Post(c echo.Context) error {
 	exerciseWithCount := schema.Exercise{
 		Exercise:         exercise,
 		InstructionCount: 0,
+		Categories:       []model.Category{},
 	}
 
 	return cc.JSON(http.StatusOK, exerciseWithCount)
