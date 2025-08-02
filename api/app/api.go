@@ -15,9 +15,10 @@ import (
 	"gym-map/config"
 	"gym-map/crud"
 	"gym-map/fetcher"
-	fileio "gym-map/file_io"
 	"gym-map/schema"
 	"gym-map/service"
+	"gym-map/storage"
+	"gym-map/store"
 	"log"
 	"net/http"
 
@@ -60,6 +61,14 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 			propertyCrud := crud.NewProperty(db)
 			exerciseCrud := crud.NewExercise(db)
 
+			var fileStorage store.FileStorage
+			if cfg.StorageType == config.S3 {
+				client := storage.GetS3Client(*cfg)
+				fileStorage = storage.S3Storage{Config: *cfg, Client: client}
+			} else {
+				fileStorage = storage.LocalStorage{Config: *cfg}
+			}
+
 			cc := &api.DbContext{Context: c,
 				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
@@ -69,7 +78,10 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
-				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
+				Storage:         fileStorage,
+				FloorMapCrud: storage.FloorMap{
+					Config: *cfg, Storage: fileStorage,
+				},
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,
@@ -206,12 +218,6 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)
-
-	floorMapJwt := floorMap.Group("")
-	floorMapJwt.Use(jwtMiddleware(appConfig))
-	floorMapJwt.Use(claimContextMiddleware)
-	floorMapJwt.Use(adminOnlyMiddleware)
-	floorMapJwt.PUT("", floormap.Put)
 
 	categories := e.Group("/categories")
 	categories.GET("", category.Get)

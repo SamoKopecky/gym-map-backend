@@ -1,5 +1,4 @@
 .PHONY: help
-
 TA ?= ""
 MSG ?= "replace_me"
 
@@ -51,7 +50,7 @@ kc-export:
 
 # Run app in dev mode
 run:
-	APP_ENV="dev" APP_KC_ADMIN_CLIENT_SECRET="ITA06Kh3BTGU8uoGn1cDbaHL6FK8N69P" air -- --debug
+	air -- --debug
 
 # Add a new migration
 add-migration:
