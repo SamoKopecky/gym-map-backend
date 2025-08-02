@@ -98,7 +98,7 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 			return newMedias, err
 		}
 
-		name := uuid.New().String()
+		name := fmt.Sprintf("%s%s", uuid.New().String(), filepath.Ext(file.Filename))
 		err = cc.Storage.Write(store.MEDIA, data, name)
 		if err != nil {
 			return newMedias, err
