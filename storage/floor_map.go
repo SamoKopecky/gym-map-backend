@@ -4,6 +4,7 @@ import (
 	"gym-map/config"
 	"gym-map/model"
 	"gym-map/store"
+	"io"
 )
 
 const MAP_NAME = "map.svg"
@@ -15,19 +16,14 @@ type FloorMap struct {
 
 func (fm FloorMap) GetMap() (floorMap model.FloorMap, err error) {
 	file, err := fm.Storage.Read(store.MAP, MAP_NAME)
-
-	stats, err := file.Stat()
 	if err != nil {
 		return nil, err
 	}
-	size := stats.Size()
-	data := make([]byte, size)
 
-	_, err = file.Read(data)
+	data, err := io.ReadAll(file)
 	if err != nil {
-		return
+		return nil, err
 	}
-	defer file.Close()
 
 	floorMap = model.FloorMap(data)
 	return

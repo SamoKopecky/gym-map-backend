@@ -1,36 +1,47 @@
 package storage
 
 import (
-	"fmt"
-	"io"
-	"mime/multipart"
+	"gym-map/config"
+	"gym-map/store"
 	"os"
 	"path/filepath"
-
-	"github.com/google/uuid"
 )
 
-func SaveFile(file *multipart.FileHeader, rootFilePath string) (name string, err error) {
-	name = fmt.Sprintf("%s%s", uuid.New().String(), filepath.Ext(file.Filename))
+type FileStorage struct {
+	Config config.Config
+}
 
-	// Source file
-	src, err := file.Open()
+func (fs FileStorage) getPath(fileType store.FileType, name string) string {
+	return filepath.Join(fs.Config.StorageLocalPath, string(fileType), name)
+}
+
+func (fs FileStorage) Read(fileType store.FileType, name string) (*os.File, error) {
+	path := fs.getPath(fileType, name)
+	file, err := os.Open(path)
 	if err != nil {
-		return
+		return nil, err
 	}
-	defer src.Close()
 
-	// Destination
-	dst, err := os.Create(filepath.Join(rootFilePath, name))
+	return file, nil
+}
+
+func (fs FileStorage) Write(fileType store.FileType, data []byte, name string) error {
+	path := fs.getPath(fileType, name)
+	file, err := os.Create(path)
 	if err != nil {
-		return
+		return err
 	}
-	defer dst.Close()
+	defer file.Close()
 
-	// Copy
-	if _, err = io.Copy(dst, src); err != nil {
-		return
+	_, err = file.Write(data)
+	if err != nil {
+		return err
 	}
 
-	return
+	return nil
+}
+
+func (fs FileStorage) Remove(fileType store.FileType, name string) error {
+	path := fs.getPath(fileType, name)
+	return os.Remove(path)
 }
