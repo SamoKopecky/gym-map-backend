@@ -15,9 +15,9 @@ import (
 	"gym-map/config"
 	"gym-map/crud"
 	"gym-map/fetcher"
-	fileio "gym-map/file_io"
 	"gym-map/schema"
 	"gym-map/service"
+	"gym-map/storage"
 	"log"
 	"net/http"
 
@@ -69,7 +69,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
-				FloorMapCrud:    fileio.FloorMap{Config: *cfg},
+				FloorMapCrud:    storage.FloorMap{Config: *cfg},
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,
