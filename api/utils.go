@@ -9,12 +9,10 @@ import (
 	"gym-map/service"
 	"gym-map/storage"
 	"gym-map/store"
-	"io"
 	"mime"
 	"net/http"
 	"path/filepath"
 
-	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -36,7 +34,6 @@ type DbContext struct {
 	CategoryCrud    store.Category
 	PropertyCrud    store.Property
 
-	Storage      store.FileStorage
 	FloorMapCrud storage.FloorMap
 
 	IAMFetcher fetcher.IAM
@@ -87,19 +84,7 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 			return newMedias, err
 		}
 
-		openFile, err := file.Open()
-		if err != nil {
-			return newMedias, err
-		}
-		defer openFile.Close()
-
-		data, err := io.ReadAll(openFile)
-		if err != nil {
-			return newMedias, err
-		}
-
-		name := uuid.New().String()
-		err = cc.Storage.Write(store.MEDIA, data, name)
+		fileId, err := storage.SaveFile(file, cc.Config.MediaFileRepository)
 		if err != nil {
 			return newMedias, err
 		}
@@ -107,7 +92,7 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 		mediaType := mime.TypeByExtension(filepath.Ext(file.Filename))
 		newMedia := model.Media{
 			Name:        file.Filename,
-			Path:        name,
+			Path:        fileId,
 			ContentType: mediaType,
 			UserId:      cc.Claims.Subject,
 		}

@@ -14,6 +14,8 @@ const (
 	S3    Storage = "s3"
 )
 
+const MAP_STORAGE_PATH = "/map"
+
 type Config struct {
 	DatabasePort     string `env:"DB_PORT" envDefault:"5432"`
 	DatabaseHost     string `env:"DB_HOST" envDefault:"127.0.0.1"`
@@ -33,6 +35,9 @@ type Config struct {
 	StorageS3Endpoint  string  `env:"STORAE_S3_ENDPOINT"`
 	StorageS3AccessKey string  `env:"STORAE_S3_ACCESS_KEY"`
 	StorageS3SecretKey string  `env:"STORAE_S3_SECRET_KEy"`
+
+	MediaFileRepository string `env:"FILE_REPOSITORY" envDefault:"./files"`
+	MapFileRepository   string `env:"MAP_REPOSITORY" envDefault:"./files/map"`
 }
 
 func (c Config) GetDSN() string {

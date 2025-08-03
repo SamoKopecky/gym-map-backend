@@ -7,12 +7,12 @@ import (
 type FileType string
 
 const (
-	MEDIA FileType = "media"
+	VIDEO FileType = "video"
+	IMAGE FileType = "image"
 	MAP   FileType = "map"
 )
 
 type FileStorage interface {
 	Write(fileType FileType, data []byte, name string) error
 	Read(fileType FileType, name string) (*os.File, error)
-	Delete(FileType FileType, name string) error
 }
