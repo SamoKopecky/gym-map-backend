@@ -1,7 +1,6 @@
 package store
 
 import (
-	"io"
 	"os"
 )
 
@@ -12,13 +11,8 @@ const (
 	MAP   FileType = "map"
 )
 
-type StorageObject struct {
-	io.ReadSeekCloser
-	os.FileInfo
-}
-
 type FileStorage interface {
-	Read(fileType FileType, name string) (*StorageObject, error)
-	Write(fileType FileType, data io.ReadSeeker, name string) error
+	Write(fileType FileType, data []byte, name string) error
+	Read(fileType FileType, name string) (*os.File, error)
 	Remove(FileType FileType, name string) error
 }

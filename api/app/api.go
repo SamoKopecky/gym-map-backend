@@ -63,10 +63,10 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 
 			var fileStorage store.FileStorage
 			if cfg.StorageType == config.S3 {
-				client := storage.GetS3Client(*cfg)
-				fileStorage = storage.S3Storage{Config: *cfg, Client: client}
+				// TODO: Change to S3 once implemeted
+				fileStorage = storage.FileStorage{Config: *cfg}
 			} else {
-				fileStorage = storage.LocalStorage{Config: *cfg}
+				fileStorage = storage.FileStorage{Config: *cfg}
 			}
 
 			cc := &api.DbContext{Context: c,

@@ -41,14 +41,14 @@ func GetMedia(c echo.Context) error {
 		return cc.NoContent(http.StatusNoContent)
 	}
 
-	storageObject, err := cc.Storage.Read(store.MEDIA, mediaMetadata.Path)
+	file, err := cc.Storage.Read(store.MEDIA, mediaMetadata.Path)
 	if err != nil {
 		return err
 	}
-	defer storageObject.ReadSeekCloser.Close()
+	defer file.Close()
 
-	fileInfo := storageObject.FileInfo
-	http.ServeContent(c.Response().Writer, c.Request(), fileInfo.Name(), fileInfo.ModTime(), storageObject)
+	fileInfo, _ := file.Stat()
+	http.ServeContent(c.Response().Writer, c.Request(), fileInfo.Name(), fileInfo.ModTime(), file)
 	return nil
 }
 

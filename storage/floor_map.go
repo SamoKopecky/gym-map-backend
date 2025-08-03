@@ -29,3 +29,12 @@ func (fm FloorMap) GetMap() (floorMap model.FloorMap, err error) {
 	return
 
 }
+
+func (fm FloorMap) SaveMap(floorMap model.FloorMap) error {
+	err := fm.Storage.Write(store.MAP, []byte(floorMap), MAP_NAME)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
