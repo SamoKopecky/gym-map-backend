@@ -78,6 +78,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
+				Storage:         fileStorage,
 				FloorMapCrud: storage.FloorMap{
 					Config: *cfg, Storage: fileStorage,
 				},
@@ -217,12 +218,6 @@ func RunApi(db *bun.DB, appConfig *config.Config) {
 
 	floorMap := e.Group("/map")
 	floorMap.GET("", floormap.Get)
-
-	floorMapJwt := floorMap.Group("")
-	floorMapJwt.Use(jwtMiddleware(appConfig))
-	floorMapJwt.Use(claimContextMiddleware)
-	floorMapJwt.Use(adminOnlyMiddleware)
-	floorMapJwt.PUT("", floormap.Put)
 
 	categories := e.Group("/categories")
 	categories.GET("", category.Get)

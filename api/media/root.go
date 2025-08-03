@@ -3,9 +3,8 @@ package media
 import (
 	"gym-map/api"
 	"gym-map/model"
+	"gym-map/store"
 	"net/http"
-	"os"
-	"path/filepath"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -42,8 +41,7 @@ func GetMedia(c echo.Context) error {
 		return cc.NoContent(http.StatusNoContent)
 	}
 
-	videoPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.Path)
-	file, err := os.Open(videoPath)
+	file, err := cc.Storage.Read(store.MEDIA, mediaMetadata.Path)
 	if err != nil {
 		return err
 	}
@@ -78,8 +76,7 @@ func DeleteMedia(c echo.Context) error {
 	}
 
 	if mediaMetadata.ContentType != model.YOUTUBE_CONTENT_TYPE {
-		mediaPath := filepath.Join(cc.Config.MediaFileRepository, mediaMetadata.Path)
-		err = os.Remove(mediaPath)
+		err = cc.Storage.Remove(store.MEDIA, mediaMetadata.Path)
 		if err != nil {
 			return err
 		}
