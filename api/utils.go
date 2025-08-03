@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"gym-map/config"
 	"gym-map/fetcher"
+	fileio "gym-map/file_io"
 	"gym-map/model"
 	"gym-map/schema"
 	"gym-map/service"
-	"gym-map/storage"
 	"gym-map/store"
 	"mime"
 	"net/http"
@@ -34,7 +34,7 @@ type DbContext struct {
 	CategoryCrud    store.Category
 	PropertyCrud    store.Property
 
-	FloorMapCrud storage.FloorMap
+	FloorMapCrud fileio.FloorMap
 
 	IAMFetcher fetcher.IAM
 
@@ -84,7 +84,7 @@ func CreateFilesFromRequest(cc *DbContext) (newMedias []model.Media, err error) 
 			return newMedias, err
 		}
 
-		fileId, err := storage.SaveFile(file, cc.Config.MediaFileRepository)
+		fileId, err := fileio.SaveFile(file, cc.Config.MediaFileRepository)
 		if err != nil {
 			return newMedias, err
 		}

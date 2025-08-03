@@ -1,4 +1,4 @@
-package storage
+package fileio
 
 import (
 	"gym-map/config"
