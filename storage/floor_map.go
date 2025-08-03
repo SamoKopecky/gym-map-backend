@@ -3,35 +3,42 @@ package storage
 import (
 	"gym-map/config"
 	"gym-map/model"
-	"os"
-	"path/filepath"
+	"gym-map/store"
 )
 
 const MAP_NAME = "map.svg"
 
 type FloorMap struct {
-	Config config.Config
-}
-
-func (fm FloorMap) getMapPath() string {
-	return filepath.Join(fm.Config.MapFileRepository, MAP_NAME)
+	Config  config.Config
+	Storage store.FileStorage
 }
 
 func (fm FloorMap) GetMap() (floorMap model.FloorMap, err error) {
-	content, err := os.ReadFile(fm.getMapPath())
+	file, err := fm.Storage.Read(store.MAP, MAP_NAME)
+
+	stats, err := file.Stat()
+	if err != nil {
+		return nil, err
+	}
+	size := stats.Size()
+	data := make([]byte, size)
+
+	_, err = file.Read(data)
 	if err != nil {
 		return
 	}
-	floorMap = model.FloorMap(content)
+	defer file.Close()
+
+	floorMap = model.FloorMap(data)
 	return
 
 }
 
-func (fm FloorMap) SaveMap(floorMap model.FloorMap) (err error) {
-	err = os.WriteFile(filepath.Join(fm.getMapPath()), []byte(floorMap), 0644)
+func (fm FloorMap) SaveMap(floorMap model.FloorMap) error {
+	err := fm.Storage.Write(store.MAP, []byte(floorMap), MAP_NAME)
 	if err != nil {
-		return
+		return err
 	}
 
-	return
+	return nil
 }
