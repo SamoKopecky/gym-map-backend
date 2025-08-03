@@ -18,7 +18,6 @@ import (
 	"gym-map/schema"
 	"gym-map/service"
 	"gym-map/storage"
-	"gym-map/store"
 	"log"
 	"net/http"
 
@@ -61,14 +60,6 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 			propertyCrud := crud.NewProperty(db)
 			exerciseCrud := crud.NewExercise(db)
 
-			var fileStorage store.FileStorage
-			if cfg.StorageType == config.S3 {
-				// TODO: Change to S3 once implemeted
-				fileStorage = storage.FileStorage{Config: *cfg}
-			} else {
-				fileStorage = storage.FileStorage{Config: *cfg}
-			}
-
 			cc := &api.DbContext{Context: c,
 				Config:          *cfg,
 				MachineCrud:     crud.NewMachine(db),
@@ -78,9 +69,7 @@ func contextMiddleware(db *bun.DB, cfg *config.Config) echo.MiddlewareFunc {
 				PropertyCrud:    propertyCrud,
 				MediaCrud:       mediaCrud,
 				IAMFetcher:      iamFetcher,
-				FloorMapCrud: storage.FloorMap{
-					Config: *cfg, Storage: fileStorage,
-				},
+				FloorMapCrud:    storage.FloorMap{Config: *cfg},
 				InstructionService: service.Instruction{
 					IAM:             iamFetcher,
 					InstructionCrud: instructionCrud,

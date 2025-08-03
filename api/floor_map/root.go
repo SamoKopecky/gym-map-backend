@@ -24,6 +24,7 @@ func Put(c echo.Context) error {
 	cc := c.(*api.DbContext)
 
 	file := cc.FormValue("file")
+	println(file)
 
 	// Destination
 	err := os.WriteFile(filepath.Join(cc.Config.MapFileRepository, "map.svg"), []byte(file), 0644)
